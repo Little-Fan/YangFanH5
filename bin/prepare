@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+// vim: set ai et nu ts=4 sw=4 cc=100 ft=javascript:
+require('../jcs').prepare();
+
+require('bower-copy').copyComponents({ dest: "./public/bower" }, function(err, copied){
+    if(err){
+        console.log("Error copying bower components: " + err);
+    } else {
+        console.log("Successfully copied: " + copied.length + " files.");
+    }
+});
+
+

@@ -1,0 +1,26 @@
+{
+  "name": "YangFanH5",
+  "description": "Yang Fan app H5 contents",
+  "main": "",
+  "authors": [
+    "Wu Yuntao <wuyuntao@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "zepto": "^1.1.6",
+    "iscroll": "^5.1.3",
+    "underscore": "^1.8.3"
+  }
+}
