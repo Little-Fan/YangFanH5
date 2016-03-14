@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-# vim: set nu ai et ts=4 sw=4 ft=javascript:
+// vim: set nu ai et ts=4 sw=4 ft=javascript:
 
 /**
  * Module dependencies.

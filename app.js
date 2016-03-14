@@ -1,6 +1,5 @@
 // vim: set ai et nu ts=4 sw=4 cc=100:
 var express     = require('express')
-  , session     = require('express-session')
   , path        = require('path')
   , favicon     = require('serve-favicon')
   , logger      = require('morgan')
