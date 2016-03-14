@@ -1,5 +1,1 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype htmlhtml(lang="zh")    head        title= pageTitle        link(            rel='stylesheet'            type='text/css'            href='css/style.css'        )        link(            rel='stylesheet'            type='text/css'            href='node_modules/bootstrap/dist/css/bootstrap.min.css'        )    body        nav.navbar.navbar-default            .container-fluid                .col-xs-3                    .navbar-header                        a.navbar-brand                            span.glyphicon.glyphicon-user                .col-xs-6.btn-wrapper                    button.btn.btn-default 直播                    button.btn.btn-default 点播                    button.btn.btn-default 专辑                .col-xs-3                    .navbar-header                        a.navbar-brand                            span.glyphicon.glyphicon-th-large        script(src="node_modules/jquery/dist/jquery.min.js")        script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")        script(src="js/app.js")

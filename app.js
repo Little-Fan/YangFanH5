@@ -38,6 +38,8 @@ app.set('jcs-middleware', require('./jcs'));
 app.use(appConfig.prefix, app.get('jcs-middleware').middleware);
 
 // Static plugin. Must be after jcs plugin.
+console.log(appConfig.prefix);
+
 app.use(appConfig.prefix, express.static(path.join(__dirname, 'public')));
 
 // If prefixed, redirect root to prefixed dir.

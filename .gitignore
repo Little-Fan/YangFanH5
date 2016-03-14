@@ -7,6 +7,7 @@ temp/
 .*.screen
 .screen
 
+public/node_modules/
 public/jcs/
 public/bower/
 Artworks/
