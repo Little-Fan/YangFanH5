@@ -17,3 +17,4 @@ dump.rdb
 logs/
 
 .DS_Store
+.idea/
