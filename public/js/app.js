@@ -2,11 +2,19 @@
  * Created by fanxiaolong on 2016/3/14.
  */
 $(document).ready(function (e) {
+
+    /*var data = {
+        ParentID: '',
+        pageindex: 0,
+        pagesize: -1
+    };*/
+
     $.ajax({
-        url:      'http://116.77.35.105:9080/rest/rest/channels/list',
+        method: "GET",
+        url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/homecategorys',
         dataType: 'json',
         success:  function (data) {
-
+            console.log(data);
         }
     })
 
