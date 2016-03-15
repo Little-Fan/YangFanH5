@@ -3,9 +3,15 @@
         <img width="30px" height="30px" class="img-circle" src="../images/avatar-placeholder.png">
     </div>
     <div class="nav-bar">
-        <a class="active" href="#">直播</a>
-        <a href="#">点播</a>
-        <a class="last" href="#">专辑</a>
+        {{#each Categorys.Category}}
+            {{#if @first}}
+                <a href="#" class="active">{{Name}}</a>
+            {{else @last}}
+                <a href="#" class="last">{{Name}}</a>
+            {{else}}
+                <a href="#">{{Name}}</a>
+            {{/if}}
+        {{/each}}
     </div>
     <div class="th-large">
         <img width="30px" height="30px" class="img-circle" src="../images/avatar-placeholder.png">

@@ -29,37 +29,24 @@ $(document).ready(function (e) {
     var target = $('#body')[0];  //获取DOM对象
     var spinner = new Spinner(opts).spin(target);  //loading加载动画
 
-
-    /*var data = {
-        ParentID: '',
-        pageindex: 0,
-        pagesize: -1
-    };*/
-
-    $.ajax({
+    var d1 = $.ajax({
         method: "GET",
         url:      '../templates/layout.hbs'
-    }).done(function (data) {
-        var template = Handlebars.compile(data);
-        var context = {
-            items: [
-                {name: "Handlebars", emotion: "love"},
-                {name: "Mustache", emotion: "enjoy"},
-                {name: "Ember", emotion: "want to learn"}
-            ]
-        };
+    });
+
+    var d2 = $.ajax({
+        method: "GET",
+        url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/homecategorys',
+        dataType: 'json'
+    });
+    
+    $.when(d1, d2).done(function (data1, data2) {
+        var template = Handlebars.compile(data1[0]);
+        var context = data2[0];
 
         var html= template(context);
 
         $('#body').html(html);
-    });
-
-    $.ajax({
-        method: "GET",
-        url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/homecategorys',
-        dataType: 'json',
-        success:  function (data) {
-            console.log(data);
-        }
+        
     })
 });
