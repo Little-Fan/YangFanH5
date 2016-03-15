@@ -1,7 +1,52 @@
 doctype html
+//- vim: set ai et nu ts=4 sw=4 cc=100:
+block before_everything
 html
   head
+    block head_start
+
+    script.
+      var IS_IPHONE = navigator.userAgent.match(/iPhone/);
+      var IS_WX = navigator.userAgent.match(/micromessenger/i);
+      var MOBILE_MIN_VIEW_PORT = 320
+    meta(content="text/html; charset=utf-8", http-equiv="content-type")
+    meta(content="yes", name="apple-mobile-web-app-capable")
+    meta(content="yes", name="apple-touch-fullscreen")
+    meta(name="App-Config",content="fullscreen=yes,useHistoryState=yes,transition=yes")
+    meta(name="format-detection", content="telephone=no,email=no,adress=no")
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(
+      rel='stylesheet'
+      type='text/css'
+      href='css/rest.css'
+    )
+    link(
+      rel='stylesheet'
+      type='text/css'
+      href='css/style.css'
+    )
+
+    script.
+      if(true){
+        var screenWidth = window.screen.width;
+        var scale = 1.0;
+        if(IS_IPHONE){
+          scale = screenWidth / 360.0;
+        }else{
+          var currentViewPort = screenWidth / window.devicePixelRatio;
+          scale = (currentViewPort >= MOBILE_MIN_VIEW_PORT) ? currentViewPort / 360.0 : screenWidth / 360.0;
+        }
+        document.write("<meta name='viewport' content='width=device-width, " +
+                "user-scalable=no, " +
+                "initial-scale=" + scale + ", " +
+                "maximum-scale=" + scale + ", " +
+                "minimum-scale=" + scale + "'>");
+      }
+    script(src = "node_modules/jquery/dist/jquery.min.js")
+    script(src = "node_modules/handlebars/dist/handlebars.min.js")
+    script(src = "node_modules/spin.js/spin.min.js")
+    block head_end
   body
-    block content
+    block body
+
+block after_everything

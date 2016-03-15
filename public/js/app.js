@@ -26,7 +26,7 @@ $(document).ready(function (e) {
         , position: 'absolute' // Element positioning
     };
 
-    var target = $('body')[0];  //获取DOM对象
+    var target = $('#body')[0];  //获取DOM对象
     var spinner = new Spinner(opts).spin(target);  //loading加载动画
 
 
@@ -38,7 +38,7 @@ $(document).ready(function (e) {
 
     $.ajax({
         method: "GET",
-        url:      '../hbs/layout.hbs'
+        url:      '../templates/layout.hbs'
     }).done(function (data) {
         var template = Handlebars.compile(data);
         var context = {
@@ -51,14 +51,8 @@ $(document).ready(function (e) {
 
         var html= template(context);
 
-        $('body').html(html);
+        $('#body').html(html);
     });
-
-
-
-
-
-
 
     $.ajax({
         method: "GET",
@@ -68,5 +62,4 @@ $(document).ready(function (e) {
             console.log(data);
         }
     })
-
 });
