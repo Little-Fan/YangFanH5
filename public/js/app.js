@@ -43,10 +43,88 @@ $(document).ready(function (e) {
     $.when(d1, d2).done(function (data1, data2) {
         var template = Handlebars.compile(data1[0]);
         var context = data2[0];
-
         var html= template(context);
-
         $('#body').html(html);
-        
+
+        var id = $('.nav-bar .active').data('id');  //这个id用于获取子分类
+
+        /* 子分类模板 */
+        var d3 = $.ajax({
+            method: "GET",
+            url:      '../templates/categorys-item.hbs'
+        });
+
+        /* 子分类接口 */
+        var d4 = $.ajax({
+            method: "GET",
+            url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/categorys',
+            dataType: 'json',
+            data: {
+                ParentID: id
+            }
+        });
+
+        $.when(d3, d4).done(function (data3, data4) {
+            var template = Handlebars.compile(data3[0]);
+            var context = data4[0];
+            var html= template(context);
+            $('.sub-nav').html(html);
+
+
+            var id =[];
+
+            var contentList = [];
+
+            $('.sub-nav li').each(function (index, element) {
+                id.push($(element).data('id'));
+            });
+
+            var d5 = $.ajax({
+                method:   "GET",
+                url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/contentlist',
+                dataType: 'json',
+                data:     {
+                    CategoryID: id[0]
+                }
+            });
+
+            var d6 = $.ajax({
+                method:   "GET",
+                url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/contentlist',
+                dataType: 'json',
+                data:     {
+                    CategoryID: id[1]
+                }
+            });
+
+            var d7 = $.ajax({
+                method: "GET",
+                url:      '../templates/live-item.hbs'
+            });
+
+            $.when(d5, d6, d7).done(function (data5, data6, data7) {
+
+                contentList.push(data5[0]);
+                contentList.push(data6[0]);
+                var template = Handlebars.compile(data7[0]);
+                var html= template(contentList);
+
+                $('.main').html(html);
+
+            })
+
+
+
+        })
+
+
+
+
     })
+
+
+
+
+
+
 });

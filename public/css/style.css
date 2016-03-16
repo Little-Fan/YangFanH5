@@ -50,33 +50,38 @@ header .avatar {
     padding: 20px 10px;
     width: 340px;
 }
-.content .nav-left,
-.content .nav-right {
-    float: left;
-    width: 50%;
+.content .sub-nav li {
     box-sizing: border-box;
-}
-.content .nav-left {
-    padding-right: 10px;
-}
-.content .nav-right {
-    padding-left: 10px;
-}
-.content h2 {
+    float: left;
     padding: 15px 0;
+    margin: 0 10px;
+    width: 140px;
     font-size: 18px;
     border-bottom: 2px solid #b9b9b9;
     text-align: center;
 }
-.content ul li {
-    padding-top: 60px;
-    padding-left: 15px;
+.content .main {
+    overflow: hidden;
+    width: 100%;
+}
+.content .main > p {
+    font-size: 16px;
+    line-height: 200px;
+    text-align: center;
+}
+.content .list-wrapper {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+}
+.content .list li {
+    margin: 60px 10px 0;
     height: 70px;
     border-bottom: 2px solid #eff0f0;
 }
-.content ul li .title {
+.content .list li .title {
     font-size: 20px;
 }
-.content ul li p {
+.content .list li p {
     margin-top: 15px;
 }
