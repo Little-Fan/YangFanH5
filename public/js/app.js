@@ -2,7 +2,6 @@
  * Created by fanxiaolong on 2016/3/14.
  */
 $(document).ready(function (e) {
-
     var opts = {
         lines: 13 // The number of lines to draw
         , length: 28 // The length of each line
@@ -29,6 +28,8 @@ $(document).ready(function (e) {
     var target = $('#body')[0];  //获取DOM对象
     var spinner = new Spinner(opts).spin(target);  //loading加载动画
 
+    var baseURL = 'http://42.159.246.214:8080/rest/rest/'; //接口基准位置
+
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/layout.hbs'
@@ -36,10 +37,9 @@ $(document).ready(function (e) {
 
     var d2 = $.ajax({
         method: "GET",
-        url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/homecategorys',
+        url:      baseURL + 'contents/homecategorys',
         dataType: 'json'
     });
-    
     $.when(d1, d2).done(function (data1, data2) {
         var template = Handlebars.compile(data1[0]);
         var context = data2[0];
@@ -56,10 +56,10 @@ $(document).ready(function (e) {
 
         /* 子分类接口 */
         var d4 = $.ajax({
-            method: "GET",
-            url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/categorys',
+            method:   "GET",
+            url:      baseURL + 'contents/categorys',
             dataType: 'json',
-            data: {
+            data:     {
                 ParentID: id
             }
         });
@@ -69,7 +69,6 @@ $(document).ready(function (e) {
             var context = data4[0];
             var html= template(context);
             $('.sub-nav').html(html);
-
 
             var id =[];
 
@@ -81,7 +80,7 @@ $(document).ready(function (e) {
 
             var d5 = $.ajax({
                 method:   "GET",
-                url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/contentlist',
+                url:      baseURL + 'contents/contentlist',
                 dataType: 'json',
                 data:     {
                     CategoryID: id[0]
@@ -90,7 +89,7 @@ $(document).ready(function (e) {
 
             var d6 = $.ajax({
                 method:   "GET",
-                url:      'http://ceshi2.chinacloudapp.cn:8080/rest/rest/contents/contentlist',
+                url:      baseURL + 'contents/contentlist',
                 dataType: 'json',
                 data:     {
                     CategoryID: id[1]
@@ -103,28 +102,13 @@ $(document).ready(function (e) {
             });
 
             $.when(d5, d6, d7).done(function (data5, data6, data7) {
-
                 contentList.push(data5[0]);
                 contentList.push(data6[0]);
                 var template = Handlebars.compile(data7[0]);
                 var html= template(contentList);
 
                 $('.main').html(html);
-
             })
-
-
-
         })
-
-
-
-
     })
-
-
-
-
-
-
 });

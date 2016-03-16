@@ -55,7 +55,7 @@ app.use('/', function(req, res, next){
 // Here goes the routing
 ////////////////////////
 app.use(appConfig.prefix, require('./routes/index'));
-
+app.use('/channel', require('./routes/channel'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

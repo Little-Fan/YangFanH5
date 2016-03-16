@@ -85,3 +85,59 @@ header .avatar {
 .content .list li p {
     margin-top: 15px;
 }
+
+
+
+/* 频道页面 */
+#body-channel {
+
+}
+#body-channel .nav-tabs {
+    height: 40px;
+    background-color: #e6e6e6;
+}
+#body-channel .nav-tabs li {
+    box-sizing: border-box;
+    float: left;
+    width: 33%;
+    padding: 0 10px;
+    line-height: 40px;
+    text-align: center;
+}
+#body-channel .nav-tabs li.active {
+    color: #1298F2;
+}
+#body-channel .main .tab-date {
+    float: left;
+    width: 70px;
+    background-color: #ececec;
+}
+#body-channel .main .tab-date li {
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+}
+#body-channel .main .tab-date li.active {
+    background-color: #FFF;
+}
+#body-channel .main .channel-list {
+    float: left;
+    padding-left: 20px;
+    padding-right: 10px;
+    width: 260px;
+}
+#body-channel .main .channel-list li {
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #E6E6E6;
+}
+#body-channel .main .channel-list li span {
+    display: inline-block;
+    margin-right: 10px;
+}
+#body-channel .main .channel-list li span.play {
+    float: right;
+    color: #1298f2;
+}
