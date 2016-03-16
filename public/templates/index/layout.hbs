@@ -5,21 +5,18 @@
     <div class="nav-bar">
         {{#each Categorys.Category}}
             {{#if @first}}
-                <a href="#" class="active" data-id="{{CategoryID}}">{{Name}}</a>
+                <a href="#" data-id="{{CategoryID}}">{{Name}}</a>
             {{else @last}}
                 <a href="#" class="last" data-id="{{CategoryID}}">{{Name}}</a>
             {{else}}
-                <a href="#" data-id="{{CategoryID}}">{{Name}}</a>
+                <a href="#" class="active" data-id="{{CategoryID}}">{{Name}}</a>
             {{/if}}
         {{/each}}
     </div>
     <div class="th-large">
-        <img width="30px" height="30px" class="img-circle" src="../images/avatar-placeholder.png">
+        <img width="30px" height="30px" class="img-circle" src="../images/more.png">
     </div>
 </header>
 <div class="content">
-    <ul class="sub-nav"></ul>
-    <div class="main">
-        <p>数据加载中……</p>
-    </div>
+
 </div>

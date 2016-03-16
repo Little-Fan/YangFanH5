@@ -1,24 +1,22 @@
 body {
     font-size: 14px;
 }
-.wrapper {
-    padding: 10px;
-    width: 340px;
-}
-header {
+
+/* 首页样式 */
+#body-index header {
     border-bottom: 1px solid #f2f2f2;
     padding: 20px 10px;
     width: 340px;
     overflow: hidden;
     background-color: #f7f7f7;
 }
-header .avatar {
+#body-index header .avatar {
     float: left;
 }
-.img-circle {
+#body-index .img-circle {
     border-radius: 50%;
 }
-.nav-bar {
+#body-index .nav-bar {
     float: left;
     margin: 0 39px;
     width: 200px;
@@ -28,7 +26,7 @@ header .avatar {
     border: 1px solid #CCC;
     border-radius: 30px;
 }
-.nav-bar a {
+#body-index .nav-bar a {
     float: left;
     line-height: 20px;
     text-decoration: none;
@@ -36,21 +34,21 @@ header .avatar {
     padding: 0 18px;
     border-right: 1px solid #ccc ;
 }
-.nav-bar a.active {
+#body-index .nav-bar a.active {
     color: #42a6ea;
 }
-.nav-bar a.last {
+#body-index .nav-bar a.last {
     border-right: none;
 }
-.th-large {
+#body-index .th-large {
     float: right;
 }
-.content {
+#body-index .content {
     overflow: hidden;
     padding: 20px 10px;
     width: 340px;
 }
-.content .sub-nav li {
+#body-index .content .sub-nav li {
     box-sizing: border-box;
     float: left;
     padding: 15px 0;
@@ -60,33 +58,63 @@ header .avatar {
     border-bottom: 2px solid #b9b9b9;
     text-align: center;
 }
-.content .main {
+#body-index .content .main {
     overflow: hidden;
     width: 100%;
 }
-.content .main > p {
+#body-index .content > p {
     font-size: 16px;
     line-height: 200px;
     text-align: center;
 }
-.content .list-wrapper {
+#body-index .content .list-wrapper {
     float: left;
     width: 50%;
     box-sizing: border-box;
 }
-.content .list li {
+#body-index .content .list-wrapper li {
     margin: 60px 10px 0;
     height: 70px;
     border-bottom: 2px solid #eff0f0;
 }
-.content .list li .title {
+#body-index .content .list-wrapper li .title {
     font-size: 20px;
 }
-.content .list li p {
+#body-index .content .list-wrapper li p {
     margin-top: 15px;
 }
-
-
+#body-index .box h2 {
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #CCC;
+}
+#body-index .box h2 span:first-child {
+    float: left;
+}
+#body-index .box h2 span:last-child {
+    float: right;
+    font-size: 18px;
+}
+#body-index .box .list {
+    overflow: hidden;
+}
+#body-index .box .list li {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px 10px 0;
+}
+#body-index .box .list img {
+    width: 100%;
+}
+#body-index .box .list h3 {
+    font-weight: bold;
+    line-height: 30px;
+}
+#body-index .box .list h4{
+    line-height: 20px;
+}
 
 /* 频道页面 */
 #body-channel {
