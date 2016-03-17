@@ -89,10 +89,10 @@ body {
     line-height: 40px;
     border-bottom: 1px solid #CCC;
 }
-#body-index .box h2 span:first-child {
+#body-index .box h2 span {
     float: left;
 }
-#body-index .box h2 span:last-child {
+#body-index .box h2 a {
     float: right;
     font-size: 18px;
 }
