@@ -169,3 +169,46 @@ body {
     float: right;
     color: #1298f2;
 }
+
+/* 列表详情页面 */
+#body-list .main {
+    width: 360px;
+}
+#body-list .main ul > p{
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+#body-list ul li {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px 10px 0;
+}
+#body-list ul li h3 {
+    height: 30px;
+    font: bold 16px/30px Arial;
+}
+#body-list ul li span {
+
+}
+
+#body-list .main .more {
+    background-color: #F0F0F0;
+    height: 28px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+#body-list .main .more a {
+    display: block;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: #06a7e1;
+    text-decoration: none;
+}
+#body-list .main .more a:hover {
+    color: #c31;
+    background-color: #e5e5e5;
+}
