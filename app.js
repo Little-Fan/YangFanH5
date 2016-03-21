@@ -55,8 +55,8 @@ app.use('/', function(req, res, next){
 // Here goes the routing
 ////////////////////////
 app.use(appConfig.prefix, require('./routes/index'));
-app.use('/channel', require('./routes/channel'));
-app.use('/list', require('./routes/list'));
+//app.use('/channel', require('./routes/channel'));
+//app.use('/list', require('./routes/list'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,7 +69,7 @@ app.use(function(req, res, next) {
 (function(debugMode){
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('jcs/error', {
             message: err.message,
             error: debugMode ? err : {}
         });

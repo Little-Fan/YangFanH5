@@ -4,6 +4,25 @@ body {
 .img-circle {
     border-radius: 50%;
 }
+.more {
+    background-color: #F0F0F0;
+    height: 28px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.more a {
+    display: block;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: #06a7e1;
+    text-decoration: none;
+}
+.more a:hover {
+    color: #c31;
+    background-color: #e5e5e5;
+}
 /* 首页样式 */
 #body-index header {
     border-bottom: 1px solid #f2f2f2;
@@ -235,7 +254,6 @@ body {
 #body-list ul li span {
 
 }
-
 #body-list .main .more {
     background-color: #F0F0F0;
     height: 28px;
@@ -298,8 +316,10 @@ body {
 #body-channel .main .comment-list .commend-wrap i:hover {
     background-position: -24px 0;
 }
-#body-channel .main .comment-list .commend-wrap span{
-
+#body-channel .main .comment-list .commend-wrap span {
+    display: inline-block;
+    width: 40px;
+    text-align: right;
 }
 #body-channel .main .comment-list .comment-content {
     clear: both;

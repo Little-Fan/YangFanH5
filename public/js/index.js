@@ -165,7 +165,7 @@ $(document).ready(function (e) {
 
                                 if(data2[0].Contents.Content.length > 4){
                                     content = data2[0].Contents.Content.slice(0, 4);
-                                    $(element).find('.more').text('更多');
+                                    $(element).find('a').text('更多');
                                 } else {
                                     content = data2[0].Contents.Content
                                 }
