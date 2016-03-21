@@ -21,6 +21,7 @@
     "spin.js": "git+https://github.com/fgnass/spin.js.git"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "bower-copy": "~0.1.0"
   }
 }
