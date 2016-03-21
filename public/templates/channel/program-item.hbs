@@ -1,0 +1,10 @@
+{{#if Schedules.Schedule}}
+    {{#each Schedules.Schedule}}
+        <li>
+            <span class="date">{{StartTime}}</span>
+            <span class="name">{{ProgramName}}</span>
+        </li>
+    {{/each}}
+{{else}}
+    <p>暂时没有数据！</p>
+{{/if}}

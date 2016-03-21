@@ -3,8 +3,10 @@
         <ul class="list">
             {{#each Contents.Content}}
                 <li>
-                    <h3 class="title">{{Name}}</h3>
-                    <p>正在播出：扬州新闻</p>
+                    <a href="/channel?{{ContentID}}">
+                        <h3 class="title">{{Name}}</h3>
+                        <p>正在播出：扬州新闻</p>
+                    </a>
                 </li>
             {{/each}}
         </ul>

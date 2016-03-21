@@ -1,7 +1,9 @@
 body {
     font-size: 14px;
 }
-
+.img-circle {
+    border-radius: 50%;
+}
 /* 首页样式 */
 #body-index header {
     border-bottom: 1px solid #f2f2f2;
@@ -12,9 +14,6 @@ body {
 }
 #body-index header .avatar {
     float: left;
-}
-#body-index .img-circle {
-    border-radius: 50%;
 }
 #body-index .nav-bar {
     float: left;
@@ -77,6 +76,10 @@ body {
     height: 70px;
     border-bottom: 2px solid #eff0f0;
 }
+#body-index .content .list-wrapper li a {
+    color: #000;
+    text-decoration: none;
+}
 #body-index .content .list-wrapper li .title {
     font-size: 20px;
 }
@@ -131,33 +134,53 @@ body {
     padding: 0 10px;
     line-height: 40px;
     text-align: center;
+    cursor: pointer;
 }
 #body-channel .nav-tabs li.active {
     color: #1298F2;
 }
-#body-channel .main .tab-date {
+#body-channel .main .tabs-nav {
     float: left;
     width: 70px;
     background-color: #ececec;
 }
-#body-channel .main .tab-date li {
+#body-channel .main #tabs_container {
+    float: left;
+    width: 290px;
+}
+#body-channel .main .tabs-nav li a {
+    text-decoration: none;
+    display: block;
+    color: #000;
+}
+#body-channel .main .tabs-nav li.active {
+    background-color: #FFF;
+    color: #1298F2;
+}
+#body-channel .main .tabs-nav li {
     height: 40px;
     font-size: 16px;
     line-height: 40px;
     text-align: center;
 }
-#body-channel .main .tab-date li.active {
-    background-color: #FFF;
+#body-channel .main #comment {
+
 }
 #body-channel .main .channel-list {
-    float: left;
     padding-left: 20px;
     padding-right: 10px;
     width: 260px;
 }
+#body-channel .main .channel-list p {
+    font-size: 18px;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+}
 #body-channel .main .channel-list li {
     font-size: 16px;
     height: 50px;
+    text-align: left;
     line-height: 50px;
     border-bottom: 1px solid #E6E6E6;
 }
@@ -169,7 +192,27 @@ body {
     float: right;
     color: #1298f2;
 }
-
+#body-channel .main #comment .comment-controls,
+#body-channel .main #comment .comment-list {
+    padding: 10px 20px;
+}
+#body-channel .main #comment .comment-controls .txt {
+    float: left;
+    border: 1px solid #C0C0C0;
+    padding: 5px 10px;
+    width: 245px;
+    height: 20px;
+    line-height: 20px;
+}
+#body-channel .main #comment .comment-controls .btn {
+    float: left;
+    box-sizing: content-box;
+    padding: 0;
+    height: 30px;
+    width: 52px;
+    border: 1px solid #C0C0C0;
+    border-left: none;
+}
 /* 列表详情页面 */
 #body-list .main {
     width: 360px;
@@ -211,4 +254,57 @@ body {
 #body-list .main .more a:hover {
     color: #c31;
     background-color: #e5e5e5;
+}
+
+/* 详情列表*/
+#body-channel .main .comment-list li {
+    margin-bottom: 15px;
+}
+#body-channel .main .comment-list .user,
+#body-channel .main .comment-list .user-info {
+    float: left;
+}
+#body-channel .main .comment-list .user-info {
+    margin-left: 20px;
+    width: 260px;
+}
+#body-channel .main .comment-list .user-info h3 {
+    float: left;
+    height: 40px;
+    line-height: 20px;
+}
+#body-channel .main .comment-list .user-name {
+    font-size: 16px;
+}
+#body-channel .main .comment-list .coment-data {
+    font-size: 12px;
+    color: #666;
+}
+#body-channel .main .comment-list .user-info p {
+    margin-bottom: 0;
+}
+#body-channel .main .comment-list .commend-wrap {
+    float: right;
+    height: 40px;
+    line-height: 40px;
+}
+#body-channel .main .comment-list .commend-wrap i {
+    display: inline-block;
+    vertical-align: text-bottom;
+    width: 24px;
+    height: 24px;
+    background: transparent url(../images/icon.png) no-repeat 0 0;
+}
+#body-channel .main .comment-list .commend-wrap i:hover {
+    background-position: -24px 0;
+}
+#body-channel .main .comment-list .commend-wrap span{
+
+}
+#body-channel .main .comment-list .comment-content {
+    clear: both;
+    float: right;
+    margin-top: 10px;
+    width: 260px;
+    line-height: 20px;
 }
