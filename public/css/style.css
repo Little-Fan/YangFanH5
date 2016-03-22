@@ -1,4 +1,5 @@
 body {
+    width: 360px;
     font-size: 14px;
 }
 .img-circle {
@@ -410,5 +411,8 @@ body {
 }
 #body-special .txt {
     line-height: 25px;
+    padding: 10px 20px;
+}
+#body-special .box {
     padding: 10px 20px;
 }
