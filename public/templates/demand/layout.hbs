@@ -1,33 +1,55 @@
-<div id="body-channel">
-    <video width="360" height="240" controls="controls" src="../vide/s7_tvc.mp4"></video>
-    <ul class="nav-tabs">
-        <li class="active">节目单</li>
-        <li>评论</li>
-        <li>图片</li>
-    </ul>
-    <div class="main">
-        <div id="tabs">
-            <ul class="tabs-nav">
-
-            </ul>
-            <div id="tabs_container">
-                <div id="tabs-1">
-                    <ul class="channel-list">
-
-                    </ul>
-                </div>
-            </div><!--End tabs container-->
-        </div><!--End tabs-->
-        <div id="comment" style="display: none">
+<div id="body-demand">
+    <video width="360" height="240" src="../vide/s7_tvc.mp4" controls="controls"></video>
+    <div class="video-info">
+        <div class="times">123次播放</div>
+        <i class="share"></i>
+        <i class="heart"></i>
+    </div>
+    <div class="box">
+        <h2>
+            <span>新闻</span>
+            <a href="./list.html?id=CCTG0000000000000170">更多</a>
+        </h2>
+        <ul class="list">
+            <li>
+                <a><img height="80" src="../images/car.jpg"></a>
+                <h3>星球大战：克隆战争</h3>
+                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
+            </li>
+            <li>
+                <a><img height="80" src="../images/car.jpg"></a>
+                <h3>星球大战：克隆战争</h3>
+                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
+            </li>
+        </ul>
+        <h2>
+            <span>评论</span>
+        </h2>
+        <div id="comment">
             <div class="comment-controls clearfix">
-                <input class="txt" type="text" placeholder="我来评论">
+                <input type="text" class="txt" placeholder="我来评论">
                 <button class="btn" type="button">发送</button>
             </div>
             <ul class="comment-list">
-
+                <li class="clearfix">
+                    <div class="user">
+                        <img width="40px" height="40px" class="img-circle" src="../images/avatar-placeholder.png">
+                    </div>
+                    <div class="user-info clearfix">
+                        <h3>
+                            <p class="user-name">2015</p>
+                            <p class="coment-data">2016-03-21 09:00:40</p>
+                        </h3>
+                        <div class="commend-wrap">
+                            <i> </i>
+                            <span>22</span>
+                        </div>
+                        <div class="comment-content">hello word！</div>
+                    </div>
+                </li>
             </ul>
             <div class="more">
-                <a href="javascript:;">加载更多</a>
+                <a href="javascript:;">数据加载完成</a>
             </div>
         </div>
     </div>

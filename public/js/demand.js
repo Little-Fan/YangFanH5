@@ -7,7 +7,7 @@ $(document).ready(function (e) {
         method: "GET",
         url:      '../templates/channel/layout.hbs'
     }).done(function (data1) {
-        $('#body-channel').html(data1);
+        $('#body').html(data1);
         var isLoad = false;  //是否是首次加载
         $('.nav-tabs li').click(function (e) {
             var index = $(this).index();

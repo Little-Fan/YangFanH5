@@ -2,18 +2,12 @@
  * Created by fanxiaolong on 2016/3/14.
  */
 $(document).ready(function (e) {
-
-    var baseURL = 'http://42.159.246.214:8080/rest/rest/'; //接口基准位置
-    var id = location.search.substr(1);
-
-    $.ajaxSetup({
-
-    });
+    var id = getQueryVariable("id");
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/channel/layout.hbs'
     }).done(function (data1) {
-        $('#body-channel').html(data1);
+        $('body').html(data1);
         var isLoad = false;  //是否是首次加载
         $('.nav-tabs li').click(function (e) {
             var index = $(this).index();

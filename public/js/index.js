@@ -27,9 +27,6 @@ $(document).ready(function (e) {
 
     var target = $('#body-index')[0];  //获取DOM对象
     var spinner = new Spinner(opts).spin(target);  //loading加载动画
-
-    var baseURL = 'http://ceshi2.chinacloudapp.cn:8080/rest/rest/'; //接口基准位置
-
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/index/layout.hbs'
