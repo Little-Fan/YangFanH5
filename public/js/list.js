@@ -5,7 +5,6 @@ $(document).ready(function (e) {
 
     var baseURL = 'http://ceshi2.chinacloudapp.cn:8080/rest/rest/'; //接口基准位置
     var id = location.search.substr(1);
-
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/list/layout.hbs'
