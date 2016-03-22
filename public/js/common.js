@@ -11,9 +11,7 @@ function getQueryVariable(variable) {
 }
 
 Handlebars.registerHelper('praiseMark', function(conditional, options) {
-
     conditional = Number(conditional);
-
     if(conditional) {
         return options.fn(this);
     } else {
@@ -22,7 +20,6 @@ Handlebars.registerHelper('praiseMark', function(conditional, options) {
 });
 
 Handlebars.registerHelper('contentType', function(type, options) {
-    console.log(type);
     if (type == "Program") {
         return options.fn(this);
     } else {

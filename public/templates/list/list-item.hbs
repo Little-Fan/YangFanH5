@@ -1,6 +1,10 @@
 {{#each Contents.Content}}
     <li>
-        <img src="../images/car.jpg" width="160" height="90">
+        {{#contentType ContentType}}
+            <a href="demand.html?id={{ContentID}}"><img src="../images/car.jpg" height="80"></a>
+        {{else}}
+            <a href="special.html?id={{ContentID}}"><img src="../images/car.jpg" height="80"></a>
+        {{/contentType}}
         <h3>{{Name}}</h3>
         <p>
             <span>3-23 22:00</span>
