@@ -267,19 +267,17 @@ body {
     width: 245px;
 }
 #comment .comment-controls .btn {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: #c0c0c0 #c0c0c0 #c0c0c0 -moz-use-text-color;
-    border-image: none;
-    border-style: solid solid solid none;
-    border-width: 1px 1px 1px medium;
     box-sizing: content-box;
     float: left;
-    height: 30px;
+    border: 1px solid #C0C0C0;
+    border-left: none;
     padding: 0;
     width: 52px;
+    height: 30px;
+}
+#comment .comment-controls .btn:hover {
+    color: #666;
+    background-color: #E0E0E0;
 }
 #body-list .main {
     width: 360px;

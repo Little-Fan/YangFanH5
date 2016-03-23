@@ -45,3 +45,30 @@ $.ajax({
         });
     }
 });
+$(document).on('click', '.commend-wrap i', function (e) {
+    var data = $(this).data();
+    $.ajax({
+        url: baseURL + 'contents/addpraise',
+        dataType: 'json',
+        data: {
+            ContentID: data.contentId,
+            CommentID: data.commentId
+        }
+    }).done(function (data) {
+        $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
+    })
+});
+
+$(document).on('click', '#send', function (e) {
+    var data = $(this).data();
+    $.ajax({
+        url: baseURL + 'contents/addpraise',
+        dataType: 'json',
+        data: {
+            ContentID: data.contentId,
+            CommentID: data.commentId
+        }
+    }).done(function (data) {
+        $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
+    })
+});

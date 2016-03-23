@@ -27,6 +27,7 @@ $(document).ready(function (e) {
 
     var target = $('#body-index')[0];  //获取DOM对象
     var spinner = new Spinner(opts).spin(target);  //loading加载动画
+    var type = getQueryVariable("type");
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/index/layout.hbs'
@@ -40,8 +41,12 @@ $(document).ready(function (e) {
 
     $.when(d1, d2).done(function (data1, data2) {
         var template = Handlebars.compile(data1[0]);
+
         var context = data2[0];
+        context.type = type;
+
         var html= template(context);
+
         $('#body-index').html(html);
 
         /* 主导航事件绑定 */
@@ -176,6 +181,6 @@ $(document).ready(function (e) {
                 }
             });
         });
-        $('.nav-bar').find('.active').trigger('click'); //默认加载直播页面
+        $('.nav-bar').find('.' + type).trigger('click'); //默认加载直播页面
     })
 });
