@@ -1,4 +1,4 @@
-window.baseURL =  'http://42.159.246.214:8080/rest/rest/'; //接口基准位置
+window.baseURL = 'http://42.159.246.214:8080/rest/rest/'; //接口基准位置
 
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
@@ -10,19 +10,38 @@ function getQueryVariable(variable) {
     return false;
 }
 
-Handlebars.registerHelper('praiseMark', function(conditional, options) {
+Handlebars.registerHelper('praiseMark', function (conditional, options) {
     conditional = Number(conditional);
-    if(conditional) {
+    if (conditional) {
         return options.fn(this);
     } else {
         return options.inverse(this);
     }
 });
 
-Handlebars.registerHelper('contentType', function(type, options) {
+Handlebars.registerHelper('contentType', function (type, options) {
     if (type == "Program") {
         return options.fn(this);
     } else {
         return options.inverse(this);
+    }
+});
+
+$.ajax({
+    url:      baseURL + 'users/login',
+    method:   'POST',
+    dataType: 'json',
+    async:    false,
+    data:     {
+        LoginType: 1,
+        LoginName: 'hezhoujun'
+    },
+    success:  function (data) {
+        $.ajaxSetup({
+            data: {
+                'UserID':    data.User.ID,
+                'UserToken': data.UserToken
+            }
+        });
     }
 });
