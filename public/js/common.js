@@ -60,15 +60,20 @@ $(document).on('click', '.commend-wrap i', function (e) {
 });
 
 $(document).on('click', '#send', function (e) {
-    var data = $(this).data();
+    var para = {
+        ContentType: getQueryVariable('type'),
+        ContentID: getQueryVariable('id'),
+        Comment: 'fxl'
+    };
+
     $.ajax({
-        url: baseURL + 'contents/addpraise',
+        url: baseURL + 'contents/addcomment',
+        method: 'POST',
         dataType: 'json',
-        data: {
-            ContentID: data.contentId,
-            CommentID: data.commentId
-        }
+        data: para
     }).done(function (data) {
-        $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
+
+
     })
+
 });

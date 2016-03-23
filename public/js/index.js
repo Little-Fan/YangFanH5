@@ -24,7 +24,6 @@ $(document).ready(function (e) {
         , hwaccel: false // Whether to use hardware acceleration
         , position: 'absolute' // Element positioning
     };
-
     var target = $('#body-index')[0];  //获取DOM对象
     var spinner = new Spinner(opts).spin(target);  //loading加载动画
     var type = getQueryVariable("type");
