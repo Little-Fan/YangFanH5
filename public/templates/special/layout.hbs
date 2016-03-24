@@ -1,45 +1,24 @@
 <div id="body-special">
     <div class="summary">
-        <img src="../../images/car.jpg" width="360" height="200">
-        <div class="txt">
-            简介：二十世纪初，爱迪生、巴黎铁塔总设计师埃菲尔、“交流电之父”尼古拉·特斯拉和其他顶尖的科学家、艺术家组成了一个秘密团体，共同打造一个理想计划——明日世界，传言中，华特·迪士尼也是创办人之一，在他的遗物中有一个黑盒子，装着神秘的机关。可是这个计划却出了……
-        </div>
+        <img src="{{Content.Poster}}" width="360" height="200">
+        <div class="txt">简介：{{Content.Summary}}</div>
     </div>
     <div class="box">
         <h2>
             <span>专辑内容</span>
         </h2>
         <ul class="list">
-            <li>
-                <a><img height="80" src="../images/car.jpg"></a>
-                <h3>星球大战：克隆战争</h3>
-                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
-            </li>
-            <li>
-                <a><img height="80" src="../images/car.jpg"></a>
-                <h3>星球大战：克隆战争</h3>
-                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
-            </li>
-            <li>
-                <a><img height="80" src="../images/car.jpg"></a>
-                <h3>星球大战：克隆战争</h3>
-                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
-            </li>
-            <li>
-                <a><img height="80" src="../images/car.jpg"></a>
-                <h3>星球大战：克隆战争</h3>
-                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
-            </li>
-            <li>
-                <a><img height="80" src="../images/car.jpg"></a>
-                <h3>星球大战：克隆战争</h3>
-                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
-            </li>
-            <li>
-                <a><img height="80" src="../images/car.jpg"></a>
-                <h3>星球大战：克隆战争</h3>
-                <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
-            </li>
+            {{#each Content.RelateContents.Content}}
+                <li>
+                    {{#contentType ContentType}}
+                        <a href="program.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+                    {{else}}
+                        <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+                    {{/contentType}}
+                    <h3>{{Name}}</h3>
+                    <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
+                </li>
+            {{/each}}
         </ul>
     </div>
 </div>
