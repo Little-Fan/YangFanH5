@@ -4,6 +4,7 @@
 $(document).ready(function (e) {
 
     var id = getQueryVariable("id");
+    var type = getQueryVariable("type");
 
     var d1 = $.ajax({
         method: "GET",
@@ -26,6 +27,18 @@ $(document).ready(function (e) {
         var html= template(context);
         $('body').html(html);
 
+        var d3 = $.ajax({
+            method:   "GET",
+            url:      baseURL + 'services/getAccessUrl',
+            dataType: 'json',
+            data:     {
+                PhysicalContentID: context.Content.Program.Movies.Movie[0].PhysicalContentID,
+                ContentType: type,
+                Domain: 0
+            }
+        }).done(function (data) {
+            $('video').attr('src',data.AccessUrl);
+        });
 
         var pagesize = 5;  //分页大小
         var pageindex = 1;  //分页页码
