@@ -4,7 +4,7 @@
 $(document).ready(function (e) {
     var d1 = $.ajax({
         method: "GET",
-        url:      '../templates/demand/layout.hbs'
+        url:      '../templates/program/layout.hbs'
     }).done(function (data) {
         $('body').html(data);
     });

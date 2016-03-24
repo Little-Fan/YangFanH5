@@ -1,4 +1,5 @@
 body {
+    overflow-x: hidden;
     width: 360px;
     font-size: 14px;
 }
