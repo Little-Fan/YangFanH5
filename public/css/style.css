@@ -216,7 +216,9 @@ html {
 }
 #body-channel .main #tabs_container {
     float: left;
+    overflow-x: hidden;
     width: 290px;
+    height: 280px;
 }
 #body-channel .main .tabs-nav li a {
     color: #000;
@@ -261,8 +263,12 @@ html {
     color: #1298f2;
     float: right;
 }
-#body-channel .main #comment .comment-controls, #body-channel .main #comment .comment-list {
+#comment .comment-controls,
+#comment .comment-list {
     padding: 10px 20px;
+}
+#comment .comment-list p{
+    text-align: center;
 }
 #comment .comment-controls .txt {
     border: 1px solid #c0c0c0;

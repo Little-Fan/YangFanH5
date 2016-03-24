@@ -33,7 +33,7 @@ $(document).ready(function (e) {
                 var context = data2[0];
                 var html= template(context);
                 $('.list').children('p').remove();
-                pageindex = $('.list').append(html).find('li').length/pagesize;
+                pageindex = Math.ceil($('.list').append(html).find('li').length/pagesize);
                 if (pageindex > data2[0].PageCount){
                     $(e.currentTarget).find('a').text('数据加载完成');
                     $(e.currentTarget).off();  //t

@@ -4,11 +4,26 @@
 $(document).ready(function (e) {
     var id = getQueryVariable("id");
     var type = getQueryVariable("type");
+    var PhysicalContentID = getQueryVariable("PhysicalContentID");
+    
+    
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/channel/layout.hbs'
     }).done(function (data1) {
         $('body').html(data1);
+
+        $.ajax({
+            method:   "GET",
+            url:      baseURL + 'services/getChannelUrl',
+            dataType: 'json',
+            data:     {
+                PhysicalContentID: PhysicalContentID
+            }
+        }).done(function (data) {
+            $('video').attr('src',data.LiveUrl);
+        });
+
         var isLoad = false;  //是否是首次加载
         $('.nav-tabs li').click(function (e) {
             var index = $(this).index();
@@ -39,7 +54,8 @@ $(document).ready(function (e) {
                             var template = Handlebars.compile(data1[0]);
                             var context = data2[0];
                             var html= template(context);
-                            pageindex = $('.comment-list').append(html).find('li').length/pagesize;
+                            pageindex = Math.ceil($('.comment-list').append(html).find('li').length/pagesize);
+                            console.log(pageindex);
                             isLoad = true;
                             if (pageindex >= data2[0].PageCount){
                                 $(e.currentTarget).find('a').text('数据加载完成');

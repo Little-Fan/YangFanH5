@@ -3,7 +3,7 @@
         <ul class="list">
             {{#each Contents.Content}}
                 <li>
-                    <a href="./channel.html?id={{ContentID}}&type={{ContentType}}">
+                    <a href="./channel.html?id={{ContentID}}&type={{ContentType}}&PhysicalContentID={{Channel.PhysicalChannels.PhysicalChannel.[0].PhysicalContentID}}">
                         <h3 class="title">{{Name}}</h3>
                         <p>正在播放：{{Channel.NowPlay.ProgramName}}</p>
                     </a>

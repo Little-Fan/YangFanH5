@@ -92,6 +92,7 @@ $(document).on('click', '#send', function (e) {
             }).done(function (data) {
                 var template = Handlebars.compile(data);
                 var html= template(context);
+                $(e.currentTarget).prev().val('');
                 $('.comment-list').prepend(html);
             })
         })

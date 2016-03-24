@@ -63,7 +63,7 @@ $(document).ready(function (e) {
             var template = Handlebars.compile(data1[0]);
             var context = data2[0];
             var html= template(context);
-            pageindex = $('.comment-list').append(html).find('li').length/pagesize;
+            pageindex = Math.ceil($('.comment-list').append(html).find('li').length/pagesize);
             if (pageindex >= data2[0].PageCount){
                 $(e.currentTarget).find('a').text('数据加载完成');
                 $(e.currentTarget).off();
