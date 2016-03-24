@@ -12,40 +12,42 @@ $(document).ready(function (e) {
         var isLoad = false;  //是否是首次加载
         $('.nav-tabs li').click(function (e) {
             var index = $(this).index();
-            $(this).addClass('active').siblings().removeClass('active');
-            $('.main').children().hide().eq(index).show();
-            if (index == 1 && !isLoad) {
-                var pagesize = 5;  //分页大小
-                var pageindex = 1;  //分页页码
-                var d1 = $.ajax({
-                    method: "GET",
-                    url:      '../templates/channel/comment-item.hbs'
-                });
-
-                $('.more').click(function (e) {
-                    var d2 = $.ajax({
-                        method:   "GET",
-                        url:      baseURL + 'contents/getcomments',
-                        dataType: 'json',
-                        data:     {
-                            Model: 1,
-                            ContentID: id,
-                            pagesize: pagesize,
-                            pageindex: pageindex
-                        }
+            if (index < 2) {
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.main').children().hide().eq(index).show();
+                if (index == 1 && !isLoad) {
+                    var pagesize = 5;  //分页大小
+                    var pageindex = 1;  //分页页码
+                    var d1 = $.ajax({
+                        method: "GET",
+                        url:      '../templates/channel/comment-item.hbs'
                     });
-                    $.when(d1, d2).done(function (data1, data2) {
-                        var template = Handlebars.compile(data1[0]);
-                        var context = data2[0];
-                        var html= template(context);
-                        pageindex = $('.comment-list').append(html).find('li').length/pagesize;
-                        isLoad = true;
-                        if (pageindex >= data2[0].PageCount){
-                            $(e.currentTarget).find('a').text('数据加载完成');
-                            $(e.currentTarget).off();
-                        }
-                    })
-                }).trigger('click');
+
+                    $('.more').click(function (e) {
+                        var d2 = $.ajax({
+                            method:   "GET",
+                            url:      baseURL + 'contents/getcomments',
+                            dataType: 'json',
+                            data:     {
+                                Model: 1,
+                                ContentID: id,
+                                pagesize: pagesize,
+                                pageindex: pageindex
+                            }
+                        });
+                        $.when(d1, d2).done(function (data1, data2) {
+                            var template = Handlebars.compile(data1[0]);
+                            var context = data2[0];
+                            var html= template(context);
+                            pageindex = $('.comment-list').append(html).find('li').length/pagesize;
+                            isLoad = true;
+                            if (pageindex >= data2[0].PageCount){
+                                $(e.currentTarget).find('a').text('数据加载完成');
+                                $(e.currentTarget).off();
+                            }
+                        })
+                    }).trigger('click');
+                }
             }
         });
         $.ajax({
