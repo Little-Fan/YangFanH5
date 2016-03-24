@@ -1,9 +1,9 @@
 {{#each Contents.Content}}
     <li>
         {{#contentType ContentType}}
-            <a href="demand.html?id={{ContentID}}"><img src="../images/car.jpg" height="80"></a>
+            <a href="demand.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
         {{else}}
-            <a href="special.html?id={{ContentID}}"><img src="../images/car.jpg" height="80"></a>
+            <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
         {{/contentType}}
         <h3>{{Name}}</h3>
         <p>

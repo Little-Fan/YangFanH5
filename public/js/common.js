@@ -37,6 +37,7 @@ $.ajax({
         LoginName: 'hezhoujun'
     },
     success:  function (data) {
+        Cookies.set('user-info', data, { expires: 7, path: '/' });
         $.ajaxSetup({
             data: {
                 'UserID':    data.User.ID,
@@ -60,20 +61,39 @@ $(document).on('click', '.commend-wrap i', function (e) {
 });
 
 $(document).on('click', '#send', function (e) {
-    var para = {
-        ContentType: getQueryVariable('type'),
-        ContentID: getQueryVariable('id'),
-        Comment: 'fxl'
-    };
-
-    $.ajax({
-        url: baseURL + 'contents/addcomment',
-        method: 'POST',
-        dataType: 'json',
-        data: para
-    }).done(function (data) {
+    var txt = $.trim($(this).prev().val());
+    var id =getQueryVariable('id');
+    var type = getQueryVariable('type');
 
 
-    })
+    if (txt != '') {
+        var para = {
+            ContentType: type,
+            ContentID: id,
+            Comment: txt
+        };
 
+        var context = {
+            UserID: Cookies.getJSON('user-info').User.ID,
+            CreateTime: moment().format('YYYY-MM-DD h:mm:ss'),
+            ContentID: id,
+            Praise: 0,
+            Detail: txt
+        };
+        $.ajax({
+            url: baseURL + 'contents/addcomment',
+            method: 'POST',
+            dataType: 'json',
+            data: para
+        }).done(function (data) {
+            $.ajax({
+                method: "GET",
+                url:    '../templates/common/comment-item.hbs'
+            }).done(function (data) {
+                var template = Handlebars.compile(data);
+                var html= template(context);
+                $('.comment-list').prepend(html);
+            })
+        })
+    }
 });
