@@ -1,0 +1,11 @@
+{{#each Content.RelateContents.Content}}
+    <li>
+        {{#contentType ContentType}}
+            <a href="program.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+        {{else}}
+            <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+        {{/contentType}}
+        <h3>{{Name}}</h3>
+        <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
+    </li>
+{{/each}}

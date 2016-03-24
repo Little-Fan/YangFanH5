@@ -371,43 +371,46 @@ body {
     margin-top: 10px;
     width: 260px;
 }
-#body-demand {
+#body-program {
     width: 360px;
 }
-#body-demand .video-info {
+#body-program .video-info {
     background-color: #f1f1f1;
     height: 40px;
     line-height: 40px;
     padding: 0 10px;
 }
-#body-demand .video-info .times {
+#body-program .video-info .times {
     float: left;
     font-weight: bold;
 }
-#body-demand .video-info i {
+#body-program .video-info i {
     float: right;
     height: 40px;
     margin-left: 20px;
     width: 40px;
 }
-#body-demand .video-info i.heart {
+#body-program .video-info i.heart {
     background: transparent url("../images/ic-heart-normal.png") no-repeat scroll center center / 40px 40px;
 }
-#body-demand .video-info i.share {
+#body-program .video-info i.share {
     background: transparent url("../images/ic-light-share.png") no-repeat scroll center center;
 }
-#body-demand .box {
+#body-program .box {
     padding: 10px;
 }
-#body-demand .box .list {
+#body-program .box .list {
     margin-bottom: 20px;
 }
-#body-demand #comment {
+#body-program #comment {
     margin-top: 20px;
 }
-#body-demand .comment-list {
+#body-program .comment-list {
     margin-top: 20px;
 }
+
+
+
 #body-special .txt {
     line-height: 25px;
     padding: 10px 20px;
