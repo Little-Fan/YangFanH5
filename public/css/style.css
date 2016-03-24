@@ -419,7 +419,9 @@ html {
 #body-program .comment-list {
     margin-top: 20px;
 }
-
+#body-program .txt {
+    width: 225px!important;
+}
 
 
 #body-special .txt {

@@ -5,8 +5,6 @@ $(document).ready(function (e) {
     var id = getQueryVariable("id");
     var type = getQueryVariable("type");
     var PhysicalContentID = getQueryVariable("PhysicalContentID");
-    
-    
     var d1 = $.ajax({
         method: "GET",
         url:      '../templates/channel/layout.hbs'
