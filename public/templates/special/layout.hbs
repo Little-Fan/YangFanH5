@@ -8,7 +8,7 @@
             <span>专辑内容</span>
         </h2>
         <ul class="list">
-            {{#each Content.RelateContents.Content}}
+            {{#each Content.Series.Programs.Program}}
                 <li>
                     {{#contentType ContentType}}
                         <a href="program.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>

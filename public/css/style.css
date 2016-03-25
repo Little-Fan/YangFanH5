@@ -54,6 +54,9 @@ html {
 .box .list h3 {
     font-weight: bold;
     line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .box .list h4 {
     line-height: 20px;
@@ -63,6 +66,11 @@ html {
 }
 .box .list h4::after {
     content: "...";
+}
+.overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #body-index header {
     background-color: #f7f7f7;
@@ -107,14 +115,24 @@ html {
     width: 340px;
 }
 #body-index .content .sub-nav li {
-    border-bottom: 2px solid #b9b9b9;
     box-sizing: border-box;
     float: left;
-    font-size: 18px;
-    margin: 0 10px;
     padding: 15px 0;
+    width: 160px ;
+    text-indent: 40px;
     text-align: center;
-    width: 140px;
+    font-size: 18px;
+    line-height: 25px;
+    border-bottom: 2px solid #b9b9b9;
+    background: transparent no-repeat 20px center;
+}
+#body-index .content .sub-nav li:first-child {
+    margin-right: 10px;
+    background-image: url(../images/tv_icon.png);
+}
+#body-index .content .sub-nav li:last-child {
+    margin-left: 10px;
+    background-image: url(../images/radio_icon.png);
 }
 #body-index .content .main {
     overflow: hidden;
@@ -256,12 +274,15 @@ html {
     text-align: left;
 }
 #body-channel .main .channel-list li span {
-    display: inline-block;
+    float: left;
     margin-right: 10px;
 }
+#body-channel .main .channel-list li span.name{
+    width: 80px;
+}
 #body-channel .main .channel-list li span.play {
+    float: left;
     color: #1298f2;
-    float: right;
 }
 #comment .comment-controls,
 #comment .comment-list {

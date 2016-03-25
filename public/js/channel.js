@@ -13,13 +13,15 @@ $(document).ready(function (e) {
 
         $.ajax({
             method:   "GET",
-            url:      baseURL + 'services/getChannelUrl',
+            url:      baseURL + 'services/getAccessUrl',
             dataType: 'json',
             data:     {
-                PhysicalContentID: PhysicalContentID
+                PhysicalContentID: PhysicalContentID,
+                ContentType: type,
+                Domain: 0
             }
         }).done(function (data) {
-            $('video').attr('src',data.LiveUrl);
+            $('video').attr('src',data.AccessUrl);
         });
 
         var isLoad = false;  //是否是首次加载
@@ -53,7 +55,6 @@ $(document).ready(function (e) {
                             var context = data2[0];
                             var html= template(context);
                             pageindex = Math.ceil($('.comment-list').append(html).find('li').length/pagesize);
-                            console.log(pageindex);
                             isLoad = true;
                             if (pageindex >= data2[0].PageCount){
                                 $(e.currentTarget).find('a').text('数据加载完成');

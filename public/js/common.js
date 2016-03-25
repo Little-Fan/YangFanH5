@@ -27,6 +27,13 @@ Handlebars.registerHelper('contentType', function (type, options) {
     }
 });
 
+Handlebars.registerHelper("transformat", function (value) {
+    console.log(value);
+    if (value == 3) {
+        return "正在播放";
+    }
+});
+
 $.ajax({
     url:      baseURL + 'users/login',
     method:   'POST',

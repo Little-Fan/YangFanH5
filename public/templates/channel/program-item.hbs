@@ -2,7 +2,8 @@
     {{#each Schedules.Schedule}}
         <li>
             <span class="date">{{StartTime}}</span>
-            <span class="name">{{ProgramName}}</span>
+            <span class="name overflow">{{ProgramName}}</span>
+            <span class="play">{{transformat PlayState}}</span>
         </li>
     {{/each}}
 {{else}}
