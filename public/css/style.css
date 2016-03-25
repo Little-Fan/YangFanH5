@@ -7,6 +7,26 @@ html {
 .img-circle {
     border-radius: 50%;
 }
+.icon {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    background: transparent no-repeat center center;
+}
+.list-icon{
+    background-image: url("../images/list_default_icon.png");
+}
+.active .list-icon{
+    background-image: url("../images/list_highlight_icon.png");
+}
+.comment-icon {
+    background-image: url("../images/comment_default_icon.png");
+}
+.active .comment-icon{
+    background-image: url("../images/comment_highlight_icon.png");
+}
 .more {
     background-color: #f0f0f0;
     height: 28px;
@@ -63,9 +83,6 @@ html {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-.box .list h4::after {
-    content: "...";
 }
 .overflow {
     white-space: nowrap;
@@ -205,9 +222,6 @@ html {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#body-index .box .list h4::after {
-    content: "...";
-}
 #body-channel {
 }
 #body-channel .nav-tabs {
@@ -327,14 +341,36 @@ html {
 #body-list ul li {
     box-sizing: border-box;
     float: left;
-    padding: 10px 10px 0;
+    padding: 10px 0;
     width: 50%;
+}
+#body-list ul li:nth-child(odd) {
+    padding-right: 10px;
+}
+#body-list ul li:nth-child(even) {
+    padding-left: 10px;
 }
 #body-list ul li h3 {
     font: bold 16px/30px Arial;
-    height: 30px;
+    height: 25px;
 }
 #body-list ul li span {
+    float: left;
+    font-size: 8px;
+    height: 25px;
+    line-height: 25px;
+    text-indent: 20px;
+}
+#body-list ul li .date {
+    background: url("../images/clicks_icon.png") no-repeat -7px center;
+}
+#body-list ul li .times {
+    margin-left: 10px;
+    background: url("../images/pv_icon.png") no-repeat -7px center;
+}
+#body-list ul li .like {
+    margin-left: 10px;
+    background: url("../images/like_icon.png") no-repeat left center / 15px 15px;
 }
 #body-list .main .more {
     background-color: #f0f0f0;
@@ -378,6 +414,7 @@ html {
     font-size: 12px;
 }
 .comment-list .user-info p {
+    text-align: left!important;
     margin-bottom: 0;
 }
 .comment-list .commend-wrap {

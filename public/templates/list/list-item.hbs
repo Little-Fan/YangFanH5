@@ -6,10 +6,10 @@
             <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
         {{/contentType}}
         <h3>{{Name}}</h3>
-        <p>
-            <span class="date">3-23 22:00</span>
-            <span class="">{{VolumnCount}}</span>
-            <span>123</span>
+        <p class="info">
+            <span class="date">{{formatTime PublishTime 'MM-DD HH:mm'}}</span>
+            <span class="times">{{PlayTimes}}</span>
+            <span class="like">123</span>
         </p>
     </li>
 {{/each}}

@@ -28,10 +28,18 @@ Handlebars.registerHelper('contentType', function (type, options) {
 });
 
 Handlebars.registerHelper("transformat", function (value) {
-    console.log(value);
-    if (value == 3) {
+    if (value == 2) {
         return "正在播放";
     }
+});
+
+Handlebars.registerHelper("formatTime", function (time, type, options) {
+    console.log(type);
+    if(type){
+        return moment.unix(time).format(type);
+    } /*else {
+        return moment.unix(time).format("HH:mm");
+    }*/
 });
 
 $.ajax({
