@@ -468,6 +468,9 @@ html {
 #body-program .video-info i.heart {
     background: transparent url("../images/like_icon.png") no-repeat scroll center center / 25px 25px;
 }
+#body-program .video-info i.heart:hover {
+    background-image: url('../images/like_highlight_icon.png');
+}
 #body-program .video-info i.share {
     background: transparent url("../images/e-share_l.png") no-repeat scroll center center / 35px 30px;
 }
