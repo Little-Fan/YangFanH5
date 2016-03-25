@@ -78,27 +78,27 @@ $(document).ready(function (e) {
                 },
                 {
                     'name': '昨天',
-                    'date': moment().day(0).format("YYYYMMDD")
+                    'date': moment().subtract(1, 'days').format("YYYYMMDD")
                 },
                 {
                     'name': '前天',
-                    'date': moment().day(-1).format("YYYYMMDD")
+                    'date': moment().subtract(2, 'days').format("YYYYMMDD")
                 },
                 {
-                    'name': moment().day(-2).format("MM-DD"),
-                    'date': moment().day(-2).format("YYYYMMDD")
+                    'name': moment().subtract(3, 'days').format("MM-DD"),
+                    'date': moment().subtract(3, 'days').format("YYYYMMDD")
                 },
                 {
-                    'name': moment().day(-3).format("MM-DD"),
-                    'date': moment().day(-3).format("YYYYMMDD")
+                    'name': moment().subtract(4, 'days').format("MM-DD"),
+                    'date': moment().subtract(4, 'days').format("YYYYMMDD")
                 },
                 {
-                    'name': moment().day(-4).format("MM-DD"),
-                    'date': moment().day(-4).format("YYYYMMDD")
+                    'name': moment().subtract(5, 'days').format("MM-DD"),
+                    'date': moment().subtract(5, 'days').format("YYYYMMDD")
                 },
                 {
-                    'name': moment().day(-5).format("MM-DD"),
-                    'date': moment().day(-5).format("YYYYMMDD")
+                    'name': moment().subtract(6, 'days').format("MM-DD"),
+                    'date': moment().subtract(6, 'days').format("YYYYMMDD")
                 }
             ];
             var html= template(context);

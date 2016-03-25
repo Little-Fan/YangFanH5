@@ -123,6 +123,7 @@ html {
     text-align: center;
     font-size: 18px;
     line-height: 25px;
+    color: #4d92e3;
     border-bottom: 2px solid #b9b9b9;
     background: transparent no-repeat 20px center;
 }
@@ -148,10 +149,13 @@ html {
     float: left;
     width: 50%;
 }
+#body-index .content .list-wrapper:first-child {
+    background: url("../images/index-bg.png") repeat-y right top;
+}
 #body-index .content .list-wrapper li {
     border-bottom: 2px solid #eff0f0;
     height: 70px;
-    margin: 60px 10px 0;
+    margin: 60px 15px 0;
 }
 #body-index .content .list-wrapper li a {
     color: #000;
