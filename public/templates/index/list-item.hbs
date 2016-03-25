@@ -3,7 +3,7 @@
         {{#contentType ContentType}}
             <a href="program.html?id={{ContentID}}&type={{ContentType}}"><img src="{{Thumb}}" height="80"></a>
             <h3>{{Name}}</h3>
-            <h4>每天：{{formatTime PublishTime}}</h4>
+            <h4>每天：{{formatTime PublishTime "HH:mm"}}</h4>
         {{else}}
             <a href="special.html?id={{ContentID}}&type={{ContentType}}"><img src="{{Thumb}}" height="80"></a>
             <h3>{{Name}}</h3>

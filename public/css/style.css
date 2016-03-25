@@ -341,8 +341,11 @@ html {
 #body-list ul li {
     box-sizing: border-box;
     float: left;
-    padding: 10px 0;
+    padding: 10px;
     width: 50%;
+}
+#body-list ul li > p {
+
 }
 #body-list ul li:nth-child(odd) {
     padding-right: 10px;
@@ -356,21 +359,29 @@ html {
 }
 #body-list ul li span {
     float: left;
+    position: relative;
+    margin-right: 10px;
     font-size: 8px;
     height: 25px;
     line-height: 25px;
     text-indent: 20px;
 }
+#body-list ul li span:last-child {
+    margin-right: 0;
+}
 #body-list ul li .date {
     background: url("../images/clicks_icon.png") no-repeat -7px center;
 }
 #body-list ul li .times {
-    margin-left: 10px;
     background: url("../images/pv_icon.png") no-repeat -7px center;
 }
-#body-list ul li .like {
-    margin-left: 10px;
-    background: url("../images/like_icon.png") no-repeat left center / 15px 15px;
+#body-list ul li span i {
+    position: absolute;
+    top: -2px;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url("../images/like_icon.png") no-repeat left center / 10px 12px;
 }
 #body-list .main .more {
     background-color: #f0f0f0;
