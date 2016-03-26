@@ -236,8 +236,11 @@ html {
     line-height: 40px;
     padding: 0 10px;
     text-align: center;
-    width: 33%;
+    width: 42%;
     height: 40px;
+}
+#body-channel .nav-tabs li:last-child {
+    width: 15%;
 }
 #body-channel .nav-tabs li.active {
     color: #1298f2;
