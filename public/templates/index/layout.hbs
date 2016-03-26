@@ -1,22 +1,3 @@
-<header>
-    <div class="avatar">
-        <img width="30px" height="30px" class="img-circle" src="../images/avatar-placeholder.png">
-    </div>
-    <div class="nav-bar">
-        {{#each Categorys.Category}}
-            {{#if @first}}
-                <a href="index.html?type=live" class="live" data-id="{{CategoryID}}">{{Name}}</a>
-            {{else @last}}
-                <a href="index.html?type=Series" class="Series last" data-id="{{CategoryID}}">{{Name}}</a>
-            {{else}}
-                <a href="index.html?type=program" class="program" data-id="{{CategoryID}}">{{Name}}</a>
-            {{/if}}
-        {{/each}}
-    </div>
-    <div class="th-large">
-        <img width="30px" height="30px" class="img-circle" src="../images/more.png">
-    </div>
-</header>
 <div class="content">
 
 </div>
