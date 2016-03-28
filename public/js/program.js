@@ -39,35 +39,6 @@ $(document).ready(function (e) {
         }).done(function (data) {
             $('video').attr('src',data.AccessUrl);
         });
-
-        var pagesize = 5;  //分页大小
-        var pageindex = 1;  //分页页码
-
-        var d5 = $.ajax({
-            method: "GET",
-            url:      '../templates/channel/comment-item.hbs'
-        });
-
-        var d6 = $.ajax({
-            method:   "GET",
-            url:      baseURL + 'contents/getcomments',
-            dataType: 'json',
-            data:     {
-                Model: 1,
-                ContentID: id,
-                pagesize: pagesize,
-                pageindex: pageindex
-            }
-        });
-        $.when(d5, d6).done(function (data1, data2) {
-            var template = Handlebars.compile(data1[0]);
-            var context = data2[0];
-            var html= template(context);
-            pageindex = Math.ceil($('.comment-list').append(html).find('li').length/pagesize);
-            if (pageindex >= data2[0].PageCount){
-                $(e.currentTarget).find('a').text('数据加载完成');
-                $(e.currentTarget).off();
-            }
-        })
+        getComment($('#comment-wrapper'), 3, 1);
     });
 });

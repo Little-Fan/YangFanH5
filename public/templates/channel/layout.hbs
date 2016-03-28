@@ -2,11 +2,11 @@
     <video width="360" height="240" controls="controls" src=" "></video>
     <ul class="nav-tabs">
         <li class="active"><i class="list-icon icon"></i>节目单</li>
-        <li><i class="comment-icon icon"></i>评论</li>
+        <li id="get-comment"><i class="comment-icon icon"></i>评论</li>
         <li class="share-ico"></li>
     </ul>
     <div class="main">
-        <div id="tabs">
+        <div id="tabs" class="clearfix">
             <ul class="tabs-nav">
 
             </ul>
@@ -18,17 +18,6 @@
                 </div>
             </div><!--End tabs container-->
         </div><!--End tabs-->
-        <div id="comment" style="display: none">
-            <div class="comment-controls clearfix">
-                <input class="txt" type="text" placeholder="我来评论">
-                <button id="send" class="btn" type="button">发送</button>
-            </div>
-            <ul class="comment-list">
-
-            </ul>
-            <div class="more">
-                <a href="javascript:;">加载更多</a>
-            </div>
-        </div>
+        <div id="comment-wrapper" style="display: none"><p>数据加载中……</p></div>
     </div>
 </div>

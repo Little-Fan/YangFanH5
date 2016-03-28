@@ -18,24 +18,13 @@
                         <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
                     {{/contentType}}
                     <h3>{{Name}}</h3>
-                    <h4>这部动画片讲述的是对《星球大战》的故事发展极具关键性的克隆战争，这场战争导致内战时期开始，揭开《星球大战》的序幕。</h4>
+                    <h4>{{Summary}}</h4>
                 </li>
             {{/each}}
         </ul>
         <h2>
             <span>评论</span>
         </h2>
-        <div id="comment">
-            <div class="comment-controls clearfix">
-                <input type="text" class="txt" placeholder="我来评论">
-                <button id="send" class="btn" type="button">发送</button>
-            </div>
-            <ul class="comment-list">
-
-            </ul>
-            <div class="more">
-                <a href="javascript:;">数据加载完成</a>
-            </div>
-        </div>
+        <div id="comment-wrapper"><p>数据加载中……</p></div>
     </div>
 </div>

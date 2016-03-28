@@ -1,11 +1,11 @@
 {{#if Schedules.Schedule}}
     {{#each Schedules.Schedule}}
         <li>
-            <span class="date">{{StartTime}}</span>
+            <span class="date">{{subString StartTime 0 5}}</span>
             <span class="name overflow">{{ProgramName}}</span>
-            {{#transformat PlayState}}
+            {{#isNowPlay PlayState}}
                 <span id="play" class="play">正在播放</span>
-            {{/transformat}}
+            {{/isNowPlay}}
         </li>
     {{/each}}
 {{else}}
