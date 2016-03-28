@@ -3,7 +3,9 @@
         <li>
             <span class="date">{{StartTime}}</span>
             <span class="name overflow">{{ProgramName}}</span>
-            <span class="play">{{transformat PlayState}}</span>
+            {{#transformat PlayState}}
+                <span id="play" class="play">正在播放</span>
+            {{/transformat}}
         </li>
     {{/each}}
 {{else}}

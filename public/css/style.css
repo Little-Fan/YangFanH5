@@ -254,6 +254,7 @@ html {
     width: 70px;
 }
 #body-channel .main #tabs_container {
+    position: relative;
     float: left;
     overflow-x: hidden;
     width: 290px;

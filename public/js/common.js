@@ -27,9 +27,11 @@ Handlebars.registerHelper('contentType', function (type, options) {
     }
 });
 
-Handlebars.registerHelper("transformat", function (value) {
+Handlebars.registerHelper("transformat", function (value, options) {
     if (value == 2) {
-        return "正在播放";
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
     }
 });
 

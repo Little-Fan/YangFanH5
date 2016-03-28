@@ -7,7 +7,7 @@ $(document).ready(function (e) {
     var PhysicalContentID = getQueryVariable("PhysicalContentID");
     var d1 = $.ajax({
         method: "GET",
-        url:      '../templates/channel/layout.hbs'
+        url:    '../templates/channel/layout.hbs'
     }).done(function (data1) {
         $('body').html(data1);
 
@@ -17,11 +17,11 @@ $(document).ready(function (e) {
             dataType: 'json',
             data:     {
                 PhysicalContentID: PhysicalContentID,
-                ContentType: type,
-                Domain: 0
+                ContentType:       type,
+                Domain:            0
             }
         }).done(function (data) {
-            $('video').attr('src',data.AccessUrl);
+            $('video').attr('src', data.AccessUrl);
         });
 
         var isLoad = false;  //是否是首次加载
@@ -35,7 +35,7 @@ $(document).ready(function (e) {
                     var pageindex = 1;  //分页页码
                     var d1 = $.ajax({
                         method: "GET",
-                        url:      '../templates/channel/comment-item.hbs'
+                        url:    '../templates/channel/comment-item.hbs'
                     });
 
                     $('.more').click(function (e) {
@@ -44,19 +44,19 @@ $(document).ready(function (e) {
                             url:      baseURL + 'contents/getcomments',
                             dataType: 'json',
                             data:     {
-                                Model: 1,
+                                Model:     1,
                                 ContentID: id,
-                                pagesize: pagesize,
+                                pagesize:  pagesize,
                                 pageindex: pageindex
                             }
                         });
                         $.when(d1, d2).done(function (data1, data2) {
                             var template = Handlebars.compile(data1[0]);
                             var context = data2[0];
-                            var html= template(context);
-                            pageindex = Math.ceil($('.comment-list').append(html).find('li').length/pagesize);
+                            var html = template(context);
+                            pageindex = Math.ceil($('.comment-list').append(html).find('li').length / pagesize);
                             isLoad = true;
-                            if (pageindex >= data2[0].PageCount){
+                            if (pageindex >= data2[0].PageCount) {
                                 $(e.currentTarget).find('a').text('数据加载完成');
                                 $(e.currentTarget).off();
                             }
@@ -67,9 +67,8 @@ $(document).ready(function (e) {
         });
         $.ajax({
             method: "GET",
-            url:      '../templates/channel/date-item.hbs'
-        }).done(
-            function (data) {
+            url:    '../templates/channel/date-item.hbs'
+        }).done(function (data) {
             var template = Handlebars.compile(data);
             var context = [
                 {
@@ -101,29 +100,28 @@ $(document).ready(function (e) {
                     'date': moment().subtract(6, 'days').format("YYYYMMDD")
                 }
             ];
-            var html= template(context);
+            var html = template(context);
+
             $('.tabs-nav').html(html);
             $('.tabs-nav li').click(function (e) {
 
                 $(this).addClass('active').siblings().removeClass('active');
 
-
                 var channelList = $('.channel-list').html('<p>数据加载中……</p>');
                 var date = $(this).data('date');
 
-
                 var d2 = $.ajax({
                     method: "GET",
-                    url:      '../templates/channel/program-item.hbs'
+                    url:    '../templates/channel/program-item.hbs'
                 });
 
                 var d3 = $.ajax({
-                    method: "GET",
+                    method:   "GET",
                     url:      baseURL + 'channels/scheduleList',
                     dataType: 'json',
-                    data: {
-                        ChannelID: id,
-                        Date: date,
+                    data:     {
+                        ChannelID:  id,
+                        Date:       date,
                         ResultType: 1
                     }
                 });
@@ -131,9 +129,16 @@ $(document).ready(function (e) {
                 $.when(d2, d3).done(function (data1, data2) {
                     var template = Handlebars.compile(data1[0]);
                     var context = data2[0];
-                    var html= template(context);
+                    var html = template(context);
                     channelList.html(html);
-                })
+                    var nowPlay = $('#play');
+                    if (nowPlay.length) {
+                        var top = nowPlay.position().top;
+                        if (top > 0){
+                            $("#tabs_container").scrollTop(top);
+                        }
+                    }
+                });
             });
             $('.tabs-nav .active').trigger('click');
         });
