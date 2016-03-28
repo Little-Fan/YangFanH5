@@ -45,6 +45,17 @@ Handlebars.registerHelper("formatTime", function (time, type, options) {
     }
 });
 
+Handlebars.registerHelper("formatTime", function (time, type, options) {
+    if (type) {
+        return moment.unix(time).format(type);
+    }
+});
+
+
+Handlebars.registerHelper("replace", function (stringObject, options) {
+    return stringObject.replace(/\:/g, '');
+});
+
 $.ajax({
     url: baseURL + 'users/login',
     method: 'POST',
@@ -120,7 +131,7 @@ function getComment(insetElement, pageSize, pageIndex) {
             });
         }
         getTemplates(pageIndex);
-        
+
         $('#more-comment').click(function (e) {
             getTemplates(pageIndex+1)
         })

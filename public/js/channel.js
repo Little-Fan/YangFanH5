@@ -6,6 +6,7 @@ $(document).ready(function (e) {
     var id = getQueryVariable("id");
     var type = getQueryVariable("type");
     var PhysicalContentID = getQueryVariable("PhysicalContentID");
+    var playURL = '';
     var d1 = $.ajax({
         method: "GET",
         url:    '../templates/channel/layout.hbs'
@@ -22,6 +23,7 @@ $(document).ready(function (e) {
                 Domain:            0
             }
         }).done(function (data) {
+            playURL = data.AccessUrl;
             $('video').attr('src', data.AccessUrl);
         });
 
@@ -113,6 +115,21 @@ $(document).ready(function (e) {
                 });
             });
             $('.tabs-nav .active').trigger('click');
+
+            $(document).on('click', '#replay', function (e) {
+                var startTime= $(this).data('date');
+                var duration = $(this).data('duration');
+                var h = Number(duration.substr(0,2));
+                var m = Number(duration.substr(2,2));
+                var s = Number(duration.substr(4,2));
+                var length = (h * 60 + m) * 60 + s;
+
+                if(playURL.length>0){
+                    var replayURL = playURL.replace('live','review');
+                }
+                replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
+                $('video').attr('src', replayURL);
+            })
         });
     });
 });

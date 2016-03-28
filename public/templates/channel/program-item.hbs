@@ -5,6 +5,9 @@
             <span class="name overflow">{{ProgramName}}</span>
             {{#isNowPlay PlayState}}
                 <span id="play" class="play">正在播放</span>
+            {{else}}
+                <span id="replay" class="play"
+                      data-date="{{StartDate}}T{{replace StartTime}}" data-duration="{{Duration}}">回看</span>
             {{/isNowPlay}}
         </li>
     {{/each}}
