@@ -159,6 +159,10 @@ $(document).ready(function (e) {
                         $.when(listItem, contentList).done(function (data1, data2) {
                             var template = Handlebars.compile(data1[0]);
                             data2[0].type = type;
+                            if (type === 'Series' && data2[0].Contents.Content.length > 4) {
+                                data2[0].Contents.Content = data2[0].Contents.Content.slice(0, 4);
+                                $('.list-more').text('更多');
+                            }
                             var html = template(data2[0]);
                             $(element).next('.list').html(html);
                         });

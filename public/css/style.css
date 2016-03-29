@@ -31,6 +31,40 @@ video {
 .active .comment-icon{
     background-image: url("../images/comment_highlight_icon.png");
 }
+
+.box h2 {
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+}
+.box h2 span {
+    float: left;
+}
+.box h2 a {
+    float: right;
+    font-size: 18px;
+}
+.box .list {
+    overflow: hidden;
+}
+.box .list li {
+    box-sizing: border-box;
+    float: left;
+    padding: 10px 10px 0;
+    width: 50%;
+}
+.box .list img {
+    width: 100%;
+}
+.box .list h3 {
+    font-weight: bold;
+    line-height: 30px;
+}
+.box .list h4 {
+    line-height: 20px;
+}
+
 #comment-wrapper {
 }
 #comment-wrapper > p,
@@ -278,6 +312,15 @@ video {
 #body-index .series h2 {
     color: #f94e06;
     background: transparent url(../images/option_red_icon.png) no-repeat 10px center;
+}
+#body-index .series h2 a{
+    float: right;
+    margin-right: 15px;
+    font-size: 16px;
+    color: #f94e06;
+}
+#body-index .series h2 a:hover {
+    color: #4a4a4a;
 }
 #body-index .program ul li {
     padding: 15px 10px !important;

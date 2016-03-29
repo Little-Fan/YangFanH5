@@ -24,7 +24,7 @@ Handlebars.registerHelper('praiseMark', function (conditional, options) {
 });
 
 Handlebars.registerHelper('contentType', function (type, options) {
-    if (type == "Program" || type == "program") {
+    if (type == "Program") {
         return options.fn(this);
     } else {
         return options.inverse(this);
