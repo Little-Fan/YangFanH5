@@ -126,8 +126,7 @@ $(document).ready(function (e) {
                         $('.main').html(html);
                     })
                 })
-            }
-            else {
+            } else {
                 var list = $.ajax({
                     method: "GET",
                     url:    '../templates/index/list-layout.hbs'
@@ -136,6 +135,7 @@ $(document).ready(function (e) {
                 $.when(list, categoryData).done(function (data1, data2) {
                     var template = Handlebars.compile(data1[0]);
                     var content = data2[0];
+                    content.type = type;
                     var html = template(content);
                     $('.content').html(html);
 
@@ -144,7 +144,7 @@ $(document).ready(function (e) {
                         url:    '../templates/index/list-item.hbs'
                     });
 
-                    $('.box h2').each(function (index, element) {
+                    $('.list-group h2').each(function (index, element) {
                         var id = $(element).data('id');
 
                         var contentList = $.ajax({
@@ -158,15 +158,8 @@ $(document).ready(function (e) {
 
                         $.when(listItem, contentList).done(function (data1, data2) {
                             var template = Handlebars.compile(data1[0]);
-
-                            if (data2[0].Contents.Content.length > 4) {
-                                content = data2[0].Contents.Content.slice(0, 4);
-                                $(element).find('a').text('更多');
-                            } else {
-                                content = data2[0].Contents.Content
-                            }
-
-                            var html = template(content);
+                            data2[0].type = type;
+                            var html = template(data2[0]);
                             $(element).next('.list').html(html);
                         });
 

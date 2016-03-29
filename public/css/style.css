@@ -69,7 +69,9 @@ video {
     background-color: #E0E0E0;
 }
 #comment-wrapper .comment-list li {
-    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 #comment-wrapper .comment-list li:last-child {
     margin-bottom: 0;
@@ -105,14 +107,14 @@ video {
     line-height: 40px;
 }
 #comment-wrapper .comment-list .commend-wrap i {
-    background: transparent url("../images/icon.png") no-repeat scroll 0 0;
     display: inline-block;
-    height: 24px;
     vertical-align: text-bottom;
+    height: 24px;
     width: 24px;
+    background: transparent url("../images/like_icon.png") no-repeat scroll 0 0 / 24px 24px;
 }
 #comment-wrapper .comment-list .commend-wrap i.current {
-    background-position: -24px 0;
+    background-image: url(../images/like_highlight_icon.png);
 }
 #comment-wrapper .comment-list .commend-wrap span {
     display: inline-block;
@@ -143,46 +145,6 @@ video {
 #more-comment a:hover {
     background-color: #e5e5e5;
     color: #c31;
-}
-
-
-.box h2 {
-    border-bottom: 1px solid #ccc;
-    font-size: 20px;
-    height: 40px;
-    line-height: 40px;
-}
-.box h2 span {
-    float: left;
-}
-.box h2 a {
-    float: right;
-    font-size: 18px;
-}
-.box .list {
-    overflow: hidden;
-}
-.box .list li {
-    box-sizing: border-box;
-    float: left;
-    padding: 10px 10px 0;
-    width: 50%;
-}
-.box .list img {
-    width: 100%;
-}
-.box .list h3 {
-    font-weight: bold;
-    line-height: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.box .list h4 {
-    line-height: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .overflow {
     white-space: nowrap;
@@ -275,6 +237,7 @@ video {
     margin: 25px 15px;
 }
 #body-index .content .list-wrapper li a {
+    display: block;
     color: #000;
     text-decoration: none;
 }
@@ -287,41 +250,48 @@ video {
     white-space: nowrap;
     margin-top: 15px;
 }
-#body-index .box h2 {
+#body-index .list-group h2 {
     border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    text-indent: 40px;
     font-size: 20px;
     height: 40px;
     line-height: 40px;
 }
-#body-index .box h2 span {
+#body-index .list-group ul li {
     float: left;
-}
-#body-index .box h2 a {
-    float: right;
-    font-size: 18px;
-}
-#body-index .box .list {
-    overflow: hidden;
-}
-#body-index .box .list li {
     box-sizing: border-box;
-    float: left;
-    padding: 10px 10px 0;
-    width: 50%;
+    margin: 5px;
+    width: calc(50% - 10px);
 }
-#body-index .box .list img {
-    width: 100%;
+#body-index .list-group ul li h3,
+#body-index .list-group ul li h4 {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #4a4a4a;
 }
-#body-index .box .list h3 {
-    font-weight: bold;
-    line-height: 30px;
+#body-index .program h2 {
+    color: #4a90e2;
+    background: transparent url(../images/option_icon.png) no-repeat 10px center;
 }
-#body-index .box .list h4 {
-    line-height: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+#body-index .series h2 {
+    color: #f94e06;
+    background: transparent url(../images/option_red_icon.png) no-repeat 10px center;
 }
+#body-index .program ul li {
+    padding: 15px 10px !important;
+    border: 1px solid #e2e3e2;
+    border-radius: 5px;
+}
+#body-index .program ul li a {
+    display: block;
+    text-decoration: none;
+}
+#body-index .series ul li h3 {
+    text-align: left;
+}
+
 #body-channel {
 }
 #body-channel .nav-tabs {
@@ -530,4 +500,46 @@ video {
 }
 #body-special .box {
     padding: 10px 20px;
+}
+#body-program-list ul li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e2e3e2;
+}
+#body-program-list ul li a {
+    float: left;
+    color: #b7b6b7;
+}
+#body-program-list ul li a img {
+    float: left;
+}
+#body-program-list .program-info {
+    float: left;
+    margin-left: 20px;
+    width: 210px;
+}
+#body-program-list .program-info h2 span {
+    display: block;
+    height: 25px;
+    text-align: left;
+    line-height: 25px;
+    color: #000;
+}
+#body-program-list i{
+    display: inline-block;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    text-indent: 30px;
+}
+#body-program-list h3 i {
+    float: right;
+}
+#body-program-list .video {
+    background: url("../images/clicks_icon.png") no-repeat left center;
+}
+#body-program-list .views {
+    background: url("../images/pv_icon.png") no-repeat left center;
+}
+#body-program-list .favorite {
+    background: url("../images/favorite_icon.png") no-repeat left center;
 }

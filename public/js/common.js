@@ -24,7 +24,7 @@ Handlebars.registerHelper('praiseMark', function (conditional, options) {
 });
 
 Handlebars.registerHelper('contentType', function (type, options) {
-    if (type == "Program") {
+    if (type == "Program" || type == "program") {
         return options.fn(this);
     } else {
         return options.inverse(this);
@@ -33,6 +33,14 @@ Handlebars.registerHelper('contentType', function (type, options) {
 
 Handlebars.registerHelper("isNowPlay", function (value, options) {
     if (value == 2) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+Handlebars.registerHelper("equality", function (v1, v2, options) {
+    if (v1 === v2) {
         return options.fn(this);
     } else {
         return options.inverse(this);

@@ -1,13 +1,17 @@
-{{#each this}}
-    <li>
-        {{#contentType ContentType}}
-            <a href="program.html?id={{ContentID}}&type={{ContentType}}"><img src="{{Thumb}}" height="80"></a>
-            <h3>{{Name}}</h3>
-            <h4>每天：{{formatTime PublishTime "HH:mm"}}</h4>
-        {{else}}
-            <a href="special.html?id={{ContentID}}&type={{ContentType}}"><img src="{{Thumb}}" height="80"></a>
-            <h3>{{Name}}</h3>
-            <h4>视频简介：{{Summary}}</h4>
-        {{/contentType}}
-    </li>
-{{/each}}
+{{#contentType type}}
+    {{#each Contents.Content}}
+        <li>
+            <a href="./program-list.html?id={{ContentID}}">
+                <h3 class="overflow">{{Name}}</h3>
+                <h4>每天：{{ScheduleTimes}}</h4>
+            </a>
+        </li>
+    {{/each}}
+{{else}}
+    {{#each Contents.Content}}
+        <li>
+            <a href="special.html?id={{ContentID}}&type={{ContentType}}"><img src="{{Thumb}}" width="100%" height="80"></a>
+            <h3 class="overflow">{{Name}}</h3>
+        </li>
+    {{/each}}
+{{/contentType}}
