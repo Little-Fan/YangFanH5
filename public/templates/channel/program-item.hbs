@@ -6,8 +6,7 @@
             {{#isNowPlay PlayState}}
                 <span id="play" class="play">正在播放</span>
             {{else}}
-                <span id="replay" class="play"
-                      data-date="{{StartDate}}T{{replace StartTime}}" data-duration="{{Duration}}">回看</span>
+                <span id="replay" class="play" data-date="{{StartDate}}T{{replace StartTime}}" data-duration="{{Duration}}">{{isTimeout StartDateTime}}</span>
             {{/isNowPlay}}
         </li>
     {{/each}}

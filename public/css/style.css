@@ -416,6 +416,7 @@ video {
 #body-channel .main .channel-list li span.play {
     float: left;
     color: #fa5915;
+    cursor: pointer;
 }
 #body-list .main {
     width: 360px;

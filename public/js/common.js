@@ -45,12 +45,16 @@ Handlebars.registerHelper("formatTime", function (time, type, options) {
     }
 });
 
-Handlebars.registerHelper("formatTime", function (time, type, options) {
-    if (type) {
-        return moment.unix(time).format(type);
+Handlebars.registerHelper("isTimeout", function (time, options) {
+
+    var timestamp = Number(moment().unix());
+
+    if (timestamp - Number(time) > 0) {
+        return '回看';
+    } else {
+        return '预约';
     }
 });
-
 
 Handlebars.registerHelper("replace", function (stringObject, options) {
     return stringObject.replace(/\:/g, '');
