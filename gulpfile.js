@@ -11,10 +11,10 @@ var jade = require('jade');
 
 //项目需要用到的库
 var commonFils = [
-    'node_modules/jquery/dist/jquery.*',
-    'node_modules/handlebars/dist/handlebars.*',
+    'node_modules/jquery/dist/jquery.*.js',
+    'node_modules/handlebars/dist/handlebars.*.js',
     'node_modules/js-cookie/src/*.js',
-    'node_modules/moment/*.js',
+    'node_modules/moment/min/*.js',
     'node_modules/spin.js/*.js'
 ];
 
@@ -30,6 +30,7 @@ gulp.task('scripts', function() {
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
     gulp.src(commonFils, {base: '.'})
+        .pipe(uglify())
         .pipe(gulp.dest('dist'));
 });
 
