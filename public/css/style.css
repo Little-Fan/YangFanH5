@@ -316,6 +316,7 @@ video {
 #body-index .series h2 a{
     float: right;
     margin-right: 15px;
+    text-indent: 0;
     font-size: 16px;
     color: #f94e06;
 }
@@ -442,11 +443,11 @@ video {
 #body-list ul li {
     box-sizing: border-box;
     float: left;
-    padding: 10px;
+    padding: 10px 10px 0;
     width: 50%;
 }
 #body-list ul li h3 {
-    font: bold 16px/30px Arial;
+    font: bold 16px/25px Arial;
     height: 25px;
 }
 #body-list ul li span {

@@ -1,15 +1,6 @@
 {{#each Contents.Content}}
     <li>
-        {{#contentType ContentType}}
-            <a href="program.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
-        {{else}}
-            <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
-        {{/contentType}}
-        <h3>{{Name}}</h3>
-        <p class="info clearfix">
-            <span class="date">{{formatTime PublishTime 'MM-DD HH:mm'}}</span>
-            <span class="times">{{PlayTimes}}</span>
-            <span><i class="like"></i>123</span>
-        </p>
+        <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+        <h3 class="overflow">{{Name}}</h3>
     </li>
 {{/each}}
