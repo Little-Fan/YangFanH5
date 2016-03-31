@@ -390,9 +390,23 @@ video {
 #body-channel #tabs {
     height: 100%;
 }
+#body-channel .main .tabs-nav li {
+    position: relative;
+    border-bottom: 2px solid #FFF;
+    font-size: 16px;
+    height: 14.285714281429%;
+    text-align: center;
+}
 #body-channel .main .tabs-nav li a {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -10px;
+    height: 20px;
+    width: 100%;
+    line-height: 20px;
+    font-size: 14px;
     color: #000;
-    display: block;
     text-decoration: none;
 }
 #body-channel .main .tabs-nav li.active {
@@ -400,13 +414,6 @@ video {
 }
 #body-channel .main .tabs-nav li.active a {
     color: #FFF;
-}
-#body-channel .main .tabs-nav li {
-    border-bottom: 2px solid #FFF;
-    font-size: 16px;
-    height: 14.2%;
-    line-height: 40px;
-    text-align: center;
 }
 #body-channel .main #comment {
 }
