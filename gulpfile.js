@@ -75,5 +75,4 @@ gulp.task('html', function () {
         .pipe(gulp.dest('dist/templates'));
 });
 
-
 gulp.task('default', ['css', 'scripts', 'images', 'templates']);

@@ -1,11 +1,24 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 body,
 html {
     overflow-x: hidden;
-    width: 360px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
     font-size: 14px;
 }
+.video-wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 240px;
+    background-color: #000;
+}
 video {
-    width: 360px;
+    width: 100%;
     height: 240px;
 }
 .img-circle {
@@ -19,21 +32,20 @@ video {
     height: 25px;
     background: transparent no-repeat center center;
 }
-.list-icon{
+.list-icon {
     background-image: url("../images/list_default_icon.png");
 }
-.active .list-icon{
+.active .list-icon {
     background-image: url("../images/list_highlight_icon.png");
 }
 .comment-icon {
     background-image: url("../images/comment_default_icon.png");
 }
-.active .comment-icon{
+.active .comment-icon {
     background-image: url("../images/comment_highlight_icon.png");
 }
-
 .box h2 {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #CCC;
     font-size: 20px;
     height: 40px;
     line-height: 40px;
@@ -49,7 +61,6 @@ video {
     overflow: hidden;
 }
 .box .list li {
-    box-sizing: border-box;
     float: left;
     padding: 10px 10px 0;
     width: 50%;
@@ -64,7 +75,6 @@ video {
 .box .list h4 {
     line-height: 20px;
 }
-
 #comment-wrapper {
 }
 #comment-wrapper > p,
@@ -76,34 +86,33 @@ video {
 }
 #comment-wrapper .comment-controls,
 #comment-wrapper .comment-list {
-    box-sizing: border-box;
     padding: 10px 20px;
     width: 100%;
 }
-#comment-wrapper .comment-controls .txt {
-    box-sizing: border-box;
+#comment-wrapper .comment-controls .txt,
+#comment-wrapper .comment-controls .btn {
     float: left;
-    border: 1px solid #c0c0c0;
+    border: 1px solid #C0C0C0;
     height: 30px;
+    border-radius: 0;
+}
+#comment-wrapper .comment-controls .txt {
     line-height: 20px;
     padding: 5px 10px;
     width: 80%;
 }
 #comment-wrapper .comment-controls .btn {
-    box-sizing: border-box;
-    float: left;
     border: 1px solid #C0C0C0;
     border-left: none;
     padding: 0;
     width: 20%;
-    height: 30px;
 }
 #comment-wrapper .comment-controls .btn:hover {
     color: #666;
     background-color: #E0E0E0;
 }
 #comment-wrapper .comment-list li {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #F0F0F0;
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
@@ -115,7 +124,6 @@ video {
     float: left;
 }
 #comment-wrapper .comment-list .user-info {
-    box-sizing: border-box;
     padding-left: 20px;
     width: calc(100% - 40px);
 }
@@ -132,7 +140,7 @@ video {
     font-size: 12px;
 }
 #comment-wrapper .comment-list .user-info p {
-    text-align: left!important;
+    text-align: left !important;
     margin-bottom: 0;
 }
 #comment-wrapper .comment-list .commend-wrap {
@@ -163,12 +171,12 @@ video {
     width: 260px;
 }
 #more-comment {
-    background-color: #f0f0f0;
+    background-color: #F0F0F0;
     height: 28px;
     margin-bottom: 15px;
 }
 #more-comment a {
-    color: #06a7e1;
+    color: #06A7E1;
     display: block;
     font-size: 14px;
     height: 28px;
@@ -177,8 +185,8 @@ video {
     text-decoration: none;
 }
 #more-comment a:hover {
-    background-color: #e5e5e5;
-    color: #c31;
+    background-color: #E5E5E5;
+    color: #C31;
 }
 .overflow {
     white-space: nowrap;
@@ -186,8 +194,8 @@ video {
     text-overflow: ellipsis;
 }
 #body-index header {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #f2f2f2;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #F2F2F2;
     overflow: hidden;
     padding: 20px 10px;
     width: 340px;
@@ -196,8 +204,8 @@ video {
     float: left;
 }
 #body-index .nav-bar {
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: #FFF;
+    border: 1px solid #CCC;
     border-radius: 30px;
     float: left;
     height: 20px;
@@ -206,7 +214,7 @@ video {
     width: 200px;
 }
 #body-index .nav-bar a {
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #CCC;
     color: #000;
     float: left;
     line-height: 20px;
@@ -214,7 +222,7 @@ video {
     text-decoration: none;
 }
 #body-index .nav-bar a.active {
-    color: #42a6ea;
+    color: #42A6EA;
 }
 #body-index .nav-bar a.last {
     border-right: medium none;
@@ -225,19 +233,17 @@ video {
 #body-index .content {
     overflow: hidden;
     padding: 10px;
-    width: 340px;
 }
 #body-index .content .sub-nav li {
-    box-sizing: border-box;
     float: left;
     padding: 5px 0;
-    width: 160px ;
+    width: calc(50% - 10px);
     text-indent: 40px;
     text-align: center;
     font-size: 18px;
     line-height: 25px;
-    color: #4d92e3;
-    border-bottom: 2px solid #b9b9b9;
+    color: #4D92E3;
+    border-bottom: 2px solid #B9B9B9;
     background: transparent no-repeat 20px center;
 }
 #body-index .content .sub-nav li:first-child {
@@ -258,7 +264,6 @@ video {
     text-align: center;
 }
 #body-index .content .list-wrapper {
-    box-sizing: border-box;
     float: left;
     width: 50%;
 }
@@ -266,9 +271,12 @@ video {
     background: url("../images/index-bg.png") repeat-y right top;
 }
 #body-index .content .list-wrapper li {
-    border-bottom: 2px solid #eff0f0;
+    border-bottom: 2px solid #EFF0F0;
     height: 70px;
     margin: 25px 15px;
+}
+#body-index .content .list-wrapper li:last-child {
+    margin-bottom: 0;
 }
 #body-index .content .list-wrapper li a {
     display: block;
@@ -285,7 +293,7 @@ video {
     margin-top: 15px;
 }
 #body-index .list-group h2 {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #CCC;
     margin-bottom: 10px;
     text-indent: 40px;
     font-size: 20px;
@@ -294,7 +302,6 @@ video {
 }
 #body-index .list-group ul li {
     float: left;
-    box-sizing: border-box;
     margin: 5px;
     width: calc(50% - 10px);
 }
@@ -303,29 +310,29 @@ video {
     height: 25px;
     line-height: 25px;
     text-align: center;
-    color: #4a4a4a;
+    color: #4A4A4A;
 }
 #body-index .program h2 {
-    color: #4a90e2;
+    color: #4A90E2;
     background: transparent url(../images/option_icon.png) no-repeat 10px center;
 }
 #body-index .series h2 {
-    color: #f94e06;
+    color: #F94E06;
     background: transparent url(../images/option_red_icon.png) no-repeat 10px center;
 }
-#body-index .series h2 a{
+#body-index .series h2 a {
     float: right;
     margin-right: 15px;
     text-indent: 0;
     font-size: 16px;
-    color: #f94e06;
+    color: #F94E06;
 }
 #body-index .series h2 a:hover {
-    color: #4a4a4a;
+    color: #4A4A4A;
 }
 #body-index .program ul li {
     padding: 15px 10px !important;
-    border: 1px solid #e2e3e2;
+    border: 1px solid #E2E3E2;
     border-radius: 5px;
 }
 #body-index .program ul li a {
@@ -335,17 +342,15 @@ video {
 #body-index .series ul li h3 {
     text-align: left;
 }
-
 #body-channel {
+    height: 100%;
 }
 #body-channel .nav-tabs {
-    border-bottom: 1px solid #e2e2e2;
-    width: 360px;
+    border-bottom: 1px solid #E2E2E2;
     height: 40px;
-    background-color: #fff;
+    background-color: #FFF;
 }
 #body-channel .nav-tabs li {
-    box-sizing: border-box;
     cursor: pointer;
     float: left;
     line-height: 40px;
@@ -355,32 +360,35 @@ video {
     height: 40px;
     background: url("../images/channel_bg.png") no-repeat right center;
 }
+#body-channel .main {
+    height: calc(100% - 280px);
+}
 #body-channel .nav-tabs li:first-child {
-
 }
 #body-channel .nav-tabs li:last-child {
     width: 16%;
 }
 #body-channel .nav-tabs li.active {
-    color: #1298f2;
+    color: #1298F2;
 }
-#body-channel .nav-tabs .share-ico{
+#body-channel .nav-tabs .share-ico {
     background: url("../images/e-share_l.png") no-repeat center center/ 30px 25px;
 }
 #body-channel .main .tabs-nav {
-    background-color: #f5f5f5;
+    background-color: #F5F5F5;
     float: left;
     width: 70px;
+    height: 100%;
 }
 #body-channel .main #tabs_container {
     position: relative;
     float: left;
     overflow-x: hidden;
-    width: 290px;
+    width: calc(100% - 70px);
     height: 100%;
 }
-#tabs {
-    height: 294px;
+#body-channel #tabs {
+    height: 100%;
 }
 #body-channel .main .tabs-nav li a {
     color: #000;
@@ -388,15 +396,15 @@ video {
     text-decoration: none;
 }
 #body-channel .main .tabs-nav li.active {
-    background-color: #4a90e2;
+    background-color: #4A90E2;
 }
-#body-channel .main .tabs-nav li.active a{
-    color: #fff;
+#body-channel .main .tabs-nav li.active a {
+    color: #FFF;
 }
 #body-channel .main .tabs-nav li {
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #FFF;
     font-size: 16px;
-    height: 40px;
+    height: 14.2%;
     line-height: 40px;
     text-align: center;
 }
@@ -405,7 +413,6 @@ video {
 #body-channel .main .channel-list {
     padding-left: 20px;
     padding-right: 10px;
-    width: 260px;
 }
 #body-channel .main .channel-list p {
     font-size: 18px;
@@ -414,7 +421,7 @@ video {
     text-align: center;
 }
 #body-channel .main .channel-list li {
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid #E6E6E6;
     height: 41px;
     line-height: 41px;
     text-align: left;
@@ -422,18 +429,14 @@ video {
 }
 #body-channel .main .channel-list li span {
     float: left;
-    margin-right: 15px;
+    width: 33%;
 }
-#body-channel .main .channel-list li span.name{
-    width: 80px;
+#body-channel .main .channel-list li span.name {
 }
 #body-channel .main .channel-list li span.play {
     float: left;
-    color: #fa5915;
+    color: #FA5915;
     cursor: pointer;
-}
-#body-list .main {
-    width: 360px;
 }
 #body-list .main ul > p {
     height: 100px;
@@ -441,7 +444,6 @@ video {
     text-align: center;
 }
 #body-list ul li {
-    box-sizing: border-box;
     float: left;
     padding: 10px 10px 0;
     width: 50%;
@@ -477,13 +479,13 @@ video {
     background: url("../images/like_icon.png") no-repeat left center / 10px 12px;
 }
 #body-list .main .more {
-    background-color: #f0f0f0;
+    background-color: #F0F0F0;
     height: 28px;
     margin-bottom: 15px;
     margin-top: 15px;
 }
 #body-list .main .more a {
-    color: #06a7e1;
+    color: #06A7E1;
     display: block;
     font-size: 14px;
     height: 28px;
@@ -492,14 +494,14 @@ video {
     text-decoration: none;
 }
 #body-list .main .more a:hover {
-    background-color: #e5e5e5;
-    color: #c31;
+    background-color: #E5E5E5;
+    color: #C31;
 }
 #body-program {
-    width: 360px;
+    width: 100%;
 }
 #body-program .video-info {
-    background-color: #f1f1f1;
+    background-color: #F1F1F1;
     height: 40px;
     line-height: 40px;
     padding: 0 10px;
@@ -536,7 +538,6 @@ video {
     margin-top: 20px;
 }
 #body-program .txt {
-    width: 225px!important;
 }
 #body-special .txt {
     line-height: 25px;
@@ -547,19 +548,19 @@ video {
 }
 #body-program-list ul li {
     padding: 10px 15px;
-    border-bottom: 1px solid #e2e3e2;
+    border-bottom: 1px solid #E2E3E2;
 }
 #body-program-list ul li a {
     float: left;
-    color: #b7b6b7;
+    color: #B7B6B7;
 }
 #body-program-list ul li a img {
     float: left;
 }
 #body-program-list .program-info {
     float: left;
-    margin-left: 20px;
-    width: 210px;
+    padding-left: 20px;
+    width: calc(100% - 100px);
 }
 #body-program-list .program-info h2 span {
     display: block;
@@ -568,7 +569,7 @@ video {
     line-height: 25px;
     color: #000;
 }
-#body-program-list i{
+#body-program-list i {
     display: inline-block;
     font-size: 12px;
     height: 25px;
