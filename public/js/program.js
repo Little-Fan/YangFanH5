@@ -1,18 +1,18 @@
 /**
  * Created by fanxiaolong on 2016/3/14.
  */
-$(document).ready(function (e) {
+$(document).ready(function () {
 
-    var id = getQueryVariable("id");
-    var type = getQueryVariable("type");
+    var id = getQueryVariable('id');
+    var type = getQueryVariable('type');
 
     var d1 = $.ajax({
-        method: "GET",
+        method: 'GET',
         url:      '../templates/program/layout.hbs'
     });
 
     var d2 = $.ajax({
-        method:   "GET",
+        method:   'GET',
         url:      baseURL + 'contents/detail',
         dataType: 'json',
         data:     {
@@ -27,8 +27,8 @@ $(document).ready(function (e) {
         var html= template(context);
         $('body').html(html);
 
-        var d3 = $.ajax({
-            method:   "GET",
+        $.ajax({
+            method:   'GET',
             url:      baseURL + 'services/getAccessUrl',
             dataType: 'json',
             data:     {

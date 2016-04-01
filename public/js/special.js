@@ -1,17 +1,17 @@
 /**
  * Created by fanxiaolong on 2016/3/22.
  */
-$(document).ready(function (e) {
+$(document).ready(function () {
 
-    var id = getQueryVariable("id");
+    var id = getQueryVariable('id');
 
     var d1 = $.ajax({
-        method: "GET",
+        method: 'GET',
         url:      '../templates/special/layout.hbs'
     });
 
     var d2 = $.ajax({
-        method:   "GET",
+        method:   'GET',
         url:      baseURL + 'contents/detail',
         dataType: 'json',
         data:     {

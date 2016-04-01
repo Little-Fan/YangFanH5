@@ -1,42 +1,42 @@
 /**
  * Created by fanxiaolong on 2016/3/14.
  */
-$(document).ready(function (e) {
+$(document).ready(function () {
     var opts = {
-        lines:       17 // The number of lines to draw
-        , length:    0 // The length of each line
-        , width:     3 // The line thickness
-        , radius:    20 // The radius of the inner circle
-        , scale:     2 // Scales overall size of the spinner
-        , corners:   1 // Corner roundness (0..1)
-        , color:     '#000' // #rgb or #rrggbb or array of colors
-        , opacity:   0.25 // Opacity of the lines
-        , rotate:    0 // The rotation offset
+        lines: 17 // The number of lines to draw
+        , length: 0 // The length of each line
+        , width: 3 // The line thickness
+        , radius: 20 // The radius of the inner circle
+        , scale: 2 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
         , direction: 1 // 1: clockwise, -1: counterclockwise
-        , speed:     1 // Rounds per second
-        , trail:     60 // Afterglow percentage
-        , fps:       20 // Frames per second when using setTimeout() as a fallback for CSS
-        , zIndex:    2e9 // The z-index (defaults to 2000000000)
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
         , className: 'spinner' // The CSS class to assign to the spinner
-        , top:       '50%' // Top position relative to parent
-        , left:      '50%' // Left position relative to parent
-        , shadow:    false // Whether to render a shadow
-        , hwaccel:   false // Whether to use hardware acceleration
-        , position:  'absolute' // Element positioning
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
     };
     var target = $('#body-index')[0];  //获取DOM对象
-    var spinner = new Spinner(opts).spin(target);  //loading加载动画
+    new Spinner(opts).spin(target);  //loading加载动画
 
-    var type = getQueryVariable("type");
-    var id = getQueryVariable("id");
+    var type = getQueryVariable('type');
+    var id = getQueryVariable('id');
 
     var d1 = $.ajax({
-        method: "GET",
+        method: 'GET',
         url:    '../templates/index/layout.hbs'
     });
 
     var d2 = $.ajax({
-        method:   "GET",
+        method:   'GET',
         url:      baseURL + 'contents/homecategorys',
         dataType: 'json'
     });
@@ -52,7 +52,7 @@ $(document).ready(function (e) {
         $('#body-index').html(html);
 
         var categoryData = $.ajax({
-            method:   "GET",
+            method:   'GET',
             url:      baseURL + 'contents/categorys',
             dataType: 'json',
             data:     {
@@ -61,19 +61,19 @@ $(document).ready(function (e) {
         });
 
         $.ajax({
-            method: "GET",
+            method: 'GET',
             url:    '../templates/common/common-load.hbs'
         }).done(function (data) {
 
             $('.content').html(data);
 
-            if (type == 'live') {
+            if (type === 'live') {
                 var d1 = $.ajax({
-                    method: "GET",
+                    method: 'GET',
                     url:    '../templates/index/live-layout.hbs'
                 });
                 var d2 = $.ajax({
-                    method: "GET",
+                    method: 'GET',
                     url:    '../templates/index/categorys-item.hbs'
                 });
 
@@ -94,7 +94,7 @@ $(document).ready(function (e) {
                     });
 
                     var d5 = $.ajax({
-                        method:   "GET",
+                        method:   'GET',
                         url:      baseURL + 'contents/contentlist',
                         dataType: 'json',
                         data:     {
@@ -103,7 +103,7 @@ $(document).ready(function (e) {
                     });
 
                     var d6 = $.ajax({
-                        method:   "GET",
+                        method:   'GET',
                         url:      baseURL + 'contents/contentlist',
                         dataType: 'json',
                         data:     {
@@ -112,7 +112,7 @@ $(document).ready(function (e) {
                     });
 
                     var d7 = $.ajax({
-                        method: "GET",
+                        method: 'GET',
                         url:    '../templates/index/live-item.hbs'
                     });
 
@@ -124,11 +124,11 @@ $(document).ready(function (e) {
                         var html = template(contentList);
 
                         $('.main').html(html);
-                    })
-                })
+                    });
+                });
             } else {
                 var list = $.ajax({
-                    method: "GET",
+                    method: 'GET',
                     url:    '../templates/index/list-layout.hbs'
                 });
 
@@ -140,7 +140,7 @@ $(document).ready(function (e) {
                     $('.content').html(html);
 
                     var listItem = $.ajax({
-                        method: "GET",
+                        method: 'GET',
                         url:    '../templates/index/list-item.hbs'
                     });
 
@@ -148,7 +148,7 @@ $(document).ready(function (e) {
                         var id = $(element).data('id');
 
                         var contentList = $.ajax({
-                            method:   "GET",
+                            method:   'GET',
                             url:      baseURL + 'contents/contentlist',
                             dataType: 'json',
                             data:     {
@@ -168,9 +168,8 @@ $(document).ready(function (e) {
                         });
 
                     });
-                })
+                });
             }
         });
-
-    })
+    });
 });

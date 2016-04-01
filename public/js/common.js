@@ -2,15 +2,15 @@ window.baseURL = 'http://42.159.246.214:8080/rest/rest/'; //接口基准位置
 
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
-    var vars = query.split("&");
+    var vars = query.split('&');
     for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == variable) {return pair[1];}
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {return pair[1];}
     }
     return false;
 }
 
-Handlebars.registerHelper('subString', function (stringObject, start, length, options) {
+Handlebars.registerHelper('subString', function (stringObject, start, length) {
     return stringObject.substring(start, length);
 });
 
@@ -24,22 +24,22 @@ Handlebars.registerHelper('praiseMark', function (conditional, options) {
 });
 
 Handlebars.registerHelper('contentType', function (type, options) {
-    if (type == "Program") {
+    if (type === 'Program') {
         return options.fn(this);
     } else {
         return options.inverse(this);
     }
 });
 
-Handlebars.registerHelper("isNowPlay", function (value, options) {
-    if (value == 2) {
+Handlebars.registerHelper('isNowPlay', function (value, options) {
+    if (Number(value) === 2) {
         return options.fn(this);
     } else {
         return options.inverse(this);
     }
 });
 
-Handlebars.registerHelper("equality", function (v1, v2, options) {
+Handlebars.registerHelper('equality', function (v1, v2, options) {
     if (v1 === v2) {
         return options.fn(this);
     } else {
@@ -47,13 +47,13 @@ Handlebars.registerHelper("equality", function (v1, v2, options) {
     }
 });
 
-Handlebars.registerHelper("formatTime", function (time, type, options) {
+Handlebars.registerHelper('formatTime', function (time, type) {
     if (type) {
         return moment.unix(time).format(type);
     }
 });
 
-Handlebars.registerHelper("isTimeout", function (time, options) {
+Handlebars.registerHelper('isTimeout', function (time) {
 
     var timestamp = Number(moment().unix());
 
@@ -64,38 +64,56 @@ Handlebars.registerHelper("isTimeout", function (time, options) {
     }
 });
 
-Handlebars.registerHelper("replace", function (stringObject, options) {
+Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
-var uid = getQueryVariable('uid');
-var oauth_token = getQueryVariable('oauth_token');
 
-$.ajax({
-    url: baseURL + 'users/login',
-    method: 'POST',
-    dataType: 'json',
-    async: false,
-    data: {
-        LoginType: 1,
-        AppCode: 'apk02',
-        LoginName: uid,
-        UserID: uid,
-        AuthToken: oauth_token
-    },
-    success: function (data) {
-        Cookies.set('user-info', data, {expires: 7, path: '/'});
-        $.ajaxSetup({
-            data: {
-                'UserID': data.User.ID,
-                'UserToken': data.UserToken
-            }
-        });
+
+
+/*$.ajax({
+ url: baseURL + 'users/login',
+ method: 'POST',
+ dataType: 'json',
+ async: false,
+ data: {
+ LoginType: 1,
+ AppCode: 'apk02',
+ LoginName: uid,
+ UserID: uid,
+ AuthToken: oauthToken
+ },
+ success: function (data) {
+ Cookies.set('user-info', data, {expires: 7, path: '/'});
+ $.ajaxSetup({
+ data: {
+ 'UserID': data.User.ID,
+ 'UserToken': data.UserToken
+ }
+ });
+ }
+ });*/
+function isLogin() {
+    var uid = getQueryVariable('uid');
+    var oauthToken = getQueryVariable('oauth_token');
+
+    function callLoginCallback(data) {
+        uid = data.uid;
+        oauthToken = data.oauthToken;
     }
-});
-$(document).on('click', '.commend-wrap i', function (e) {
-    var data = $(this).data();
-    $.ajax({
+    
+    if (uid === false || oauthToken === false) {
+        // APP那边发起登陆
+        if (window.AndroidWebView) {
+            window.AndroidWebView.callLogin();
+        }
+    }
+}
+
+$(document).on('click', '.commend-wrap i', function () {
+    //var data = $(this).data();
+    isLogin();
+    /*$.ajax({
         url: baseURL + 'contents/addpraise',
         dataType: 'json',
         data: {
@@ -104,26 +122,26 @@ $(document).on('click', '.commend-wrap i', function (e) {
         }
     }).done(function (data) {
         $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
-    })
+    });*/
 });
 
 function getComment(insetElement, pageSize, pageIndex) {
     var id = getQueryVariable('id');
     var d1 = $.ajax({
-        method: "GET",
+        method: 'GET',
         url: '../templates/common/comment-layout.hbs'
     });
 
     var d2 = $.ajax({
-        method: "GET",
+        method: 'GET',
         url: '../templates/common/comment-item.hbs'
     });
 
     $.when(d1, d2).done(function (data1, data2) {
         var layout = insetElement.html(data1[0]);
         function getTemplates() {
-            var d3 = $.ajax({
-                method: "GET",
+            $.ajax({
+                method: 'GET',
                 url: baseURL + 'contents/getcomments',
                 dataType: 'json',
                 async: false,
@@ -150,18 +168,17 @@ function getComment(insetElement, pageSize, pageIndex) {
         }
         getTemplates(pageIndex);
 
-        $('#more-comment').click(function (e) {
-            getTemplates(pageIndex+1)
-        })
-    })
+        $('#more-comment').click(function () {
+            getTemplates(pageIndex+1);
+        });
+    });
 }
-
 $(document).on('click', '#send', function (e) {
     var txt = $.trim($(this).prev().val());
     var id = getQueryVariable('id');
     var type = getQueryVariable('type');
 
-    if (txt != '') {
+    if (txt !== '') {
         var para = {
             ContentType: type,
             ContentID: id,
@@ -180,16 +197,16 @@ $(document).on('click', '#send', function (e) {
             method: 'POST',
             dataType: 'json',
             data: para
-        }).done(function (data) {
+        }).done(function () {
             $.ajax({
-                method: "GET",
+                method: 'GET',
                 url: '../templates/common/comment-item.hbs'
             }).done(function (data) {
                 var template = Handlebars.compile(data);
                 var html = template(context);
                 $(e.currentTarget).prev().val('');
                 $('.comment-list').prepend(html);
-            })
-        })
+            });
+        });
     }
 });

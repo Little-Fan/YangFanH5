@@ -1,10 +1,10 @@
 /**
  * Created by fanxiaolong on 2016/3/14.
  */
-$(document).ready(function (e) {
-    var id = getQueryVariable("id");
-    var d1 = $.ajax({
-        method: "GET",
+$(document).ready(function () {
+    var id = getQueryVariable('id');
+    $.ajax({
+        method: 'GET',
         url: '../templates/list/layout.hbs'
     }).done(function (data1) {
         $('#body-list').html(data1);
@@ -13,13 +13,13 @@ $(document).ready(function (e) {
         var pageindex = 0;  //分页页码
 
         var d2 = $.ajax({
-            method: "GET",
+            method: 'GET',
             url: '../templates/list/list-item.hbs'
         });
 
         $('.more').click(function (e) {
             var d3 = $.ajax({
-                method: "GET",
+                method: 'GET',
                 url: baseURL + 'contents/contentlist',
                 dataType: 'json',
                 data: {
@@ -38,7 +38,7 @@ $(document).ready(function (e) {
                     $(e.currentTarget).find('a').text('数据加载完成');
                     $(e.currentTarget).off();  //t
                 }
-            })
+            });
         }).trigger('click');
-    })
+    });
 });

@@ -1,20 +1,22 @@
 /**
  * Created by fanxiaolong on 2016/3/14.
  */
-$(document).ready(function (e) {
+'use strict';
+
+$(document).ready(function () {
     var isLoad = false;  //是否是首次加载
-    var id = getQueryVariable("id");
-    var type = getQueryVariable("type");
-    var PhysicalContentID = getQueryVariable("PhysicalContentID");
+    var id = getQueryVariable('id');
+    var type = getQueryVariable('type');
+    var PhysicalContentID = getQueryVariable('PhysicalContentID');
     var playURL = '';
-    var d1 = $.ajax({
-        method: "GET",
+    $.ajax({
+        method: 'GET',
         url:    '../templates/channel/layout.hbs'
     }).done(function (data1) {
         $('body').html(data1);
 
         $.ajax({
-            method:   "GET",
+            method:   'GET',
             url:      baseURL + 'services/getAccessUrl',
             dataType: 'json',
             data:     {
@@ -27,7 +29,7 @@ $(document).ready(function (e) {
             $('video').attr('src', data.AccessUrl);
         });
 
-        $('.nav-tabs li').click(function (e) {
+        $('.nav-tabs li').click(function () {
             var index = $(this).index();
             if (index < 2) {
                 $(this).addClass('active').siblings().removeClass('active');
@@ -40,44 +42,44 @@ $(document).ready(function (e) {
         });
 
         $.ajax({
-            method: "GET",
+            method: 'GET',
             url:    '../templates/channel/date-item.hbs'
         }).done(function (data) {
             var template = Handlebars.compile(data);
             var context = [
                 {
                     'name': '今天',
-                    'date': moment().format("YYYYMMDD")
+                    'date': moment().format('YYYYMMDD')
                 },
                 {
                     'name': '昨天',
-                    'date': moment().subtract(1, 'days').format("YYYYMMDD")
+                    'date': moment().subtract(1, 'days').format('YYYYMMDD')
                 },
                 {
                     'name': '前天',
-                    'date': moment().subtract(2, 'days').format("YYYYMMDD")
+                    'date': moment().subtract(2, 'days').format('YYYYMMDD')
                 },
                 {
-                    'name': moment().subtract(3, 'days').format("MM-DD"),
-                    'date': moment().subtract(3, 'days').format("YYYYMMDD")
+                    'name': moment().subtract(3, 'days').format('MM-DD'),
+                    'date': moment().subtract(3, 'days').format('YYYYMMDD')
                 },
                 {
-                    'name': moment().subtract(4, 'days').format("MM-DD"),
-                    'date': moment().subtract(4, 'days').format("YYYYMMDD")
+                    'name': moment().subtract(4, 'days').format('MM-DD'),
+                    'date': moment().subtract(4, 'days').format('YYYYMMDD')
                 },
                 {
-                    'name': moment().subtract(5, 'days').format("MM-DD"),
-                    'date': moment().subtract(5, 'days').format("YYYYMMDD")
+                    'name': moment().subtract(5, 'days').format('MM-DD'),
+                    'date': moment().subtract(5, 'days').format('YYYYMMDD')
                 },
                 {
-                    'name': moment().subtract(6, 'days').format("MM-DD"),
-                    'date': moment().subtract(6, 'days').format("YYYYMMDD")
+                    'name': moment().subtract(6, 'days').format('MM-DD'),
+                    'date': moment().subtract(6, 'days').format('YYYYMMDD')
                 }
             ];
             var html = template(context);
 
             $('.tabs-nav').html(html);
-            $('.tabs-nav li').click(function (e) {
+            $('.tabs-nav li').click(function () {
 
                 $(this).addClass('active').siblings().removeClass('active');
 
@@ -85,12 +87,12 @@ $(document).ready(function (e) {
                 var date = $(this).data('date');
 
                 var d2 = $.ajax({
-                    method: "GET",
+                    method: 'GET',
                     url:    '../templates/channel/program-item.hbs'
                 });
 
                 var d3 = $.ajax({
-                    method:   "GET",
+                    method:   'GET',
                     url:      baseURL + 'channels/scheduleList',
                     dataType: 'json',
                     data:     {
@@ -109,14 +111,14 @@ $(document).ready(function (e) {
                     if (nowPlay.length) {
                         var top = nowPlay.position().top;
                         if (top > 0){
-                            $("#tabs_container").scrollTop(top);
+                            $('#tabs_container').scrollTop(top);
                         }
                     }
                 });
             });
             $('.tabs-nav .active').trigger('click');
 
-            $(document).on('click', '#replay', function (e) {
+            $(document).on('click', '#replay', function () {
                 var startTime= $(this).data('date');
                 var duration = $(this).data('duration');
                 var h = Number(duration.substr(0,2));
@@ -129,7 +131,7 @@ $(document).ready(function (e) {
                 }
                 replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
                 $('video').attr('src', replayURL);
-            })
+            });
         });
     });
 });

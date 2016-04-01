@@ -80,7 +80,7 @@ gulp.task('templates',['html'], function() {
             jade: jade,
             pretty: false
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist'));
 });
 
 //压缩html文件
