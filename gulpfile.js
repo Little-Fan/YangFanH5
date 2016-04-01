@@ -7,6 +7,9 @@ var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var gulpJade  = require('gulp-jade');
 var jade = require('jade');
+var jshint = require('gulp-jshint');
+var csslint = require('gulp-csslint');
+var stylish = require('jshint-stylish');
 
 
 //项目需要用到的库
@@ -17,6 +20,21 @@ var commonFils = [
     'node_modules/moment/min/*.js',
     'node_modules/spin.js/*.js'
 ];
+
+// 代码质量静态检查
+gulp.task('lint:js', function () {
+    return gulp.src([commonPathPrefix + 'js/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish));
+});
+
+gulp.task('lint:css', function () {
+    return gulp.src(commonPathPrefix + 'css/*.css')
+        .pipe(csslint('.csslintrc'))
+        .pipe(csslint.reporter(stylish));
+});
+
+gulp.task('lint', ['lint:js', 'lint:css']);
 
 //开发环境复件文件
 gulp.task('default', function() {

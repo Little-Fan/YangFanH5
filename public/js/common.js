@@ -68,6 +68,9 @@ Handlebars.registerHelper("replace", function (stringObject, options) {
     return stringObject.replace(/\:/g, '');
 });
 
+var uid = getQueryVariable('uid');
+var oauth_token = getQueryVariable('oauth_token');
+
 $.ajax({
     url: baseURL + 'users/login',
     method: 'POST',
@@ -75,7 +78,10 @@ $.ajax({
     async: false,
     data: {
         LoginType: 1,
-        LoginName: 'hezhoujun'
+        AppCode: 'apk02',
+        LoginName: uid,
+        UserID: uid,
+        AuthToken: oauth_token
     },
     success: function (data) {
         Cookies.set('user-info', data, {expires: 7, path: '/'});
