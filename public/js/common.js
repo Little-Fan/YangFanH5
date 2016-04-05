@@ -105,7 +105,7 @@ function callLoginCallback(data) {
     });
 }
 
-$(document).on('click', '.commend-wrap i', function () {
+$(document).on('click', '.commend-wrap i', function (e) {
     var data = $(this).data();
     var userInfo = Cookies.get('user-info');
     isLogin();
