@@ -71,37 +71,10 @@ Handlebars.registerHelper('replace', function (stringObject) {
 
 
 
-/*$.ajax({
- url: baseURL + 'users/login',
- method: 'POST',
- dataType: 'json',
- async: false,
- data: {
- LoginType: 1,
- AppCode: 'apk02',
- LoginName: uid,
- UserID: uid,
- AuthToken: oauthToken
- },
- success: function (data) {
- Cookies.set('user-info', data, {expires: 7, path: '/'});
- $.ajaxSetup({
- data: {
- 'UserID': data.User.ID,
- 'UserToken': data.UserToken
- }
- });
- }
- });*/
 function isLogin() {
     var uid = getQueryVariable('uid');
     var oauthToken = getQueryVariable('oauth_token');
 
-    function callLoginCallback(data) {
-        uid = data.uid;
-        oauthToken = data.oauthToken;
-    }
-    
     if (uid === false || oauthToken === false) {
         // APP那边发起登陆
         if (window.AndroidWebView) {
@@ -110,19 +83,47 @@ function isLogin() {
     }
 }
 
-$(document).on('click', '.commend-wrap i', function () {
-    //var data = $(this).data();
-    isLogin();
-    /*$.ajax({
-        url: baseURL + 'contents/addpraise',
+function callLoginCallback(data) {
+    $.ajax({
+        url: baseURL + 'users/login',
+        method: 'POST',
         dataType: 'json',
+        async: false,
         data: {
-            ContentID: data.contentId,
-            CommentID: data.commentId
+            LoginType: 1,
+            AppCode: 'apk02',
+            LoginName: data.uid,
+            UserID: data.uid,
+            AuthToken: data.oauthToken
+        },
+        success: function (data) {
+            Cookies.set('user-info', data, {expires: 7, path: '/'});
+            $.ajaxSetup({
+                data: {
+                    'UserID': data.User.ID,
+                    'UserToken': data.UserToken
+                }
+            });
         }
-    }).done(function (data) {
-        $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
-    });*/
+    });
+}
+
+$(document).on('click', '.commend-wrap i', function () {
+    var data = $(this).data();
+    var userInfo = Cookies.get('user-info');
+    isLogin();
+    if (userInfo) {
+        $.ajax({
+            url: baseURL + 'contents/addpraise',
+            dataType: 'json',
+            data: {
+                ContentID: data.contentId,
+                CommentID: data.commentId
+            }
+        }).done(function (data) {
+            $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
+        });
+    }
 });
 
 function getComment(insetElement, pageSize, pageIndex) {
