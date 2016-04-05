@@ -68,9 +68,6 @@ Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
-
-
-
 function isLogin() {
     var uid = getQueryVariable('uid');
     var oauthToken = getQueryVariable('oauth_token');
