@@ -298,7 +298,7 @@ video {
     text-indent: 40px;
     font-size: 20px;
     height: 40px;
-    line-height: 40px;
+    line-height: 35px;
 }
 #body-index .list-group ul li {
     float: left;
@@ -312,20 +312,35 @@ video {
     text-align: center;
     color: #4A4A4A;
 }
+#body-index .program ul li h3 {
+    font-size: 14px;
+    color: #444;
+}
+#body-index .program ul li h4 {
+    font-size: 12px;
+    color: #A6A6A6;
+}
 #body-index .program h2 {
     color: #4A90E2;
     background: transparent url(../images/option_icon.png) no-repeat 10px center;
 }
 #body-index .series h2 {
-    color: #F94E06;
     background: transparent url(../images/option_red_icon.png) no-repeat 10px center;
+}
+#body-index .program h2 span {
+    font-size: 16px;
+    color: #4486cf;
+}
+#body-index .series h2 span {
+    font-size: 16px;
+    color: #333;
 }
 #body-index .series h2 a {
     float: right;
     margin-right: 15px;
     text-indent: 0;
-    font-size: 16px;
-    color: #F94E06;
+    font-size: 12px;
+    color: #A6A6A6;
 }
 #body-index .series h2 a:hover {
     color: #4A4A4A;
@@ -340,6 +355,9 @@ video {
     text-decoration: none;
 }
 #body-index .series ul li h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #444;
     text-align: left;
 }
 #body-channel {
