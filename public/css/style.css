@@ -244,7 +244,7 @@ video {
     line-height: 25px;
     color: #4486cf;
     border-bottom: 1px solid #eff0f0;
-    background: transparent no-repeat 20px center;
+    background: transparent no-repeat 35px center / 25px 25px;
 }
 #body-index .content .sub-nav li:first-child {
     margin-right: 10px;
