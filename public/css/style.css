@@ -240,10 +240,10 @@ video {
     width: calc(50% - 10px);
     text-indent: 40px;
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 25px;
-    color: #4D92E3;
-    border-bottom: 2px solid #B9B9B9;
+    color: #4486cf;
+    border-bottom: 1px solid #eff0f0;
     background: transparent no-repeat 20px center;
 }
 #body-index .content .sub-nav li:first-child {
@@ -271,9 +271,9 @@ video {
     background: url("../images/index-bg.png") repeat-y right top;
 }
 #body-index .content .list-wrapper li {
-    border-bottom: 2px solid #EFF0F0;
-    height: 70px;
-    margin: 25px 15px;
+    border-bottom: 1px solid #EFF0F0;
+    height: 60px;
+    margin: 15px 15px;
 }
 #body-index .content .list-wrapper li:last-child {
     margin-bottom: 0;
@@ -285,12 +285,12 @@ video {
 }
 #body-index .content .list-wrapper li .title {
     font-size: 16px;
+    color: #444;
 }
 #body-index .content .list-wrapper li p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-top: 15px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #A6A6A6;
 }
 #body-index .list-group h2 {
     border-bottom: 1px solid #CCC;

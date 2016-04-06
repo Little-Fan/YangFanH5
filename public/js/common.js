@@ -108,7 +108,9 @@ function callLoginCallback(data) {
 $(document).on('click', '.commend-wrap i', function (e) {
     var data = $(this).data();
     var userInfo = Cookies.get('user-info');
+
     isLogin();
+
     if (userInfo) {
         $.ajax({
             url: baseURL + 'contents/addpraise',
