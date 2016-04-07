@@ -39,6 +39,15 @@ Handlebars.registerHelper('isNowPlay', function (value, options) {
     }
 });
 
+Handlebars.registerHelper('isVideo', function (value, options) {
+    value = value.substr(-2);
+    if (value === '频道') {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
 Handlebars.registerHelper('equality', function (v1, v2, options) {
     if (v1 === v2) {
         return options.fn(this);

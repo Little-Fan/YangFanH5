@@ -8,6 +8,7 @@ $(document).ready(function () {
     var id = getQueryVariable('id');
     var type = getQueryVariable('type');
     var PhysicalContentID = getQueryVariable('PhysicalContentID');
+    var mode = getQueryVariable('mode');
     var playURL = '';
     $.ajax({
         method: 'GET',
@@ -15,18 +16,41 @@ $(document).ready(function () {
     }).done(function (data1) {
         $('body').html(data1);
 
-        $.ajax({
-            method:   'GET',
-            url:      baseURL + 'services/getAccessUrl',
+        var channelType = $.ajax({
+            method: 'GET',
+            url: '../templates/channel/channel-type.hbs'
+        });
+
+        var getAccessUrl = $.ajax({
+            method: 'GET',
+            url: baseURL + 'services/getAccessUrl',
             dataType: 'json',
-            data:     {
+            data: {
                 PhysicalContentID: PhysicalContentID,
-                ContentType:       type,
-                Domain:            0
+                ContentType: type,
+                Domain: 0
             }
-        }).done(function (data) {
-            playURL = data.AccessUrl;
-            $('video').attr('src', data.AccessUrl);
+        });
+
+        $.when(channelType, getAccessUrl).done(function (data1, data2) {
+            var template = Handlebars.compile(data1[0]);
+            var context = data2[0];
+            context.video = mode;
+            var html = template(context);
+            $('#media-wrapper').html(html);
+
+            $('.audio-wrapper').click(function () {
+
+                var audio = $('#audio'), isPaused = audio.prop('paused');
+
+                if(isPaused){
+                    $('#audio')[0].play();
+                } else {
+                    $('#audio')[0].pause();
+                }
+                
+            });
+
         });
 
         $('.nav-tabs li').click(function () {
