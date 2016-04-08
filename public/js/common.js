@@ -116,11 +116,9 @@ function callLoginCallback(data) {
 
 $(document).on('click', '.commend-wrap i', function (e) {
     var data = $(this).data();
-    var userInfo = Cookies.get('user-info');
+    var userInfo = Cookies.getJSON('user-info');
 
-    isLogin();
-
-    if (userInfo) {
+    if (userInfo && userInfo.User && userInfo.User.ID) {
         $.ajax({
             url: baseURL + 'contents/addpraise',
             dataType: 'json',
@@ -131,6 +129,8 @@ $(document).on('click', '.commend-wrap i', function (e) {
         }).done(function (data) {
             $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
         });
+    } else {
+        isLogin();
     }
 });
 
@@ -194,28 +194,34 @@ $(document).on('click', '#send', function (e) {
             Comment: txt
         };
 
-        var context = {
-            UserID: Cookies.getJSON('user-info').User.ID,
-            CreateTime: moment().format('YYYY-MM-DD h:mm:ss'),
-            ContentID: id,
-            Praise: 0,
-            Detail: txt
-        };
-        $.ajax({
-            url: baseURL + 'contents/addcomment',
-            method: 'POST',
-            dataType: 'json',
-            data: para
-        }).done(function () {
+        var userInfo = Cookies.getJSON('user-info');
+
+        if (userInfo && userInfo.User && userInfo.User.ID) {
+            var context = {
+                /*UserID: Cookies.getJSON('user-info').User.ID,*/
+                CreateTime: moment().format('YYYY-MM-DD h:mm:ss'),
+                ContentID: id,
+                Praise: 0,
+                Detail: txt
+            };
             $.ajax({
-                method: 'GET',
-                url: '../templates/common/comment-item.hbs'
-            }).done(function (data) {
-                var template = Handlebars.compile(data);
-                var html = template(context);
-                $(e.currentTarget).prev().val('');
-                $('.comment-list').prepend(html);
+                url: baseURL + 'contents/addcomment',
+                method: 'POST',
+                dataType: 'json',
+                data: para
+            }).done(function () {
+                $.ajax({
+                    method: 'GET',
+                    url: '../templates/common/comment-item.hbs'
+                }).done(function (data) {
+                    var template = Handlebars.compile(data);
+                    var html = template(context);
+                    $(e.currentTarget).prev().val('');
+                    $('.comment-list').prepend(html);
+                });
             });
-        });
+        } else {
+            isLogin();
+        }
     }
 });

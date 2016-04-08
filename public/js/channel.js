@@ -142,7 +142,7 @@ $(document).ready(function () {
             });
             $('.tabs-nav .active').trigger('click');
 
-            $(document).on('click', '#replay', function () {
+            $(document).on('click', '.replay', function () {
                 var startTime= $(this).data('date');
                 var duration = $(this).data('duration');
                 var h = Number(duration.substr(0,2));
@@ -154,7 +154,7 @@ $(document).ready(function () {
                     var replayURL = playURL.replace('live','review');
                 }
                 replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
-                $('video').attr('src', replayURL);
+                $('#video').attr('src', replayURL);
             });
         });
     });

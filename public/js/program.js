@@ -23,6 +23,11 @@ $(document).ready(function () {
     $.when(d1, d2).done(function (data1,data2) {
 
         var template = Handlebars.compile(data1[0]);
+
+        if (data2[0] && data2[0].Content && data2[0].Content.RelateContents && data2[0].Content.RelateContents.Content && data2[0].Content.RelateContents.Content.length > 2) {
+            data2[0].Content.RelateContents.Content = data2[0].Content.RelateContents.Content.slice(0, 2);
+        }
+
         var context = data2[0];
         var html= template(context);
         $('body').html(html);

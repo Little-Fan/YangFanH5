@@ -15,8 +15,11 @@ html {
     overflow: hidden;
     width: 100%;
     height: 240px;
+}
+#media-wrapper .video-wrapper{
     background-color: #000;
 }
+#media-wrapper .video-wrapper,
 #media-wrapper .audio-wrapper {
     width: 100%;
     height: 100%;
@@ -458,17 +461,25 @@ video {
     line-height: 41px;
     text-align: left;
     font-size: 16px;
+    cursor: pointer;
 }
 #body-channel .main .channel-list li span {
     float: left;
-    width: 33%;
+    padding-left: 10px;
+    width: 33.333333333%;
+}
+#body-channel .main .channel-list li span.date {
+    padding-left: 0;
+    text-align: center;
 }
 #body-channel .main .channel-list li span.name {
+
+}
+#body-channel .main .channel-list li span.full-name {
+    width: 66.666666666%;
 }
 #body-channel .main .channel-list li span.play {
-    float: left;
     color: #FA5915;
-    cursor: pointer;
 }
 #body-list .main ul > p {
     height: 100px;
