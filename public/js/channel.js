@@ -44,9 +44,9 @@ $(document).ready(function () {
                 var audio = $('#audio'), isPaused = audio.prop('paused');
 
                 if(isPaused){
-                    $('#audio')[0].play();
+                    audio[0].play();
                 } else {
-                    $('#audio')[0].pause();
+                    audio[0].pause();
                 }
                 
             });
