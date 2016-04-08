@@ -35,22 +35,21 @@ $(document).ready(function () {
         $.when(channelType, getAccessUrl).done(function (data1, data2) {
             var template = Handlebars.compile(data1[0]);
             var context = data2[0];
+
             context.video = mode;
+            playURL = data2[0].AccessUrl;
+
             var html = template(context);
             $('#media-wrapper').html(html);
 
             $('.audio-wrapper').click(function () {
-
                 var audio = $('#audio'), isPaused = audio.prop('paused');
-
-                if(isPaused){
+                if (isPaused) {
                     audio[0].play();
                 } else {
                     audio[0].pause();
                 }
-                
             });
-
         });
 
         $('.nav-tabs li').click(function () {
@@ -155,6 +154,7 @@ $(document).ready(function () {
                 }
                 replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
                 $('#video').attr('src', replayURL);
+                $(this).addClass('active').siblings().removeClass('active');
             });
         });
     });

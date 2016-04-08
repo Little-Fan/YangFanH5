@@ -463,6 +463,9 @@ video {
     font-size: 16px;
     cursor: pointer;
 }
+#body-channel .main .channel-list li.active span {
+    color: #F00;
+}
 #body-channel .main .channel-list li span {
     float: left;
     padding-left: 10px;
