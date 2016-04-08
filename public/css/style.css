@@ -482,6 +482,7 @@ video {
     width: 66.666666666%;
 }
 #body-channel .main .channel-list li span.play {
+    font-size: 12px;
     color: #FA5915;
 }
 #body-list .main ul > p {
