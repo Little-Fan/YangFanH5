@@ -62,14 +62,14 @@ Handlebars.registerHelper('formatTime', function (time, type) {
     }
 });
 
-Handlebars.registerHelper('isTimeout', function (time) {
+Handlebars.registerHelper('isTimeout', function (time, options) {
 
     var timestamp = Number(moment().unix());
 
     if (timestamp - Number(time) > 0) {
-        return '回看';
+        return options.fn(this);
     } else {
-        return '预约';
+        return options.inverse(this);
     }
 });
 

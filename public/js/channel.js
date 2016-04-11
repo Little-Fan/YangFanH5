@@ -15,6 +15,7 @@ $(document).ready(function () {
         url:    '../templates/channel/layout.hbs'
     }).done(function (data1) {
         $('body').html(data1);
+        $('.main').height($(window).height() - 280);  //低版本浏览器兼容
 
         var channelType = $.ajax({
             method: 'GET',
@@ -132,18 +133,25 @@ $(document).ready(function () {
                     channelList.html(html);
 
                     //页面进入时，滚动条滚动到正在播放的位置
-                    var nowPlay = $('.play');
+                    var nowPlay = $('.play'),
+                        tab = $('#tabs_container');
+
+                    tab.scrollTop(0);  //重置为0的位置
+
                     if (nowPlay.length >= 1) {
                         var top = nowPlay.position().top;
-                        if (top > 0){
-                            $('#tabs_container').scrollTop(top);
-                        }
+                        tab.scrollTop(top);
                     }
                 });
             });
             $('.tabs-nav .active').trigger('click');
 
             $(document).on('click', '.replay', function () {
+                
+                if ($(this).hasClass('now-playing')) {
+                    return false;
+                }
+                
                 var startTime= $(this).data('date');
                 var duration = $(this).data('duration');
                 var h = Number(duration.substr(0,2));

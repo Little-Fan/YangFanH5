@@ -1,6 +1,6 @@
 {{#if Schedules.Schedule}}
     {{#each Schedules.Schedule}}
-        <li class="replay" data-date="{{StartDate}}T{{replace StartTime}}" data-duration="{{Duration}}">
+        <li {{#isTimeout StartDateTime}}class="replay"{{/isTimeout}} data-date="{{StartDate}}T{{replace StartTime}}" data-duration="{{Duration}}">
             <span class="date">{{subString StartTime 0 5}}</span>
             {{#isNowPlay PlayState}}
                 <span class="name overflow">{{ProgramName}}</span>

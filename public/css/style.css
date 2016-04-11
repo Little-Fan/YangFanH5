@@ -410,9 +410,8 @@ video {
 }
 #body-channel .main #tabs_container {
     position: relative;
-    float: left;
+    margin-left: 70px;
     overflow-x: hidden;
-    width: calc(100% - 70px);
     height: 100%;
 }
 #body-channel #tabs {
