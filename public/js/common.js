@@ -5,7 +5,9 @@ function getQueryVariable(variable) {
     var vars = query.split('&');
     for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split('=');
-        if (pair[0] === variable) {return pair[1];}
+        if (pair[0] === variable) {
+            return pair[1];
+        }
     }
     return false;
 }
@@ -103,13 +105,18 @@ function callLoginCallback(data) {
             AuthToken: data.oauthToken
         },
         success: function (data) {
-            Cookies.set('user-info', data, {expires: 7, path: '/'});
-            $.ajaxSetup({
-                data: {
-                    'UserID': data.User.ID,
-                    'UserToken': data.UserToken
-                }
-            });
+            /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
+            if (Number(data.ResultCode) === 0) {
+                Cookies.set('user-info', data, {expires: 7, path: '/'});
+                $.ajaxSetup({
+                    data: {
+                        'UserID': data.User.ID,
+                        'UserToken': data.UserToken
+                    }
+                });
+            } else {
+                alert(data.ResultDesc);   //失败时候的操作
+            }
         }
     });
 }
@@ -148,6 +155,7 @@ function getComment(insetElement, pageSize, pageIndex) {
 
     $.when(d1, d2).done(function (data1, data2) {
         var layout = insetElement.html(data1[0]);
+
         function getTemplates() {
             $.ajax({
                 method: 'GET',
@@ -175,10 +183,11 @@ function getComment(insetElement, pageSize, pageIndex) {
                 layout.find('.comment-list').append(html);
             });
         }
+
         getTemplates(pageIndex);
 
         $('#more-comment').click(function () {
-            getTemplates(pageIndex+1);
+            getTemplates(pageIndex + 1);
         });
     });
 }
