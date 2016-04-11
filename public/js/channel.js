@@ -130,8 +130,10 @@ $(document).ready(function () {
                     var context = data2[0];
                     var html = template(context);
                     channelList.html(html);
-                    var nowPlay = $('#play');
-                    if (nowPlay.length) {
+
+                    //页面进入时，滚动条滚动到正在播放的位置
+                    var nowPlay = $('.play');
+                    if (nowPlay.length >= 1) {
                         var top = nowPlay.position().top;
                         if (top > 0){
                             $('#tabs_container').scrollTop(top);
@@ -153,7 +155,9 @@ $(document).ready(function () {
                     var replayURL = playURL.replace('live','review');
                 }
                 replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
-                $('#video').attr('src', replayURL);
+
+                $('#video').attr('src', replayURL) && $('#audio').attr('src', replayURL);
+
                 $(this).addClass('active').siblings().removeClass('active');
             });
         });
