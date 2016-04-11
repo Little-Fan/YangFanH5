@@ -246,8 +246,11 @@ video {
 }
 #body-index .content .sub-nav li {
     float: left;
+    width: 50%;
+}
+#body-index .content .sub-nav li span {
+    display: block;
     padding: 5px 0;
-    width: calc(50% - 10px);
     text-indent: 40px;
     text-align: center;
     font-size: 14px;
@@ -256,12 +259,12 @@ video {
     border-bottom: 1px solid #eff0f0;
     background: transparent no-repeat 35px center / 25px 25px;
 }
-#body-index .content .sub-nav li:first-child {
-    margin-right: 10px;
+#body-index .content .sub-nav li:first-child span {
+    margin-right: 15px;
     background-image: url(../images/tv_icon.png);
 }
-#body-index .content .sub-nav li:last-child {
-    margin-left: 10px;
+#body-index .content .sub-nav li:last-child span {
+    margin-left: 15px;
     background-image: url(../images/radio_icon.png);
 }
 #body-index .content .main {

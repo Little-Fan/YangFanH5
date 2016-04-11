@@ -15,7 +15,7 @@ $(document).ready(function () {
         url:    '../templates/channel/layout.hbs'
     }).done(function (data1) {
         $('body').html(data1);
-        $('.main').height($(window).height() - 280);  //低版本浏览器兼容
+        $('.main').height($(window).height() - 280);  //在不支持calc属性的浏览器
 
         var channelType = $.ajax({
             method: 'GET',
