@@ -151,13 +151,12 @@ $(document).ready(function () {
                 var s = Number(duration.substr(4,2));
                 var length = (h * 60 + m) * 60 + s;
 
-                if(playURL.length>0){
-                    var replayURL = playURL.replace('live','review');
+                if (playURL.length > 0) {
+                    var replayURL = playURL.replace(/\/(live)\//g, '/review/');
                 }
+
                 replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
-
                 $('#video').attr('src', replayURL) && $('#audio').attr('src', replayURL);
-
                 $(this).addClass('active').siblings().removeClass('active');
             });
         });
