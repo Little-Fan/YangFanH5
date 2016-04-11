@@ -4,7 +4,7 @@
             {{#each Contents.Content}}
                 <li>
                     <a href="./channel.html?id={{ContentID}}{{#isVideo Name}}&mode=Video{{/isVideo}}&type={{ContentType}}&PhysicalContentID={{Channel.PhysicalChannels.PhysicalChannel.[0]
-                    .PhysicalContentID}}">
+                    .PhysicalContentID}}&title={{Name}}">
                         <h3 class="title overflow">{{Name}}</h3>
                         <p class="overflow">{{Channel.NowPlay.ProgramName}}</p>
                     </a>

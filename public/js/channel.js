@@ -9,7 +9,11 @@ $(document).ready(function () {
     var type = getQueryVariable('type');
     var PhysicalContentID = getQueryVariable('PhysicalContentID');
     var mode = getQueryVariable('mode');
+    var title = decodeURI(getQueryVariable('title'));
     var playURL = '';
+
+    $('title').text(title);  //增加APP上需要的title
+
     $.ajax({
         method: 'GET',
         url:    '../templates/channel/layout.hbs'
