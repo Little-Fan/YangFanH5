@@ -1,32 +1,30 @@
-<div id="body-program">
-    <div class="video-wrapper">
-        <video controls="controls" autoplay="autoplay" webkit-playsinline="true" src=" "></video>
-    </div>
-    <div class="video-info">
-        <div class="times"><span>{{Content.PlayTimes}}</span>次播放</div>
-        <i class="share"></i>
-        <i class="heart"></i>
-    </div>
-    <div class="box">
-        <h2>
-            <span>推荐</span>
-        </h2>
-        <ul class="list">
-            {{#each Content.RelateContents.Content}}
-                <li>
-                    {{#contentType ContentType}}
-                        <a href="program.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
-                    {{else}}
-                        <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
-                    {{/contentType}}
-                    <h3 class="overflow">{{Name}}</h3>
-                    <h4 class="overflow">{{Summary}}</h4>
-                </li>
-            {{/each}}
-        </ul>
-        <h2>
-            <span>评论</span>
-        </h2>
-        <div id="comment-wrapper"><p>数据加载中……</p></div>
-    </div>
+<div class="video-wrapper">
+    <video controls="controls" autoplay="autoplay" webkit-playsinline="true" src=" "></video>
+</div>
+<div class="video-info">
+    <div class="times"><span>{{Content.PlayTimes}}</span>次播放</div>
+    <i class="share"></i>
+    <i class="heart"></i>
+</div>
+<div class="box">
+    <h2>
+        <span>推荐</span>
+    </h2>
+    <ul class="list">
+        {{#each Content.RelateContents.Content}}
+        <li>
+            {{#contentType ContentType}}
+            <a href="program.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+            {{else}}
+            <a href="special.html?id={{ContentID}}"><img src="{{Poster}}" height="80" width="100%"></a>
+            {{/contentType}}
+            <h3 class="overflow">{{Name}}</h3>
+            <h4 class="overflow">{{Summary}}</h4>
+        </li>
+        {{/each}}
+    </ul>
+    <h2>
+        <span>评论</span>
+    </h2>
+    <div id="comment-wrapper"><p>数据加载中……</p></div>
 </div>

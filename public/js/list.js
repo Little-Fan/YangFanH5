@@ -3,6 +3,8 @@
  */
 $(document).ready(function () {
     var id = getQueryVariable('id');
+    loading('#body-list');
+
     $.ajax({
         method: 'GET',
         url: '../templates/list/layout.hbs'

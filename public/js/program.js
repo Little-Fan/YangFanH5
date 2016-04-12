@@ -6,6 +6,8 @@ $(document).ready(function () {
     var id = getQueryVariable('id');
     var type = getQueryVariable('type');
 
+    loading('#body-program');
+    
     var d1 = $.ajax({
         method: 'GET',
         url:      '../templates/program/layout.hbs'
@@ -30,7 +32,7 @@ $(document).ready(function () {
 
         var context = data2[0];
         var html= template(context);
-        $('body').html(html);
+        $('#body-program').html(html);
 
         $.ajax({
             method:   'GET',

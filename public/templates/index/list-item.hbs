@@ -1,11 +1,7 @@
 {{#contentType type}}
     {{#each Contents.Content}}
         <li>
-            <img src="{{Thumb}}">
-            <a href="./program-list.html?id={{ContentID}}">
-                <h3 class="overflow">{{Name}}</h3>
-                <h4>每天：{{ScheduleTimes}}</h4>
-            </a>
+            <a href="./program-list.html?id={{ContentID}}"><img src="{{Thumb}}"></a>
         </li>
     {{/each}}
 {{else}}

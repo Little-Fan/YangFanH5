@@ -383,17 +383,17 @@ video {
     border: 1px solid #E2E3E2;
     border-radius: 5px;
 }
-#body-index .program ul li img {
+#body-index .program ul li a {
+    display: block;
+    height: 60px;
+}
+#body-index .program ul li a img {
     z-index: -9;
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-}
-#body-index .program ul li a {
-    display: block;
-    text-decoration: none;
 }
 #body-index .series ul li h3 {
     margin-bottom: 10px;

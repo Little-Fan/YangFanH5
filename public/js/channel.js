@@ -14,11 +14,13 @@ $(document).ready(function () {
 
     $('title').text(title);  //增加APP上需要的title
 
+    loading('#body-channel');
+    
     $.ajax({
         method: 'GET',
         url:    '../templates/channel/layout.hbs'
     }).done(function (data1) {
-        $('body').html(data1);
+        $('#body-channel').html(data1);
         $('.main').height($(window).height() - 280);  //在不支持calc属性的浏览器
 
         var channelType = $.ajax({
