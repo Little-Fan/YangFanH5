@@ -165,7 +165,7 @@ function callLoginCallback(data) {
 }
 
 $(document).on('click', '.commend-wrap i', function (e) {
-    var data = $(this).data();
+    var contentData = $(this).data();
     var userInfo = Cookies.getJSON('user-info');
 
     if (userInfo && userInfo.User && userInfo.User.ID) {
@@ -173,8 +173,9 @@ $(document).on('click', '.commend-wrap i', function (e) {
             url: baseURL + 'contents/addpraise',
             dataType: 'json',
             data: {
-                ContentID: data.contentId,
-                CommentID: data.commentId
+                ContentID: contentData.contentId,
+                CommentID: contentData.commentId,
+                UserID: userInfo.User.ID
             }
         }).done(function (data) {
             $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
