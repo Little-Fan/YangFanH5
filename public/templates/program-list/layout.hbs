@@ -1,7 +1,8 @@
+{{#if Comment.Series.Programs.Program}}
 <ul>
     {{#each Content.Series.Programs.Program}}
         <li class="clearfix">
-            <a  href="program.html?id={{ContentID}}&type=Program">
+            <a href="program.html?id={{ContentID}}&type=Program">
                 <img src="{{Poster}}" height="60" width="100">
             </a>
             <div class="program-info">
@@ -17,3 +18,6 @@
         </li>
     {{/each}}
 </ul>
+{{else}}
+    <p>暂时没有数据！</p>
+{{/if}}

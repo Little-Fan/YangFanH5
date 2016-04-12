@@ -595,6 +595,10 @@ video {
 #body-special .box {
     padding: 10px 20px;
 }
+#body-program-list > p {
+    text-align: center;
+    line-height: 100px;
+}
 #body-program-list ul li {
     padding: 10px 15px;
     border-bottom: 1px solid #E2E3E2;
