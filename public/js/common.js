@@ -91,36 +91,10 @@ function isLogin() {
     }
 }
 
-$.ajax({
-    url: baseURL + 'users/login',
-    method: 'POST',
-    dataType: 'json',
-    async: false,
-    data: {
-        LoginType: 1,
-        AppCode: 'apk02',
-        LoginName: '30565',
-        UserID: '30565',
-        AuthToken: 'fe00800aedb74882b773f24f5f98789b'
-    },
-    success: function (data) {
-        /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
-        if (Number(data.ResultCode) === 0) {
-            Cookies.set('user-info', data, {expires: 7, path: '/'});
-            $.ajaxSetup({
-                data: {
-                    'UserID': data.User.ID,
-                    'UserToken': data.UserToken
-                }
-            });
-        } else {
-            alert(data.ResultDesc);   //失败时候的操作
-        }
-    }
-});
-
-
 function callLoginCallback(data) {
+    alert(data);
+    alert(data.uid);
+    alert(data.oauthToken);
     $.ajax({
         url: baseURL + 'users/login',
         method: 'POST',

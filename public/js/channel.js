@@ -47,12 +47,14 @@ $(document).ready(function () {
             var html = template(context);
             $('#media-wrapper').html(html);
 
-            $('.audio-wrapper').click(function () {
+            $('.audio-wrapper i').click(function () {
                 var audio = $('#audio'), isPaused = audio.prop('paused');
                 if (isPaused) {
                     audio[0].play();
+                    $(this).removeClass().addClass('pause');
                 } else {
                     audio[0].pause();
+                    $(this).removeClass().addClass('play');
                 }
             });
         });

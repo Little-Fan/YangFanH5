@@ -24,8 +24,27 @@ html {
     width: 100%;
     height: 100%;
 }
+#media-wrapper .audio-wrapper {
+    position: relative;
+}
 #media-wrapper .audio-wrapper audio {
     display: none;
+}
+#media-wrapper .audio-wrapper i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -56px;
+    margin-top: -56px;;
+    display: block;
+    width: 112px;
+    height: 112px;
+}
+#media-wrapper .audio-wrapper .pause {
+    background: transparent url(../images/pause.png) no-repeat center center;
+}
+#media-wrapper .audio-wrapper .play {
+    background: transparent url(../images/play.png) no-repeat center center;
 }
 video {
     width: 100%;
