@@ -130,9 +130,6 @@ function isLogin() {
     }
 }
 
-
-
-
 function callLoginCallback(data) {
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
@@ -258,23 +255,34 @@ $(document).on('click', '#send', function (e) {
             context.Comments.Comment = [];
             context.Comments.Comment[0] = {
                 UserID: Cookies.getJSON('user-info').User.ID,
-                CreateTime: moment().format('YYYY-MM-DD h:mm:ss'),
+                CreateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
                 ContentID: id,
                 Praise: 0,
                 Detail: txt
             };
 
             $.ajax({
-                method: 'GET',
-                url: '../templates/common/comment-item.hbs'
+                url: baseURL + 'contents/addcomment',
+                method: 'POST',
+                dataType: 'json',
+                data: para
             }).done(function (data) {
-                var template = Handlebars.compile(data);
-                var html = template(context);
-                var comment = $('.comment-list');
+                if (Number(data.ResultCode) === 0) {
+                    $.ajax({
+                        method: 'GET',
+                        url: '../templates/common/comment-item.hbs'
+                    }).done(function (data) {
+                        var template = Handlebars.compile(data);
+                        var html = template(context);
+                        var comment = $('.comment-list');
 
-                $(e.currentTarget).prev().val('');
-                comment.prepend(html);
-                comment.children('p').remove();
+                        $(e.currentTarget).prev().val('');
+                        comment.prepend(html);
+                        comment.children('p').remove();
+                    });
+                } else {
+                    alert(data.ResultDesc);
+                }
             });
         } else {
             isLogin();
