@@ -121,9 +121,9 @@ function callLoginCallback(data) {
         data: {
             LoginType: 1,
             AppCode: 'apk02',
-            LoginName: data.uid,
-            UserID: data.uid,
-            AuthToken: data.oauthToken
+            LoginName: uid,
+            UserID: uid,
+            AuthToken: oauthToken
         },
         success: function (data) {
             /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
