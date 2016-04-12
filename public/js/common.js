@@ -104,15 +104,10 @@ function isLogin() {
 
 
 function callLoginCallback(data) {
-
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
 
-    /* 测试 */
-    alert(data);
-    alert(uid);
-    alert(oauthToken);
-
+    /* 登陆接口 */
     $.ajax({
         url: baseURL + 'users/login',
         method: 'POST',
@@ -227,28 +222,29 @@ $(document).on('click', '#send', function (e) {
         var userInfo = Cookies.getJSON('user-info');
 
         if (userInfo && userInfo.User && userInfo.User.ID) {
-            var context = {
-                /*UserID: Cookies.getJSON('user-info').User.ID,*/
+            var context = {};
+
+            context.Comments = {};
+            context.Comments.Comment = [];
+            context.Comments.Comment[0] = {
+                UserID: Cookies.getJSON('user-info').User.ID,
                 CreateTime: moment().format('YYYY-MM-DD h:mm:ss'),
                 ContentID: id,
                 Praise: 0,
                 Detail: txt
             };
+
             $.ajax({
-                url: baseURL + 'contents/addcomment',
-                method: 'POST',
-                dataType: 'json',
-                data: para
-            }).done(function () {
-                $.ajax({
-                    method: 'GET',
-                    url: '../templates/common/comment-item.hbs'
-                }).done(function (data) {
-                    var template = Handlebars.compile(data);
-                    var html = template(context);
-                    $(e.currentTarget).prev().val('');
-                    $('.comment-list').prepend(html);
-                });
+                method: 'GET',
+                url: '../templates/common/comment-item.hbs'
+            }).done(function (data) {
+                var template = Handlebars.compile(data);
+                var html = template(context);
+                var comment = $('.comment-list');
+
+                $(e.currentTarget).prev().val('');
+                comment.prepend(html);
+                comment.children('p').remove();
             });
         } else {
             isLogin();
