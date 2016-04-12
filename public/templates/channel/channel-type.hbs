@@ -1,11 +1,11 @@
 {{#if video}}
     <div class="video-wrapper">
-        <video id="video" controls="controls" autoplay="autoplay" webkit-playsinline="true" src="{{AccessUrl}}"></video>
+        <video id="video" width="100%" controls="controls" autoplay="autoplay" webkit-playsinline="true" src="{{AccessUrl}}"></video>
     </div>
 {{else}}
     <div class="audio-wrapper">
         <!--<img src="../images/audio.jpg" height="100%" width="100%">-->
         <i class="pause"></i>
-        <audio id="audio" controls="controls" autoplay="autoplay" src="{{AccessUrl}}"></audio>
+        <audio id="audio" controls="controls" autoplay="autoplay" src="{{AccessUrl}}" style="display: none"></audio>
     </div>
 {{/if}}
