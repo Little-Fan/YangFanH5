@@ -359,9 +359,18 @@ video {
     color: #4A4A4A;
 }
 #body-index .program ul li {
+    position: relative;
     padding: 15px 10px !important;
     border: 1px solid #E2E3E2;
     border-radius: 5px;
+}
+#body-index .program ul li img {
+    z-index: -9;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }
 #body-index .program ul li a {
     display: block;
