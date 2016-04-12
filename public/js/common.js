@@ -1,8 +1,17 @@
 window.baseURL = 'http://42.159.246.214:8080/rest/rest/'; //接口基准位置
 
-function getQueryVariable(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split('&');
+function getQueryVariable(variable, url) {
+    var query,
+        vars;
+
+    if (url) {
+        query = url;
+    } else {
+        query = window.location.search.substring(1);
+    }
+
+    vars = query.split('&');
+
     for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split('=');
         if (pair[0] === variable) {
@@ -91,10 +100,19 @@ function isLogin() {
     }
 }
 
+
+
+
 function callLoginCallback(data) {
+
+    var uid = getQueryVariable('uid', data);
+    var oauthToken = getQueryVariable('oauth_token', data);
+
+    /* 测试 */
     alert(data);
-    alert(data.uid);
-    alert(data.oauthToken);
+    alert(uid);
+    alert(oauthToken);
+
     $.ajax({
         url: baseURL + 'users/login',
         method: 'POST',
