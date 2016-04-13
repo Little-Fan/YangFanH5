@@ -118,18 +118,6 @@ Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
-function isLogin() {
-    var uid = getQueryVariable('uid');
-    var oauthToken = getQueryVariable('oauth_token');
-
-    if (uid === false || oauthToken === false) {
-        // APP那边发起登陆
-        if (window.AndroidWebView) {
-            window.AndroidWebView.callLogin();
-        }
-    }
-}
-
 function callLoginCallback(data) {
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
@@ -164,7 +152,44 @@ function callLoginCallback(data) {
     });
 }
 
-$(document).on('click', '.commend-wrap i', function (e) {
+function setupWebViewJavascriptBridge(callback) {
+    if (window.WebViewJavascriptBridge) {
+        return callback(WebViewJavascriptBridge);
+    }
+    if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback);
+    }
+    window.WVJBCallbacks = [callback];
+    var WVJBIframe = document.createElement('iframe');
+    WVJBIframe.style.display = 'none';
+    WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+    document.documentElement.appendChild(WVJBIframe);
+    setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe);
+    }, 0);
+}
+
+function isLogin() {
+    var uid = getQueryVariable('uid');
+    var oauthToken = getQueryVariable('oauth_token');
+
+    if (uid === false || oauthToken === false) {
+        // 安卓APP那边发起登陆
+        if (window.AndroidWebView) {
+            window.AndroidWebView.callLogin();
+        }
+
+        // IOS发起登陆
+        setupWebViewJavascriptBridge(function(bridge) {
+            bridge.callHandler('callLogin', function responseCallback(responseData) {
+                callLoginCallback(responseData);
+            });
+        });
+    }
+}
+
+$(document).on('touchstart', '.commend-wrap i', function (e) {
+    alert('touches event');
     var contentData = $(this).data();
     var userInfo = Cookies.getJSON('user-info');
 

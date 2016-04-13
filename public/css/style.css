@@ -197,7 +197,7 @@ video {
     float: right;
     line-height: 20px;
     margin-top: 10px;
-    width: 260px;
+    width: 100%;
 }
 #more-comment {
     background-color: #F0F0F0;
