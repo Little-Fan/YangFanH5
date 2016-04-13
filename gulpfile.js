@@ -38,8 +38,8 @@ gulp.task('lint:css', function () {
 gulp.task('lint', ['lint:js', 'lint:css']);
 
 //开发环境复件文件
-gulp.task('default', function() {
-    gulp.src('node_modules/**/*')
+gulp.task('copy', function() {
+    gulp.src('node_modules/**/*.js')
         .pipe(gulp.dest('public/node_modules'));
 });
 
@@ -94,4 +94,4 @@ gulp.task('html', function () {
         .pipe(gulp.dest('dist/templates'));
 });
 
-gulp.task('default', ['css', 'scripts', 'images', 'templates']);
+gulp.task('default', ['css', 'scripts', 'images', 'templates', 'copy']);
