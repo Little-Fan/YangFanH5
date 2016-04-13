@@ -38,7 +38,7 @@ gulp.task('lint:css', function () {
 gulp.task('lint', ['lint:js', 'lint:css']);
 
 //开发环境复件文件
-gulp.task('fxl', function() {
+gulp.task('default', function() {
     gulp.src('node_modules/**/*')
         .pipe(gulp.dest('public/node_modules'));
 });
