@@ -152,6 +152,11 @@ function callLoginCallback(data) {
     });
 }
 
+function isIOSWebView() {
+    var ua = detect.parse(navigator.userAgent);
+    return ua.device.manufacturer === 'Apple' && ua.device.family === 'iPhone' && ua.os.family === 'iOS' && ua.device.type === 'Mobile';
+}
+
 function setupWebViewJavascriptBridge(callback) {
     var ua = detect.parse(navigator.userAgent);
 
@@ -162,7 +167,7 @@ function setupWebViewJavascriptBridge(callback) {
         return window.WVJBCallbacks.push(callback);
     }
 
-    if (ua.device.manufacturer === 'Apple' && ua.device.family === 'iPhone' && ua.os.family === 'iOS' && ua.device.type === 'Mobile') {
+    if (isIOSWebView()) {
         window.WVJBCallbacks = [callback];
         var WVJBIframe = document.createElement('iframe');
         WVJBIframe.style.display = 'none';
@@ -185,11 +190,13 @@ function isLogin() {
         }
 
         // IOS发起登陆
-        setupWebViewJavascriptBridge(function(bridge) {
-            bridge.callHandler('callLogin', function responseCallback(responseData) {
-                callLoginCallback(responseData);
+        if (isIOSWebView()) {
+            setupWebViewJavascriptBridge(function (bridge) {
+                bridge.callHandler('callLogin', function responseCallback(responseData) {
+                    callLoginCallback(responseData);
+                });
             });
-        });
+        }
     }
 }
 
