@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "Detect.js": "git+https://github.com/darcyclarke/Detect.js.git",
     "body-parser": "~1.13.2",
     "bootstrap": "3.3.6",
     "coffee-script": "^1.10.0",

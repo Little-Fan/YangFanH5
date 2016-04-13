@@ -378,9 +378,9 @@ video {
 }
 #body-index .program ul li {
     position: relative;
-    padding: 15px 10px !important;
     border: 1px solid #E2E3E2;
     border-radius: 5px;
+    height: 90px;
 }
 #body-index .program ul li a {
     display: block;

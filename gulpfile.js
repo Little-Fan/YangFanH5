@@ -18,7 +18,8 @@ var commonFils = [
     'node_modules/handlebars/dist/handlebars.*.js',
     'node_modules/js-cookie/src/*.js',
     'node_modules/moment/min/*.js',
-    'node_modules/spin.js/*.js'
+    'node_modules/spin.js/*.js',
+    'node_modules/Detect.js/*.js'
 ];
 
 // 代码质量静态检查
@@ -37,7 +38,7 @@ gulp.task('lint:css', function () {
 gulp.task('lint', ['lint:js', 'lint:css']);
 
 //开发环境复件文件
-gulp.task('default', function() {
+gulp.task('fxl', function() {
     gulp.src('node_modules/**/*')
         .pipe(gulp.dest('public/node_modules'));
 });
