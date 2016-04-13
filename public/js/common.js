@@ -118,9 +118,6 @@ Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
-
-callLoginCallback('uid=32335&oauth_token=7629774b9eb88cd03d5ae9c5fdc7bd3b');
-
 function callLoginCallback(data) {
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
