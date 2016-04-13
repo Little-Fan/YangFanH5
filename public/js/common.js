@@ -118,6 +118,9 @@ Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
+
+callLoginCallback('uid=32335&oauth_token=7629774b9eb88cd03d5ae9c5fdc7bd3b');
+
 function callLoginCallback(data) {
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
@@ -188,8 +191,29 @@ function isLogin() {
     }
 }
 
-$(document).on('touchstart', '.commend-wrap i', function (e) {
-    alert('touches event');
+
+$(document).on('click touchstart', '.share', function (e) {
+
+    var userInfo = Cookies.getJSON('user-info');
+
+    if (userInfo && userInfo.User && userInfo.User.ID) {
+
+        if (window.AndroidWebView) {
+            window.AndroidWebView.callShareSDK();
+        }
+
+        setupWebViewJavascriptBridge(function(bridge) {
+            bridge.callHandler('callShareSDK', Cookies.getJSON('userShareUrl'), function responseCallback(responseData) {
+                alert('callShareSDK');
+            });
+        });
+    } else {
+        isLogin();
+    }
+});
+
+
+$(document).on('click touchstart', '.commend-wrap i', function (e) {
     var contentData = $(this).data();
     var userInfo = Cookies.getJSON('user-info');
 

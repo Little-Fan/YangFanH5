@@ -148,13 +148,12 @@ video {
 #comment-wrapper .comment-list li:last-child {
     margin-bottom: 0;
 }
-#comment-wrapper .comment-list .user,
-#comment-wrapper .comment-list .user-info {
+#comment-wrapper .comment-list .user {
     float: left;
 }
 #comment-wrapper .comment-list .user-info {
     padding-left: 20px;
-    width: calc(100% - 40px);
+    margin-left: 40px;
 }
 #comment-wrapper .comment-list .user-info h3 {
     float: left;
