@@ -13,11 +13,7 @@
     <ul class="list">
         {{#each Content.RelateContents.Content}}
         <li>
-            {{#contentType ContentType}}
             <a href="program.html?id={{ContentID}}"><img src="{{Thumb}}" height="80" width="100%"></a>
-            {{else}}
-            <a href="special.html?id={{ContentID}}"><img src="{{Thumb}}" height="80" width="100%"></a>
-            {{/contentType}}
             <h3 class="overflow">{{Name}}</h3>
             <h4 class="overflow">{{Summary}}</h4>
         </li>
