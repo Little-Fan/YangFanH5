@@ -333,8 +333,6 @@ video {
 }
 #body-index .list-group ul li {
     float: left;
-    margin: 5px;
-    width: calc(50% - 10px);
 }
 #body-index .list-group ul li h3,
 #body-index .list-group ul li h4 {
@@ -377,14 +375,15 @@ video {
     color: #4A4A4A;
 }
 #body-index .program ul li {
-    position: relative;
-    border: 1px solid #E2E3E2;
-    border-radius: 5px;
-    height: 90px;
+    width: 50%;
 }
 #body-index .program ul li a {
+    position: relative;
     display: block;
-    height: 60px;
+    margin: 5px;
+    height: 90px;
+    border: 1px solid #E2E3E2;
+    border-radius: 5px;
 }
 #body-index .program ul li a img {
     z-index: -9;
