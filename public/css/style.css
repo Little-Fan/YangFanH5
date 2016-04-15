@@ -332,7 +332,13 @@ video {
     line-height: 35px;
 }
 #body-index .list-group ul li {
+    overflow: hidden;
     float: left;
+    width: 50%;
+}
+#body-index .list-group ul li > a{
+    display: block;
+    height: 90px;
 }
 #body-index .list-group ul li h3,
 #body-index .list-group ul li h4 {
