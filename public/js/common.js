@@ -118,38 +118,8 @@ Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
-function callLoginCallback(data) {
-    var uid = getQueryVariable('uid', data);
-    var oauthToken = getQueryVariable('oauth_token', data);
-
-    /* 登陆接口 */
-    $.ajax({
-        url: baseURL + 'users/login',
-        method: 'POST',
-        dataType: 'json',
-        async: false,
-        data: {
-            LoginType: 1,
-            AppCode: 'apk02',
-            LoginName: uid,
-            UserID: uid,
-            AuthToken: oauthToken
-        },
-        success: function (data) {
-            /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
-            if (Number(data.ResultCode) === 0) {
-                Cookies.set('user-info', data, {expires: 7, path: '/'});
-                $.ajaxSetup({
-                    data: {
-                        'UserID': data.User.ID,
-                        'UserToken': data.UserToken
-                    }
-                });
-            } else {
-                alert(data.ResultDesc);   //失败时候的操作
-            }
-        }
-    });
+function _isNil(value) {
+    return value === null || value === undefined;
 }
 
 function isIOSWebView() {
@@ -158,7 +128,6 @@ function isIOSWebView() {
 }
 
 function setupWebViewJavascriptBridge(callback) {
-    var ua = detect.parse(navigator.userAgent);
 
     if (window.WebViewJavascriptBridge) {
         return callback(WebViewJavascriptBridge);
@@ -180,10 +149,11 @@ function setupWebViewJavascriptBridge(callback) {
 }
 
 function isLogin() {
-    var uid = getQueryVariable('uid');
-    var oauthToken = getQueryVariable('oauth_token');
+    var userInfo = Cookies.getJSON('user-info');
 
-    if (uid === false || oauthToken === false) {
+    if (userInfo && userInfo.User && userInfo.User.ID) {
+        return true;
+    } else {
         // 安卓APP那边发起登陆
         if (window.AndroidWebView) {
             window.AndroidWebView.callLogin();
@@ -192,20 +162,58 @@ function isLogin() {
         // IOS发起登陆
         if (isIOSWebView()) {
             setupWebViewJavascriptBridge(function (bridge) {
-                bridge.callHandler('callLogin', function responseCallback(responseData) {
-                    callLoginCallback(responseData);
-                });
+                bridge.callHandler('callLogin');
             });
         }
     }
+    return false;
 }
 
+function callLoginCallback(data) {
+    var uid = getQueryVariable('uid', data);
+    var oauthToken = getQueryVariable('oauth_token', data);
+
+    if(_isNil(uid) && _isNil(oauthToken)){
+        /* 登陆接口 */
+        $.ajax({
+            url: baseURL + 'users/login',
+            method: 'POST',
+            dataType: 'json',
+            async: false,
+            data: {
+                LoginType: 1,
+                AppCode: 'apk02',
+                LoginName: uid,
+                UserID: uid,
+                AuthToken: oauthToken
+            }
+        }).done(function (data) {
+            /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
+            if (Number(data.ResultCode) === 0) {
+                Cookies.set('user-info', data, {expires: 7, path: '/'});
+                $.ajaxSetup({
+                    data: {
+                        'UserID': data.User.ID,
+                        'UserToken': data.UserToken
+                    }
+                });
+            } else {
+                alert(data.ResultDesc);   //失败时候的操作
+            }
+        });
+    }
+}
+
+if (isIOSWebView()) {
+    setupWebViewJavascriptBridge(function (bridge) {
+        bridge.registerHandler('callLoginCallback', function (data) {
+            callLoginCallback(data);
+        });
+    });
+}
 
 $(document).on('click touchstart', '.share', function (e) {
-
-    var userInfo = Cookies.getJSON('user-info');
-
-    if (userInfo && userInfo.User && userInfo.User.ID) {
+    if (isLogin()) {
 
         if (window.AndroidWebView) {
             window.AndroidWebView.callShareSDK();
@@ -216,17 +224,11 @@ $(document).on('click touchstart', '.share', function (e) {
                 alert('callShareSDK');
             });
         });
-    } else {
-        isLogin();
     }
 });
 
-
 $(document).on('click touchstart', '.commend-wrap i', function (e) {
-    var contentData = $(this).data();
-    var userInfo = Cookies.getJSON('user-info');
-
-    if (userInfo && userInfo.User && userInfo.User.ID) {
+    if (isLogin()) {
         $.ajax({
             url: baseURL + 'contents/addpraise',
             dataType: 'json',
@@ -238,8 +240,6 @@ $(document).on('click touchstart', '.commend-wrap i', function (e) {
         }).done(function (data) {
             $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
         });
-    } else {
-        isLogin();
     }
 });
 
@@ -293,6 +293,7 @@ function getComment(insetElement, pageSize, pageIndex) {
         });
     });
 }
+
 $(document).on('click', '#send', function (e) {
     var txt = $.trim($(this).prev().val());
     var id = getQueryVariable('id');
@@ -305,9 +306,7 @@ $(document).on('click', '#send', function (e) {
             Comment: txt
         };
 
-        var userInfo = Cookies.getJSON('user-info');
-
-        if (userInfo && userInfo.User && userInfo.User.ID) {
+        if (isLogin) {
             var context = {};
 
             context.Comments = {};
@@ -343,8 +342,6 @@ $(document).on('click', '#send', function (e) {
                     alert(data.ResultDesc);
                 }
             });
-        } else {
-            isLogin();
         }
     }
 });
