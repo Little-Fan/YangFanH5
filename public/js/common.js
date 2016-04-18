@@ -118,38 +118,8 @@ Handlebars.registerHelper('replace', function (stringObject) {
     return stringObject.replace(/\:/g, '');
 });
 
-function callLoginCallback(data) {
-    var uid = getQueryVariable('uid', data);
-    var oauthToken = getQueryVariable('oauth_token', data);
-
-    /* 登陆接口 */
-    $.ajax({
-        url: baseURL + 'users/login',
-        method: 'POST',
-        dataType: 'json',
-        async: false,
-        data: {
-            LoginType: 1,
-            AppCode: 'apk02',
-            LoginName: uid,
-            UserID: uid,
-            AuthToken: oauthToken
-        },
-        success: function (data) {
-            /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
-            if (Number(data.ResultCode) === 0) {
-                Cookies.set('user-info', data, {expires: 7, path: '/'});
-                $.ajaxSetup({
-                    data: {
-                        'UserID': data.User.ID,
-                        'UserToken': data.UserToken
-                    }
-                });
-            } else {
-                alert(data.ResultDesc);   //失败时候的操作
-            }
-        }
-    });
+function _isNil(value) {
+    return value === null || value === undefined;
 }
 
 function isIOSWebView() {
@@ -158,7 +128,6 @@ function isIOSWebView() {
 }
 
 function setupWebViewJavascriptBridge(callback) {
-    var ua = detect.parse(navigator.userAgent);
 
     if (window.WebViewJavascriptBridge) {
         return callback(WebViewJavascriptBridge);
@@ -180,10 +149,11 @@ function setupWebViewJavascriptBridge(callback) {
 }
 
 function isLogin() {
-    var uid = getQueryVariable('uid');
-    var oauthToken = getQueryVariable('oauth_token');
+    var userInfo = Cookies.getJSON('user-info');
 
-    if (uid === false || oauthToken === false) {
+    if (userInfo && userInfo.User && userInfo.User.ID) {
+        return true;
+    } else {
         // 安卓APP那边发起登陆
         if (window.AndroidWebView) {
             window.AndroidWebView.callLogin();
@@ -192,41 +162,88 @@ function isLogin() {
         // IOS发起登陆
         if (isIOSWebView()) {
             setupWebViewJavascriptBridge(function (bridge) {
-                bridge.callHandler('callLogin', function responseCallback(responseData) {
-                    callLoginCallback(responseData);
-                });
+                bridge.callHandler('callLogin');
             });
         }
+    }
+    return false;
+}
+
+function callLoginCallback(data) {
+    var uid = getQueryVariable('uid', data);
+    var oauthToken = getQueryVariable('oauth_token', data);
+    var headIcon = getQueryVariable('headIcon', data);
+    var nickName = getQueryVariable('nickName', data);
+
+    if (uid.length > 0 && oauthToken.length > 0) {
+        /* 登陆接口 */
+        Cookies.set('nickName', nickName, {expires: 7, path: '/'});
+        $.ajax({
+            url: baseURL + 'users/login',
+            method: 'POST',
+            dataType: 'json',
+            async: false,
+            data: {
+                LoginType: 1,
+                AppCode: 'apk02',
+                LoginName: uid,
+                UserID: uid,
+                AuthToken: oauthToken,
+                HeadURL: headIcon,
+                NickName: nickName
+            }
+        }).done(function (data) {
+            /*  ResultCode === 0  就是登陆成功，其他的都是出错。 出错的消息字段 ResultDesc */
+            if (Number(data.ResultCode) === 0) {
+                Cookies.set('user-info', data, {expires: 7, path: '/'});
+                $.ajaxSetup({
+                    data: {
+                        'UserID': data.User.ID,
+                        'UserToken': data.UserToken
+                    }
+                });
+            } else {
+                alert(data.ResultDesc);   //失败时候的操作
+            }
+        });
     }
 }
 
-
-$(document).on('click touchstart', '.share', function (e) {
-
-    var userInfo = Cookies.getJSON('user-info');
-
-    if (userInfo && userInfo.User && userInfo.User.ID) {
-
-        if (window.AndroidWebView) {
-            window.AndroidWebView.callShareSDK();
-        }
-
-        setupWebViewJavascriptBridge(function(bridge) {
-            bridge.callHandler('callShareSDK', Cookies.getJSON('userShareUrl'), function responseCallback(responseData) {
-                alert('callShareSDK');
-            });
+if (isIOSWebView()) {
+    setupWebViewJavascriptBridge(function (bridge) {
+        bridge.registerHandler('callLoginCallback', function (data) {
+            callLoginCallback(data);
         });
-    } else {
-        isLogin();
+    });
+}
+
+function setVideoCookie(playURL) {
+    var regexp = new RegExp('(http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?', 'gi');
+
+    if (regexp.test(playURL)) {
+        Cookies.set('userShareUrl', playURL);
     }
+}
+
+$(document).on('touchstart', '.share', function () {
+    var userShareUrl = Cookies.getJSON('userShareUrl');
+
+    if (window.AndroidWebView) {
+        window.AndroidWebView.callShareSDK(userShareUrl);
+    }
+
+    setupWebViewJavascriptBridge(function (bridge) {
+        bridge.callHandler('callShareSDK', userShareUrl, function responseCallback(responseData) {
+            alert('callShareSDK');
+        });
+    });
+
 });
 
-
-$(document).on('click touchstart', '.commend-wrap i', function (e) {
-    var contentData = $(this).data();
-    var userInfo = Cookies.getJSON('user-info');
-
-    if (userInfo && userInfo.User && userInfo.User.ID) {
+$(document).on('touchstart', '.commend-wrap i', function (e) {
+    if (isLogin()) {
+        var contentData = $(this).data();
+        var userInfo = Cookies.getJSON('user-info');
         $.ajax({
             url: baseURL + 'contents/addpraise',
             dataType: 'json',
@@ -238,8 +255,6 @@ $(document).on('click touchstart', '.commend-wrap i', function (e) {
         }).done(function (data) {
             $(e.currentTarget).toggleClass('current').next().html(data.ResultRecord);
         });
-    } else {
-        isLogin();
     }
 });
 
@@ -271,6 +286,7 @@ function getComment(insetElement, pageSize, pageIndex) {
                     pageindex: pageIndex
                 }
             }).done(function (data) {
+                console.log(data);
                 var template = Handlebars.compile(data2[0]);
                 var html = template(data);
                 var moreComment = $('#more-comment');
@@ -293,58 +309,62 @@ function getComment(insetElement, pageSize, pageIndex) {
         });
     });
 }
-$(document).on('click', '#send', function (e) {
+
+$(document).on('touchstart', '#send', function (e) {
+
     var txt = $.trim($(this).prev().val());
     var id = getQueryVariable('id');
     var type = getQueryVariable('type');
+    var userInfo = Cookies.getJSON('user-info');
 
-    if (txt !== '') {
+    if (isLogin() && txt !== '') {
         var para = {
             ContentType: type,
             ContentID: id,
-            Comment: txt
+            Comment: txt,
+            UserID: userInfo.User.ID,
+            UserName: Cookies.getJSON('nickName')
         };
 
-        var userInfo = Cookies.getJSON('user-info');
+        var context = {};
 
-        if (userInfo && userInfo.User && userInfo.User.ID) {
-            var context = {};
+        context.Comments = {};
+        context.Comments.Comment = [];
+        context.Comments.Comment[0] = {
+            HeadURL: Cookies.getJSON('user-info').User.ID,
+            UserID: Cookies.getJSON('user-info').User.ID,
+            CreateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+            ContentID: id,
+            Praise: 0,
+            Detail: txt
+        };
 
-            context.Comments = {};
-            context.Comments.Comment = [];
-            context.Comments.Comment[0] = {
-                UserID: Cookies.getJSON('user-info').User.ID,
-                CreateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-                ContentID: id,
-                Praise: 0,
-                Detail: txt
-            };
+        $(e.currentTarget).prop('disabled', true);
 
-            $.ajax({
-                url: baseURL + 'contents/addcomment',
-                method: 'POST',
-                dataType: 'json',
-                data: para
-            }).done(function (data) {
-                if (Number(data.ResultCode) === 0) {
-                    $.ajax({
-                        method: 'GET',
-                        url: '../templates/common/comment-item.hbs'
-                    }).done(function (data) {
-                        var template = Handlebars.compile(data);
-                        var html = template(context);
-                        var comment = $('.comment-list');
+        $.ajax({
+            url: baseURL + 'contents/addcomment',
+            method: 'POST',
+            dataType: 'json',
+            data: para
+        }).done(function (data) {
+            if (Number(data.ResultCode) === 0) {
+                $.ajax({
+                    method: 'GET',
+                    url: '../templates/common/comment-item.hbs'
+                }).done(function (data) {
+                    var template = Handlebars.compile(data);
+                    var html = template(context);
+                    var comment = $('.comment-list');
 
-                        $(e.currentTarget).prev().val('');
-                        comment.prepend(html);
-                        comment.children('p').remove();
-                    });
-                } else {
-                    alert(data.ResultDesc);
-                }
-            });
-        } else {
-            isLogin();
-        }
+                    $(e.currentTarget).prev().val('');
+                    comment.prepend(html);
+                    comment.children('p').remove();
+                    $(e.currentTarget).prop('disabled', false);
+                });
+            } else {
+                alert(data.ResultDesc);
+            }
+        });
     }
+
 });
