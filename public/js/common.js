@@ -168,12 +168,14 @@ function isLogin() {
     }
     return false;
 }
-
+callLoginCallback();
 function callLoginCallback(data) {
+
+    /*var data = 'uid=32335&oauth_token=d1d366ec1f889cb1ce0fc1d0ba323def&headIcon=http://account.96189.com/data/upload/avatar/headicon_200_200.png&nickName=6043079283';*/
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
 
-    if(_isNil(uid) && _isNil(oauthToken)){
+    if (uid.length > 0 && oauthToken.length > 0) {
         /* 登陆接口 */
         $.ajax({
             url: baseURL + 'users/login',
