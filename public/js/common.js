@@ -168,24 +168,14 @@ function isLogin() {
     }
     return false;
 }
-
+callLoginCallback();
 function callLoginCallback(data) {
+
+    /*var data = 'uid=32335&oauth_token=d1d366ec1f889cb1ce0fc1d0ba323def&headIcon=http://account.96189.com/data/upload/avatar/headicon_200_200.png&nickName=6043079283';*/
     var uid = getQueryVariable('uid', data);
     var oauthToken = getQueryVariable('oauth_token', data);
 
-    $.ajax({
-        url: baseURL + 'test',
-        method: 'POST',
-        dataType: 'json',
-        async: false,
-        data: {
-            data: data,
-            uid: uid,
-            oauthToken: oauthToken
-        }
-    });
-
-    if (_isNil(uid) && _isNil(oauthToken)) {
+    if (uid.length > 0 && oauthToken.length > 0) {
         /* 登陆接口 */
         $.ajax({
             url: baseURL + 'users/login',
@@ -224,26 +214,23 @@ if (isIOSWebView()) {
     });
 }
 
-$(document).on('click touchstart', '.share', function () {
+$(document).on('click touchstart', '.share', function (e) {
+    if (isLogin()) {
 
-    var userShareUrl = Cookies.getJSON('userShareUrl');
+        if (window.AndroidWebView) {
+            window.AndroidWebView.callShareSDK();
+        }
 
-    if (window.AndroidWebView) {
-        window.AndroidWebView.callShareSDK(userShareUrl);
-    }
-
-    setupWebViewJavascriptBridge(function (bridge) {
-        bridge.callHandler('callShareSDK', userShareUrl, function responseCallback(responseData) {
-            alert('callShareSDK');
+        setupWebViewJavascriptBridge(function(bridge) {
+            bridge.callHandler('callShareSDK', Cookies.getJSON('userShareUrl'), function responseCallback(responseData) {
+                alert('callShareSDK');
+            });
         });
-    });
-
+    }
 });
 
 $(document).on('click touchstart', '.commend-wrap i', function (e) {
     if (isLogin()) {
-        var contentData = $(this).data();
-        var userInfo = Cookies.getJSON('user-info');
         $.ajax({
             url: baseURL + 'contents/addpraise',
             dataType: 'json',
@@ -309,55 +296,54 @@ function getComment(insetElement, pageSize, pageIndex) {
     });
 }
 
-$(document).on('click touchstart', '#send', function (e) {
+$(document).on('click', '#send', function (e) {
     var txt = $.trim($(this).prev().val());
     var id = getQueryVariable('id');
     var type = getQueryVariable('type');
-    var userInfo = Cookies.getJSON('user-info');
 
-    if (isLogin() && txt !== '') {
+    if (txt !== '') {
         var para = {
             ContentType: type,
             ContentID: id,
-            Comment: txt,
-            UserID: userInfo.User.ID
+            Comment: txt
         };
 
-        var context = {};
+        if (isLogin) {
+            var context = {};
 
-        context.Comments = {};
-        context.Comments.Comment = [];
-        context.Comments.Comment[0] = {
-            UserID: Cookies.getJSON('user-info').User.ID,
-            CreateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-            ContentID: id,
-            Praise: 0,
-            Detail: txt
-        };
+            context.Comments = {};
+            context.Comments.Comment = [];
+            context.Comments.Comment[0] = {
+                UserID: Cookies.getJSON('user-info').User.ID,
+                CreateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+                ContentID: id,
+                Praise: 0,
+                Detail: txt
+            };
 
-        $.ajax({
-            url: baseURL + 'contents/addcomment',
-            method: 'POST',
-            dataType: 'json',
-            data: para
-        }).done(function (data) {
-            if (Number(data.ResultCode) === 0) {
-                $.ajax({
-                    method: 'GET',
-                    url: '../templates/common/comment-item.hbs'
-                }).done(function (data) {
-                    var template = Handlebars.compile(data);
-                    var html = template(context);
-                    var comment = $('.comment-list');
+            $.ajax({
+                url: baseURL + 'contents/addcomment',
+                method: 'POST',
+                dataType: 'json',
+                data: para
+            }).done(function (data) {
+                if (Number(data.ResultCode) === 0) {
+                    $.ajax({
+                        method: 'GET',
+                        url: '../templates/common/comment-item.hbs'
+                    }).done(function (data) {
+                        var template = Handlebars.compile(data);
+                        var html = template(context);
+                        var comment = $('.comment-list');
 
-                    $(e.currentTarget).prev().val('');
-                    comment.prepend(html);
-                    comment.children('p').remove();
-                });
-            } else {
-                alert(data.ResultDesc);
-            }
-        });
+                        $(e.currentTarget).prev().val('');
+                        comment.prepend(html);
+                        comment.children('p').remove();
+                    });
+                } else {
+                    alert(data.ResultDesc);
+                }
+            });
+        }
     }
-
 });
