@@ -72,7 +72,7 @@ $(document).ready(function () {
                 $('.main').children().hide().eq(index).show();
                 if(!isLoad){
                     isLoad = true;
-                    getComment($('#comment-wrapper'), 3, 1);
+                    //getComment($('#comment-wrapper'), 3, 1);
                 }
             }
         });
