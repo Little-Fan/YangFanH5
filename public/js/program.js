@@ -46,6 +46,6 @@ $(document).ready(function () {
         }).done(function (data) {
             $('video').attr('src',data.AccessUrl);
         });
-        //getComment($('#comment-wrapper'), 3, 1);
+        getComment($('#comment-wrapper'), 3, 1);
     });
 });
