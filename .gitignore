@@ -19,6 +19,6 @@ logs/
 
 .DS_Store
 .idea/
-/public/vide
+/public/video
 /public/audio
 dist/
