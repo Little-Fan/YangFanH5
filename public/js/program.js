@@ -44,7 +44,9 @@ $(document).ready(function () {
                 Domain: 0
             }
         }).done(function (data) {
-            $('video').attr('src',data.AccessUrl);
+            var playURL = data.AccessUrl;
+            $('video').attr('src',playURL);
+            setVideoCookie(playURL);
         });
         getComment($('#comment-wrapper'), 3, 1);
     });

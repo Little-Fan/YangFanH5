@@ -42,14 +42,10 @@ $(document).ready(function () {
         $.when(channelType, getAccessUrl).done(function (data1, data2) {
             var template = Handlebars.compile(data1[0]);
             var context = data2[0];
-            var regexp = new RegExp('(http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?', 'gi');
             context.video = mode;
             playURL = data2[0].AccessUrl;
-
-            if (regexp.test(playURL)) {
-                Cookies.set('userShareUrl', playURL);
-            }
-
+            setVideoCookie(playURL);
+            
             var html = template(context);
             $('#media-wrapper').html(html);
 
