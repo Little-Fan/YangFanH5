@@ -647,7 +647,10 @@ video {
     padding-left: 20px;
     width: calc(100% - 100px);
 }
-#body-program-list .program-info h2 span {
+#body-program-list .program-info a {
+    text-decoration: none;
+}
+#body-program-list .program-info a span {
     display: block;
     height: 25px;
     text-align: left;
