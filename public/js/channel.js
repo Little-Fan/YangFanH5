@@ -10,7 +10,7 @@ $(document).ready(function () {
     var PhysicalContentID = getQueryVariable('PhysicalContentID');
     var mode = getQueryVariable('mode');
     var title = decodeURI(getQueryVariable('title'));
-    var playURL = '';
+    var playURL = '', myCirclePlayer;
 
     $('title').text(title);  //增加APP上需要的title
 
@@ -47,6 +47,7 @@ $(document).ready(function () {
             setVideoCookie(playURL);
             
             var html = template(context);
+            
             $('#media-wrapper').html(html);
 
             $('.audio-wrapper i').click(function () {
@@ -59,6 +60,16 @@ $(document).ready(function () {
                     $(this).removeClass().addClass('play');
                 }
             });
+
+            myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
+                {
+                    m3u8a: playURL
+                }, {
+                    solution: "html,flash",
+                    supplied: 'm4a, m3u8a',
+                    swfPath: "../circleplayer/dist/jplayer/jquery.jplayer.swf",
+                    cssSelectorAncestor: "#cp_container_1"
+                });
         });
 
         $('.nav-tabs li').click(function () {
@@ -159,7 +170,7 @@ $(document).ready(function () {
                 if ($(this).hasClass('now-playing')) {
                     return false;
                 }
-                
+
                 var startTime= $(this).data('date');
                 var duration = $(this).data('duration');
                 var h = Number(duration.substr(0,2));
@@ -172,7 +183,21 @@ $(document).ready(function () {
                 }
 
                 replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
-                $('#video').attr('src', replayURL) && $('#audio').attr('src', replayURL);
+
+                if(mode === 'Video'){
+                    $('#video').attr('src', replayURL)
+                } else {
+                    myCirclePlayer.destroy();
+
+                    new CirclePlayer("#jquery_jplayer_1",
+                        {
+                            m3u8a: replayURL
+                        }, {
+                            solution: "html,flash",
+                            supplied: 'm3u8a',
+                            cssSelectorAncestor: "#cp_container_1"
+                        });
+                }
                 $(this).addClass('active').siblings().removeClass('active');
             });
         });

@@ -1,6 +1,14 @@
 extends layout
-
+block style_end
+    link(rel = 'stylesheet',type = 'text/css',href = '../circleplayer/circle.skin/circle.player.css')
+block head_end
+    script(src="../circleplayer/js/jquery.transform2d.js")
+    script(src="../circleplayer/js/jquery.grab.js")
+    script(src="../circleplayer/js/jquery.jplayer.js")
+    script(src="../circleplayer/js/mod.csstransforms.min.js")
+    script(src="../circleplayer/js/circle.player.js")
 block body
+    #jquery_jplayer_1.cp-jplayer
     #body-channel
     script(src="../js/channel.js")
 
