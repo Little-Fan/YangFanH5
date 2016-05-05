@@ -107,7 +107,7 @@ $.extend(true, GetVideoInfo.prototype, {
         self.bindStickTimes();
     },
     calcLoadingTime: function () {
-        this.videoLoadTime = Number(new Date().getTime()) - this.pageStartTime;
+        this.videoLoadTime = Number(new Date().getTime()) - beforeload;
         this.startPolling(10);
     },
     userAgent: function () {
@@ -192,9 +192,10 @@ $.extend(true, GetVideoInfo.prototype, {
         this.models.bs = this.detectBrowser();  //bs：浏览器类型（browserType）
         this.models.os = this.detectOSVersion();  //os：系统(系统版本)
         this.models.pf = this.detectOS();  // pf:播放平台（android，IOS，windows）
-        this.models.dr = this.getVideoDuration(); //dr: 视频文件总时长(videoDuration)
-        this.models.lt = this.videoLoadTime || 0;  //lt: 加载时长  毫秒（loaddingTime）
+        this.models.dr = this.getVideoDuration() || 0; //dr: 视频文件总时长(videoDuration)
+        this.models.lt = this.videoLoadTime || 0;  //lt: 加载时长毫秒（loaddingTime）
         this.models.st = this.stickTimes;   //卡顿次数
+        this.models.pTime = seconds;
     },
     bindStickTimes: function () {
         var self = this;
@@ -224,7 +225,7 @@ $.extend(true, GetVideoInfo.prototype, {
             self = this,
             timeStamp = new Date().getTime();
 
-        img.src = 'http://tracker.otvcloud.com/ot.gif?_=' + timeStamp + '&' + data;
+        img.src = 'http://chengdugit.chinacloudapp.cn/qscontents/data/test?_=' + timeStamp + '&' + data;
 
         self.processData();
 
@@ -246,3 +247,42 @@ $.extend(true, GetVideoInfo.prototype, {
         }, 1000 * this.interval);
     }
 });
+
+
+var dtd = $.Deferred(),t;
+
+var wait = function(dtd){
+    var tasks = function(){
+        if($('video').length > 0){
+            dtd.resolve($('video'));   // 改变deferred对象的执行状态
+            clearInterval(t)
+        }
+    };
+    t = setInterval(tasks,1);
+    return dtd;
+};
+
+var getVideoInfo;
+
+$.when(wait(dtd).done(function (data) {
+    getVideoInfo = new GetVideoInfo({
+        initialize: function () {
+            this.createUID();
+            this.getVideo('video');
+            this.userAgent();
+            this.evenInitialize();
+        },
+        //默认参数
+        models: {
+            appid: 1,  //应用ID (应用ID)
+            cmd: '',  //播放类型(直播、点播)
+            vid: '',  //业务系统中的视频ID(vedioId)
+            von: '',  //视频原始名称(VideoOriginalName)
+            n: '',  //视频名称(VideoName)
+            ch: '',  //视频频道(VideoTVChannel)
+            wch: '', // 网络频道(VideoWebChannel)
+            tg: '', //标签
+            cdn: '' //cdn信息
+        }
+    });
+}));
