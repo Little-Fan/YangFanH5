@@ -105,6 +105,7 @@ $.extend(true, GetVideoInfo.prototype, {
             self.removeEvent(this.videoObject, 'timeupdate', self.calcLoadingTime);  //删除事件监听，节约内存
         }
         self.bindStickTimes();
+        self.getFirstPlaying();
     },
     calcLoadingTime: function () {
         this.videoLoadTime = Number(new Date().getTime()) - beforeload;
@@ -185,23 +186,27 @@ $.extend(true, GetVideoInfo.prototype, {
             ( parseInt(ary[2], 10) || 0 );
     },
     processData: function () {
-        this.models.ref = this.getReferrer();  //ref: 来源（来自于来个页面）
-        this.models.pu = this.getCurrentURL();  //pu：page url 页面url（当前页面url）
+        this.models.pTime = seconds;  //页面打开时间
+        this.models.lt = this.videoLoadTime || 0;  //首次缓冲时间
+        this.models.st = this.stickTimes;   //再次缓冲次数
+        this.models.fp = this.videoFirstPlaying || 0;  //首次播放时间
+        this.models.sn = this.sendNumbers;  //发送序号
+        this.models.uid = this.getCookie('uid');
         this.models.vurl = this.getVideoURL();  //vurl:视频URL（被播放的视频的url地址
-        this.models.pt = this.getTitle();  //pt: page title,页面标题
-        this.models.bs = this.detectBrowser();  //bs：浏览器类型（browserType）
-        this.models.os = this.detectOSVersion();  //os：系统(系统版本)
-        this.models.pf = this.detectOS();  // pf:播放平台（android，IOS，windows）
-        this.models.dr = this.getVideoDuration() || 0; //dr: 视频文件总时长(videoDuration)
-        this.models.lt = this.videoLoadTime || 0;  //lt: 加载时长毫秒（loaddingTime）
-        this.models.st = this.stickTimes;   //卡顿次数
-        this.models.pTime = seconds;
     },
     bindStickTimes: function () {
         var self = this;
         self.addEvent(self.videoObject, 'waiting', function () {
             self.stickTimes++;
         });
+    },
+    getFirstPlaying: function () {
+        var self = this;
+        if(self.sendNumbers === 0){
+            self.addEvent(self.videoObject, 'playing', function () {
+                self.videoFirstPlaying = Number(new Date().getTime()) - beforeload;
+            });
+        }
     },
     polling: false,
     url: '',
@@ -230,9 +235,11 @@ $.extend(true, GetVideoInfo.prototype, {
         self.processData();
 
         img.onabort = function () {
+            self.sendNumbers ++;
             self.onCommit();
         };
         img.onerror = function () {
+            self.sendNumbers ++;
             self.onCommit();
         };
         img.onload = function () {
@@ -269,20 +276,7 @@ $.when(wait(dtd).done(function (data) {
         initialize: function () {
             this.createUID();
             this.getVideo('video');
-            this.userAgent();
             this.evenInitialize();
-        },
-        //默认参数
-        models: {
-            appid: 1,  //应用ID (应用ID)
-            cmd: '',  //播放类型(直播、点播)
-            vid: '',  //业务系统中的视频ID(vedioId)
-            von: '',  //视频原始名称(VideoOriginalName)
-            n: '',  //视频名称(VideoName)
-            ch: '',  //视频频道(VideoTVChannel)
-            wch: '', // 网络频道(VideoWebChannel)
-            tg: '', //标签
-            cdn: '' //cdn信息
         }
     });
 }));
