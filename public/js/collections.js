@@ -186,6 +186,7 @@ $.extend(true, GetVideoInfo.prototype, {
             ( parseInt(ary[2], 10) || 0 );
     },
     processData: function () {
+        this.models.pu = this.getCurrentURL();  //pu：page url 页面url（当前页面url）
         this.models.pTime = seconds;  //页面打开时间
         this.models.lt = this.videoLoadTime || 0;  //首次缓冲时间
         this.models.st = this.stickTimes;   //再次缓冲次数
