@@ -9,12 +9,6 @@ html
         link(rel = 'stylesheet',type = 'text/css',href = '../css/rest.css')
         link(rel = 'stylesheet',type = 'text/css',href = '../css/style.css')
         block style_end
-        script.
-            var beforeload = (new Date()).getTime(), seconds;
-            window.addEventListener('pageshow', function (event) {
-                var afterload = (new Date()).getTime();
-                seconds = afterload - beforeload;
-            });
         script(src = "../node_modules/jquery/dist/jquery.min.js")
         script(src = "../node_modules/handlebars/dist/handlebars.min.js")
         script(src = "../node_modules/js-cookie/src/js.cookie.js")
@@ -25,5 +19,4 @@ html
         block head_end
     body
         block body
-        script(src = "../js/collections.js")
 block after_everything
