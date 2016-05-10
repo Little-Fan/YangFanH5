@@ -1,0 +1,15 @@
+{{#if Schedules.Schedule}}
+    {{#each Schedules.Schedule}}
+        <li {{#isTimeout StartDateTime}}class="replay"{{/isTimeout}} data-date="{{StartDate}}T{{replace StartTime}}" data-duration="{{Duration}}">
+            <span class="date">{{subString StartTime 0 5}}</span>
+            {{#isNowPlay PlayState}}
+                <span class="name overflow">{{ProgramName}}</span>
+                <span class="play">正在播放</span>
+            {{else}}
+                <span class="name full-name overflow">{{ProgramName}}</span>
+            {{/isNowPlay}}
+        </li>
+    {{/each}}
+{{else}}
+    <p>暂时没有数据！</p>
+{{/if}}
