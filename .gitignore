@@ -1,9 +1,9 @@
 node_modules/
 bower_components/
+www-built/
 video/
 .idea/
 dist/
-temp/
 *.log
 *.swp
 *.vim

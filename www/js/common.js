@@ -1,9 +1,29 @@
 /*global define*/
 'use strict';
+require.config({
+    baseUrl: 'js/',
+    paths: {
+        jquery: '../../node_modules/jquery/dist/jquery.min',
+        hbs: '../../bower_components/require-handlebars-plugin/hbs',
+        handlebars: "../../bower_components/require-handlebars-plugin/hbs/handlebars.runtime",
+        cookie: '../../node_modules/js-cookie/src/js.cookie',
+        moment: '../../node_modules/moment/min/moment.min',
+        spin: '../../node_modules/spin.js/spin.min',
+        detect: '../../node_modules/Detect.js/detect.min',
+        templates: '../templates'  //模板目录
+    },
+    hbs: {
+        helpers: true,            // default: true
+        templateExtension: 'hbs', // default: 'hbs'
+        partialsUrl: '',           // default: ''
+        helperDirectory: "template/helpers/",
+        handlebarsPath: "handlebars"
+    }
+});
 
 define(['jquery', 'cookie'], function ($, Cookies) {
     return {
-        baseURL : 'http://42.159.246.214:8080/rest/rest/', //接口基准位置
+        baseURL: 'http://42.159.246.214:8080/rest/rest/', //接口基准位置
         getQueryVariable: function (variable, url) {
             var query, vars;
             query = url ? url : window.location.search.substring(1);
@@ -52,7 +72,7 @@ define(['jquery', 'cookie'], function ($, Cookies) {
         isIOSWebView: function () {
             var ua = detect.parse(navigator.userAgent);
             return ua.device.manufacturer === 'Apple' && ua.device.family === 'iPhone' && ua.os.family === 'iOS' && ua.device.type === 'Mobile';
-        }
+        },
         setupWebViewJavascriptBridge: function (callback) {
 
             if (window.WebViewJavascriptBridge) {
@@ -74,26 +94,24 @@ define(['jquery', 'cookie'], function ($, Cookies) {
             }
         },
         isLogin: function () {
-        var userInfo = Cookies.getJSON('user-info');
+            var userInfo = Cookies.getJSON('user-info');
 
-        if (userInfo && userInfo.User && userInfo.User.ID) {
-            return true;
-        } else {
-            // 安卓APP那边发起登陆
-            if (window.AndroidWebView) {
-                window.AndroidWebView.callLogin();
-            }
+            if (userInfo && userInfo.User && userInfo.User.ID) {
+                return true;
+            } else {
+                // 安卓APP那边发起登陆
+                if (window.AndroidWebView) {
+                    window.AndroidWebView.callLogin();
+                }
 
-            // IOS发起登陆
-            if (isIOSWebView()) {
-                setupWebViewJavascriptBridge(function (bridge) {
-                    bridge.callHandler('callLogin');
-                });
+                // IOS发起登陆
+                if (isIOSWebView()) {
+                    setupWebViewJavascriptBridge(function (bridge) {
+                        bridge.callHandler('callLogin');
+                    });
+                }
             }
+            return false;
         }
-        return false;
-    }
-
-
     };
 });
