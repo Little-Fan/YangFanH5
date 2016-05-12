@@ -6,9 +6,9 @@ require.config({
         jquery: '../../node_modules/jquery/dist/jquery.min',
         hbs: '../../bower_components/require-handlebars-plugin/hbs',
         handlebars: "../../bower_components/require-handlebars-plugin/hbs/handlebars.runtime",
-        cookie: '../../node_modules/js-cookie/src/js.cookie',
+        Cookies: '../../node_modules/js-cookie/src/js.cookie',
         moment: '../../node_modules/moment/min/moment.min',
-        spin: '../../node_modules/spin.js/spin.min',
+        Spinner: '../../node_modules/spin.js/spin.min',
         detect: '../../node_modules/Detect.js/detect.min',
         templates: '../templates'  //模板目录
     },
@@ -21,7 +21,8 @@ require.config({
     }
 });
 
-define(['jquery', 'cookie'], function ($, Cookies) {
+define(['jquery', 'Cookies', 'Spinner'], function ($, Cookies, Spinner) {
+    console.log(Spinner);
     return {
         baseURL: 'http://42.159.246.214:8080/rest/rest/', //接口基准位置
         getQueryVariable: function (variable, url) {

@@ -11,10 +11,13 @@
         {
             //module names are relative to baseUrl
             name: 'common',
-            //List common dependencies here. Only need to list
-            //top level dependencies, "include" will find
-            //nested dependencies.
-            include: ['jquery']
+            include: [
+                'hbs',
+                'handlebars',
+                'hbs/underscore',
+                'hbs/json2',
+                'hbs/handlebars'
+            ]
         },
         {
             //module names are relative to baseUrl/paths config
