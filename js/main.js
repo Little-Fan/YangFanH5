@@ -3,7 +3,7 @@
 require.config({
     baseUrl: "../js",
     paths: {
-        jquery: '../node_modules/jquery/dist/jquery',
+        jquery: '../node_modules/jquery/dist/jquery.min',
         hbs: '../bower_components/require-handlebars-plugin/hbs',
         "handlebars": "../bower_components/require-handlebars-plugin/hbs/handlebars.runtime",
         cookie: '../node_modules/js-cookie/src/js.cookie.js',
