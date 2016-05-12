@@ -16,7 +16,7 @@ require.config({
         helpers: true,            // default: true
         templateExtension: 'hbs', // default: 'hbs'
         partialsUrl: '',           // default: ''
-        helperDirectory: "template/helpers/",
+        helperDirectory: "templates/helpers/",
         handlebarsPath: "handlebars"
     }
 });

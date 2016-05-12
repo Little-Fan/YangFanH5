@@ -20,8 +20,14 @@ define([
         dataType: 'json'
     }).done(function (data) {
         data.type = type;
-        $('#body-index').html(layoutView(data)).find('.content').html(commonLoadView);
-    }).done(function () {
+        return $('#body-index').html(layoutView(data)).find('.content').html(commonLoadView);
+    }).done(function (data) {
+
+        console.log(data);
+        
+        if (type === 'live') {
+
+        }
 
     })
 });
