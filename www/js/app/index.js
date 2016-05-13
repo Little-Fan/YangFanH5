@@ -14,9 +14,8 @@ define([
     var type = common.getQueryVariable('type');
     var id = common.getQueryVariable('id');
 
-    function getContentList(element) {
-        console.log(element);
-        $.ajax({
+    function getCategorised(element) {
+        return $.ajax({
             method:   'GET',
             url:      common.baseURL + 'contents/categorys',
             dataType: 'json',
@@ -24,7 +23,7 @@ define([
                 ParentID: id
             }
         }).done(function (data) {
-            element.html(liveLayoutView(data));
+            data.$element = element.html(liveLayoutView(data));
         });
     }
 
@@ -37,7 +36,12 @@ define([
         data.$element = $('#body-index').html(layoutView(data)).find('.content').html(commonLoadView);
     }).done(function (data) {
         if (type === 'live') {
-            getContentList(data.$element)
+            getCategorised(data.$element).done(function (data) {
+                data.$element.find('.sub-nav').html(categoryItemView(data));
+                console.timeStamp('fan')
+            }).done(function (data) {
+                console.timeStamp('fan2')
+            })
         }
     })
 });

@@ -22,7 +22,6 @@ require.config({
 });
 
 define(['jquery', 'Cookies', 'Spinner'], function ($, Cookies, Spinner) {
-    console.log(Spinner);
     return {
         baseURL: 'http://42.159.246.214:8080/rest/rest/', //接口基准位置
         getQueryVariable: function (variable, url) {
