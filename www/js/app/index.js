@@ -14,20 +14,30 @@ define([
     var type = common.getQueryVariable('type');
     var id = common.getQueryVariable('id');
 
+    function getContentList(element) {
+        console.log(element);
+        $.ajax({
+            method:   'GET',
+            url:      common.baseURL + 'contents/categorys',
+            dataType: 'json',
+            data:     {
+                ParentID: id
+            }
+        }).done(function (data) {
+            element.html(liveLayoutView(data));
+        });
+    }
+
     $.ajax({
         method: 'GET',
         url: common.baseURL + 'contents/homecategorys',
         dataType: 'json'
     }).done(function (data) {
         data.type = type;
-        return $('#body-index').html(layoutView(data)).find('.content').html(commonLoadView);
+        data.$element = $('#body-index').html(layoutView(data)).find('.content').html(commonLoadView);
     }).done(function (data) {
-
-        console.log(data);
-        
         if (type === 'live') {
-
+            getContentList(data.$element)
         }
-
     })
 });
