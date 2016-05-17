@@ -2,6 +2,13 @@
 'use strict';
 require.config({
     baseUrl: 'js/',
+    hbs: {
+        helpers: true,            // default: true
+        templateExtension: 'hbs', // default: 'hbs'
+        partialsUrl: '',           // default: ''
+        helperDirectory: "templates/helpers/",
+        handlebarsPath: "handlebars"
+    },
     paths: {
         jquery: '../../node_modules/jquery/dist/jquery.min',
         hbs: '../../bower_components/require-handlebars-plugin/hbs',
@@ -10,20 +17,36 @@ require.config({
         moment: '../../node_modules/moment/min/moment.min',
         Spinner: '../../node_modules/spin.js/spin.min',
         detect: '../../node_modules/Detect.js/detect.min',
-        templates: '../templates'  //模板目录
+        templates: '../templates',  //模板目录
+        'jquery.transform2d': 'lib/circleplayer/js/jquery.transform2d',
+        'jquery.grab': 'lib/circleplayer/js/jquery.grab',
+        'jquery.jplayer': 'lib/circleplayer/js/jquery.jplayer.min',
+        'mod.csstransforms': 'lib/circleplayer/js/mod.csstransforms.min',
+        'circle.player': 'lib/circleplayer/js/circle.player'
     },
-    hbs: {
-        helpers: true,            // default: true
-        templateExtension: 'hbs', // default: 'hbs'
-        partialsUrl: '',           // default: ''
-        helperDirectory: "templates/helpers/",
-        handlebarsPath: "handlebars"
+    shim: {
+        'jquery.transform2d': ['jquery'],
+        'jquery.grab': ['jquery.transform2d'],
+        'mod.csstransforms': ['jquery.jplayer', 'jquery.grab'],
+        'circle.player': ['mod.csstransforms']
     }
 });
 
 define(['jquery', 'Cookies', 'Spinner'], function ($, Cookies, Spinner) {
+    //全局ajax配置
+    $.ajaxSetup({
+        dataType: 'json'
+    });
+
     return {
         baseURL: 'http://42.159.246.214:8080/rest/rest/', //接口基准位置
+        setVideoCookie: function (playURL) {
+            var regexp = new RegExp('(http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?', 'gi');
+
+            if (regexp.test(playURL)) {
+                Cookies.set('userShareUrl', playURL);
+            }
+        },
         getQueryVariable: function (variable, url) {
             var query, vars;
             query = url ? url : window.location.search.substring(1);
