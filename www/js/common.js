@@ -32,7 +32,11 @@ require.config({
     }
 });
 
-define(['jquery', 'Cookies', 'Spinner'], function ($, Cookies, Spinner) {
+define([
+    'jquery',
+    'Cookies',
+    'Spinner'
+], function ($, Cookies, Spinner) {
     //全局ajax配置
     $.ajaxSetup({
         dataType: 'json'

@@ -4,19 +4,23 @@
 'use strict';
 define([
     '../common',
+    'moment',
+    './main',
     'hbs!templates/channel/layout',
     'hbs!templates/channel/channel-type',
     'hbs!templates/channel/date-item',
     'hbs!templates/channel/program-item',
     'circle.player'
-], function (common, layoutTemplate, channelTypeTemplate, dateItemTemplate, programItemTemplate) {
-    var isLoad = false;  //是否是首次加载
-    var id = common.getQueryVariable('id');
-    var type = common.getQueryVariable('type');
-    var PhysicalContentID = common.getQueryVariable('PhysicalContentID');
-    var mode = common.getQueryVariable('mode');
-    var title = decodeURI(common.getQueryVariable('title'));
-    var playURL = '', myCirclePlayer;
+], function (common, moment, main, layoutTemplate, channelTypeTemplate, dateItemTemplate, programItemTemplate) {
+    var isLoad = false,  //是否是首次加载
+        id = common.getQueryVariable('id'),
+        type = common.getQueryVariable('type'),
+        PhysicalContentID = common.getQueryVariable('PhysicalContentID'),
+        mode = common.getQueryVariable('mode'),
+        title = decodeURI(common.getQueryVariable('title')),
+        playURL = '',
+        myCirclePlayer,
+        dateMap;
 
     $('title').text(title);  //增加APP上需要的title
     common.loading('#body-channel');
@@ -47,5 +51,51 @@ define([
                 swfPath: "../circleplayer/dist/jplayer/jquery.jplayer.swf",
                 cssSelectorAncestor: "#cp_container_1"
             });
-    })
+    });
+
+    //切换节目单
+    $('.nav-tabs li').click(function () {
+        var index = $(this).index();
+        if (index < 2) {
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.main').children().hide().eq(index).show();
+            if(!isLoad){
+                isLoad = true;
+                main.renderComment(id, '#comment-wrapper', '#more-comment', 3, 1);  //拉取评论列表
+            }
+        }
+    });
+
+    dateMap = [
+        {
+            'name': '今天',
+            'date': moment().format('YYYYMMDD')
+        },
+        {
+            'name': '昨天',
+            'date': moment().subtract(1, 'days').format('YYYYMMDD')
+        },
+        {
+            'name': '前天',
+            'date': moment().subtract(2, 'days').format('YYYYMMDD')
+        },
+        {
+            'name': moment().subtract(3, 'days').format('MM-DD'),
+            'date': moment().subtract(3, 'days').format('YYYYMMDD')
+        },
+        {
+            'name': moment().subtract(4, 'days').format('MM-DD'),
+            'date': moment().subtract(4, 'days').format('YYYYMMDD')
+        },
+        {
+            'name': moment().subtract(5, 'days').format('MM-DD'),
+            'date': moment().subtract(5, 'days').format('YYYYMMDD')
+        },
+        {
+            'name': moment().subtract(6, 'days').format('MM-DD'),
+            'date': moment().subtract(6, 'days').format('YYYYMMDD')
+        }
+    ];
+
+    $('.tabs-nav').html(dateItemTemplate(dateMap));  //渲染选择播放日期列表
 });
