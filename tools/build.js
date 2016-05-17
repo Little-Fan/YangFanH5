@@ -21,8 +21,12 @@
         },
         {
             //module names are relative to baseUrl/paths config
-            name: 'index',
-            include: ['app/index'],
+            name: 'app/index',
+            exclude: ['common']
+        },
+        {
+            //module names are relative to baseUrl
+            name: 'app/channel',
             exclude: ['common']
         }
     ]
