@@ -18,6 +18,7 @@ define([
         PhysicalContentID = common.getQueryVariable('PhysicalContentID'),
         mode = common.getQueryVariable('mode'),
         title = decodeURI(common.getQueryVariable('title')),
+        scheduleList = {},  //缓存接口单列表数据
         playURL = '',
         myCirclePlayer,
         dateMap;
@@ -97,5 +98,82 @@ define([
         }
     ];
 
-    $('.tabs-nav').html(dateItemTemplate(dateMap));  //渲染选择播放日期列表
+
+
+
+    //获取节目单列表接口
+    function getScheduleList(date) {
+        return $.ajax({
+            method: 'GET',
+            url: common.baseURL + 'channels/scheduleList',
+            data: {
+                ChannelID: id,
+                Date: date,
+                ResultType: 1
+            }
+        })
+    }
+
+    //渲染选择播放日期列表，并添加节目单日期事件
+    $('.tabs-nav').html(dateItemTemplate(dateMap)).find('li').click(function (e) {
+        var date = $(this).data('date'),
+            channelList = $('.channel-list').html('<p>数据加载中……</p>');
+        $(this).addClass('active').siblings().removeClass('active');
+        if(common.isNil(scheduleList[date])){
+            getScheduleList(date).done(function (data) {
+                scheduleList[date] = data;
+                channelList.html(programItemTemplate(data));
+            })
+        } else {
+            channelList.html(programItemTemplate(scheduleList[date]));
+        }
+
+        //页面进入时，滚动条滚动到正在播放的位置
+        var nowPlay = $('.play'),
+            tab = $('#tabs_container');
+
+        tab.scrollTop(0);  //重置为0的位置
+
+        if (nowPlay.length >= 1) {
+            var top = nowPlay.position().top;
+            tab.scrollTop(top);
+        }
+    });
+
+    $('.tabs-nav .active').trigger('click');
+
+    $('#tabs_container').on('click', '.replay', function () {
+        var startTime= $(this).data('date');
+        var duration = $(this).data('duration');
+        var h = Number(duration.substr(0,2));
+        var m = Number(duration.substr(2,2));
+        var s = Number(duration.substr(4,2));
+        var length = (h * 60 + m) * 60 + s;
+
+        if ($(this).hasClass('now-playing')) {
+            return false;
+        }
+
+        if (playURL.length > 0) {
+            var replayURL = playURL.replace(/\/(live)\//g, '/review/');
+        }
+
+        replayURL = replayURL + '?starttime=' + startTime + '&length=' + length;
+
+        if(mode === 'Video'){
+            $('#video').attr('src', replayURL)
+        } else {
+            myCirclePlayer.destroy();
+
+            new CirclePlayer("#jquery_jplayer_1",
+                {
+                    m3u8a: replayURL
+                }, {
+                    solution: "html,flash",
+                    supplied: 'm3u8a',
+                    cssSelectorAncestor: "#cp_container_1"
+                });
+        }
+        $(this).addClass('active').siblings().removeClass('active');
+    });
 });

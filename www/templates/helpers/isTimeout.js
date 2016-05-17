@@ -1,7 +1,7 @@
 /**
  * Created by fanxiaolong on 2016/5/12.
  */
-define(["handlebars"], function(Handlebars) {
+define(["handlebars", 'moment'], function(Handlebars, moment) {
     function isTimeout(time, options) {
         var timestamp = Number(moment().unix());
         if (timestamp - Number(time) > 0) {

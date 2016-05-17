@@ -459,6 +459,7 @@ video {
     font-size: 16px;
     height: 14.285714281429%;
     text-align: center;
+    cursor: pointer;
 }
 #body-channel .main .tabs-nav li a {
     position: absolute;
