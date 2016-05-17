@@ -1,31 +1,21 @@
 /**
  * Created by fanxiaolong on 2016/3/22.
  */
-$(document).ready(function () {
+'use strict';
+define([
+    '../common',
+    'hbs!templates/program-list/layout'
+], function (common, layoutTemplate) {
+    var id = common.getQueryVariable('id');
+    common.loading('#body-program-list');
 
-    loading('#body-program-list');
-
-    var id = getQueryVariable('id');
-
-    var d1 = $.ajax({
-        method: 'GET',
-        url:      '../templates/program-list/layout.hbs'
-    });
-
-    var d2 = $.ajax({
+    $.ajax({
         method:   'GET',
-        url:      baseURL + 'contents/detail',
-        dataType: 'json',
+        url:      common.baseURL + 'contents/detail',
         data:     {
             ContentID: id
         }
-    });
-
-    $.when(d1, d2).done(function (data1, data2) {
-        var template = Handlebars.compile(data1[0]);
-        var context = data2[0];
-        var html= template(context);
-
-        $('#body-program-list').html(html);
+    }).done(function (data) {
+        $('#body-program-list').html(layoutTemplate(data));
     });
 });

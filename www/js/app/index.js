@@ -40,6 +40,7 @@ define([
                     CategoryID: obj.CategoryID
                 }
             }).done(function (contentList) {
+                contentList.type = type;
                 if (type === 'live') {
                     data.$element.find('.main').append(template(contentList));
                 } else {
@@ -65,6 +66,7 @@ define([
             })
         } else {
             renderTitle(data.$element, listLayoutTemplate).done(function (data) {
+                console.log(data);
                 renderMain(data, listItemTemplate)
             })
         }

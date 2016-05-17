@@ -6,16 +6,14 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/rest.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
-    <script src="../node_modules/js-cookie/src/js.cookie.js"></script>
-    <script src="../node_modules/moment/min/moment.min.js"></script>
-    <script src="../node_modules/spin.js/spin.min.js"></script>
-    <script src="../node_modules/Detect.js/detect.min.js"></script>
-    <script src="js/common.js"></script>
   </head>
   <body>
     <div id="body-program"></div>
-    <script src="../js/program.js"></script>
+    <script src="../node_modules/requirejs/require.js"></script>
+    <script>
+      requirejs(['./js/common'], function (common) {
+        requirejs(['app/program']);
+      });
+    </script>
   </body>
 </html>
