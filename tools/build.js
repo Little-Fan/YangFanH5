@@ -28,6 +28,23 @@
             //module names are relative to baseUrl
             name: 'app/channel',
             exclude: ['common']
+        },
+        {
+            //module names are relative to baseUrl
+            name: 'app/program',
+            exclude: ['common']
+        }
+        ,
+        {
+            //module names are relative to baseUrl
+            name: 'app/program-list',
+            exclude: ['common']
+        }
+        ,
+        {
+            //module names are relative to baseUrl
+            name: 'app/special',
+            exclude: ['common']
         }
     ]
 })
