@@ -1,0 +1,7 @@
+{{#each this}}
+    {{#if @first}}
+        <li class="active" data-date="{{date}}"><a>{{name}}</a></li>
+    {{else}}
+        <li data-date="{{date}}"><a>{{name}}</a></li>
+    {{/if}}
+{{/each}}
